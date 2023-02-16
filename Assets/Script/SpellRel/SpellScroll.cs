@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using R0.ScriptableObjConfig;
 using R0.Static;
 
 namespace R0.SpellRel
@@ -8,8 +9,15 @@ namespace R0.SpellRel
     /// </summary>
     public class SpellScroll
     {
-        
+        /// <summary>
+        /// 符文列表
+        /// </summary>
         private List<Spell> _spells;
+        
+        public SpellScroll()
+        {
+            _spells = new List<Spell>();
+        }
 
         /// <summary>
         /// 添加spell至符文列表
@@ -17,7 +25,13 @@ namespace R0.SpellRel
         /// <param name="spell">添加的符文</param>
         public void AppendSpell(Spell spell)
         {
-            
+            if (_spells.Count > SpellScrollData.Instance.maxSpellCapacity)
+            {
+                
+            }
+            _spells.Add(spell);
+            SpellScrollViewer.Instance.UpdateSpellScrollHud();
         }
+        
     }
 }

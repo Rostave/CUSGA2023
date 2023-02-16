@@ -2,7 +2,6 @@
 
 namespace R0.SpellRel
 {
-
     /// <summary>
     /// 符文类型枚举
     /// </summary>
