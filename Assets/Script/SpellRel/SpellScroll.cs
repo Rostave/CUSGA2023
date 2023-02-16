@@ -13,6 +13,11 @@ namespace R0.SpellRel
         /// 符文列表
         /// </summary>
         private List<Spell> _spells;
+
+        /// <summary>
+        /// 符文能量
+        /// </summary>
+        private float _power;
         
         public SpellScroll()
         {

@@ -9,16 +9,22 @@ namespace R0.ScriptableObjConfig
     public abstract class SingaltonScriptableObj<T> : ScriptableObject where T : ScriptableObject
     {
         private static readonly string ScriptableObjPath = $"Data/{typeof(T).Name}";
+
+        private static T _instance
+        {
+            get
+            {
+                if (Instance == null)
+                {
+                    Instance = Resources.Load<T>(ScriptableObjPath);
+                    Debug.Log(ScriptableObjPath);
+                    if (Instance == null) Instance = CreateInstance<T>();
+                }
+                return Instance;
+            }
+            set => Instance = value;
+        }
         public static T Instance { get; private set; }
 
-        protected virtual void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = Resources.Load<T>(ScriptableObjPath);
-                if (Instance == null) Instance = CreateInstance<T>();
-            }
-        }
-        
     }
 }
