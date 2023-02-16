@@ -7,7 +7,9 @@ namespace R0.SpellRel
     /// </summary>
     public enum SpellType
     {
-        
+        Bullet,      // 子弹类型
+        Element,     // 元素类型
+        Property,    // 属性类型
     }
     
     /// <summary>
@@ -15,7 +17,7 @@ namespace R0.SpellRel
     /// </summary>
     public class Spell
     {
-        public SpellType Type;
+        // public SpellType Type;
         
     }
 }

@@ -9,14 +9,10 @@ namespace R0.SpellRel
     /// </summary>
     public class SpellScroll
     {
-        /// <summary>
-        /// 符文列表
-        /// </summary>
+        /// <summary> 符文列表 </summary>
         private List<Spell> _spells;
 
-        /// <summary>
-        /// 符文能量
-        /// </summary>
+        /// <summary> 符文能量 </summary>
         private float _power;
         
         public SpellScroll()
@@ -32,9 +28,20 @@ namespace R0.SpellRel
         {
             if (_spells.Count > SpellScrollData.Instance.maxSpellCapacity)
             {
-                
+                // TODO : UI面板移除选择的符文
             }
             _spells.Add(spell);
+            SpellScrollViewer.Instance.UpdateSpellScrollHud();
+        }
+        
+        /// <summary>
+        /// 将第index个符文移出符文列表
+        /// </summary>
+        /// <param name="index">移除目标符文在列表里的角标</param>
+        public void RemoveSpellAt(int index)
+        {
+            if (index < 0 || index >= _spells.Count) return;
+            _spells.RemoveAt(index);
             SpellScrollViewer.Instance.UpdateSpellScrollHud();
         }
         

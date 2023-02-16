@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: "\u7B26\u6587\u5377\u8F74\u6570\u503C"
   m_EditorClassIdentifier: 
   maxSpellCapacity: 10
-  initPower: 1
+  powerFreeSpellCount: 3
+  maxSpellPower: 10
+  initSpellPower: 1

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace R0.SpellRel
 {
-    public class SpellScrollViewer : SingaltonBehaviour<SpellScrollViewer>
+    public class SpellScrollViewer : SingletonBehaviour<SpellScrollViewer>
     {
         
         /// <summary>
@@ -13,5 +13,7 @@ namespace R0.SpellRel
         {
             
         }
+
+        protected override void OnEnableInit() { }
     }
 }

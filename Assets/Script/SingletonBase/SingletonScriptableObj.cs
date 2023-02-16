@@ -6,25 +6,25 @@ namespace R0.ScriptableObjConfig
     /// scriptableObject单例模式抽象基类
     /// </summary>
     /// <typeparam name="T">实际ScriptableObject类型</typeparam>
-    public abstract class SingaltonScriptableObj<T> : ScriptableObject where T : ScriptableObject
+    public abstract class SingletonScriptableObj<T> : ScriptableObject where T : ScriptableObject
     {
         private static readonly string ScriptableObjPath = $"Data/{typeof(T).Name}";
 
-        private static T _instance
+        private static T _instance { get; set; }
+       
+        public static T Instance 
         {
             get
             {
-                if (Instance == null)
+                if (_instance == null)
                 {
-                    Instance = Resources.Load<T>(ScriptableObjPath);
+                    _instance = Resources.Load<T>(ScriptableObjPath);
                     Debug.Log(ScriptableObjPath);
-                    if (Instance == null) Instance = CreateInstance<T>();
+                    if (_instance == null) _instance = CreateInstance<T>();
                 }
-                return Instance;
+                return _instance;
             }
-            set => Instance = value;
+            set => _instance = value;
         }
-        public static T Instance { get; private set; }
-
     }
 }

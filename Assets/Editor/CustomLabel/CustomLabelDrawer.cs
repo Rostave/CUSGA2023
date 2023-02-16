@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using R0.EditorTool;
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -12,10 +13,9 @@ public class CustomLabelDrawer: PropertyDrawer
     {
         if (_label == null)
         {
-            var name = (attribute as CustomLabelAttribute)?.Name;
+            var name = (attribute as CustomLabelAttribute)?.name;
             _label = new GUIContent(name);
         }
-
         EditorGUI.PropertyField(position, property, _label);
     }
 }
