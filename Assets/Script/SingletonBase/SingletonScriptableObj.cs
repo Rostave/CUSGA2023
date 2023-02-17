@@ -19,7 +19,6 @@ namespace R0.ScriptableObjConfig
                 if (_instance == null)
                 {
                     _instance = Resources.Load<T>(ScriptableObjPath);
-                    Debug.Log(ScriptableObjPath);
                     if (_instance == null) _instance = CreateInstance<T>();
                 }
                 return _instance;

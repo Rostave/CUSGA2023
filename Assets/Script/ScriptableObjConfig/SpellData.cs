@@ -11,28 +11,22 @@ namespace R0.ScriptableObjConfig
         [Serializable]
         public class SpellDataStruct
         {
-            [LabelText("名称")]
-            [VerticalGroup("row1/left")]
+            [LabelText("名称"), VerticalGroup("row1/left")]
             public string name;
 
-            [LabelText("单次能耗")]
-            [VerticalGroup("row1/left")]
+            [LabelText("单次能耗"), VerticalGroup("row1/left")]
             public float powerCost;
 
-            [LabelText("效果")]
-            [VerticalGroup("row1/left")]
+            [LabelText("效果"), VerticalGroup("row1/left")]
             public SpellEffect effect;
             
-            [LabelText("效果发动时机")]
-            [VerticalGroup("row1/left")]
+            [LabelText("效果发动时机"), VerticalGroup("row1/left")]
             public SpellEffectActivationTime activationTime;
 
-            [LabelText("效果参数")]
-            [VerticalGroup("row1/left")]
+            [LabelText("效果参数"), VerticalGroup("row1/left")]
             public float effectParam;
 
-            [TextArea]
-            [LabelText("描述")]
+            [TextArea, LabelText("描述")]
             public string description;
             
             [HideLabel]
@@ -41,25 +35,30 @@ namespace R0.ScriptableObjConfig
             public Sprite sprite;
         }
         
-        [FoldoutGroup("【符文卷轴】")]
-        [LabelText("最大符文容量")]
+        [FoldoutGroup("【符文卷轴】"), LabelText("最大符文容量")]
+        // [HorizontalGroup("scroll"), VerticalGroup("scroll/left")]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public byte maxSpellCapacity = 10;
         
-        [FoldoutGroup("【符文卷轴】")]
-        [LabelText("不耗能符文数")]
+        [FoldoutGroup("【符文卷轴】"), LabelText("不耗能符文数")]
+        // [HorizontalGroup("scroll"), VerticalGroup("scroll/left")]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public byte powerFreeSpellCount = 3;
         
-        [FoldoutGroup("【符文卷轴】")]
-        [LabelText("最大能量容量")]
+        [FoldoutGroup("【符文卷轴】"), LabelText("最大能量容量")]
+        // [HorizontalGroup("scroll"), VerticalGroup("scroll/left")]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public float maxSpellPower = 10f;
         
-        [FoldoutGroup("【符文卷轴】")]
-        [LabelText("初始能量")]
+        [FoldoutGroup("【符文卷轴】"), LabelText("初始能量")]
+        // [HorizontalGroup("scroll"), VerticalGroup("scroll/left")]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public float initSpellPower = 1f;
+        
+        // [HideLabel]
+        // [PreviewField(58, ObjectFieldAlignment.Right)]
+        // [HorizontalGroup("scroll", 58), VerticalGroup("scroll/right")]
+        // public Sprite frameImg;
         
         [TableList]
         [LabelText("【各类型符文属性】")]

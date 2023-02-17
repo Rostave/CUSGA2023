@@ -38,8 +38,7 @@ namespace R0.ScriptableObjConfig
             public Sprite sprite;
         }
         
-        [FoldoutGroup("【公有属性】", true)]
-        [LabelText("子弹召唤cd")]
+        [FoldoutGroup("【公有属性】", true), LabelText("子弹召唤cd")]
         [SuffixLabel("unit/16ms", true)]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public float defaultSummonCd;
