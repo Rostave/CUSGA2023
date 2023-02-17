@@ -22,20 +22,26 @@ namespace R0.ScriptableObjConfig
 
             [LabelText("单次伤害")]
             [VerticalGroup("row1/left")]
-            public float atk;
+            public float dmg;
 
             [LabelText("图片朝向速度方向")]
             [TableColumnWidth(30)]
+            [VerticalGroup("row2")]
             public bool isFacingDir;
-
-            [TextArea]
-            [LabelText("描述")]
-            public string description;
             
             [HideLabel]
             [PreviewField(58, ObjectFieldAlignment.Right)]
             [HorizontalGroup("row1", 58), VerticalGroup("row1/right")]
             public Sprite sprite;
+            
+            [LabelText("生命时长")]
+            [VerticalGroup("row2")]
+            public float defaultLifeTime;
+
+            [TextArea]
+            [LabelText("描述")]
+            [VerticalGroup("row3")]
+            public string description;
         }
         
         [FoldoutGroup("【公有属性】", true), LabelText("子弹召唤cd")]
