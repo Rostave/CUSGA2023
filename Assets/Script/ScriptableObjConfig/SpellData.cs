@@ -28,7 +28,7 @@ namespace R0.ScriptableObjConfig
 
             [TextArea, LabelText("描述")]
             public string description;
-            
+
             [HideLabel]
             [PreviewField(58, ObjectFieldAlignment.Right)]
             [HorizontalGroup("row1", 58), VerticalGroup("row1/right")]

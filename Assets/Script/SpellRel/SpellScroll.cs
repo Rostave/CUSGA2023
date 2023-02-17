@@ -20,8 +20,12 @@ namespace R0.SpellRel
 
         /// <summary> 符文能量 </summary> ///
         private float _power;
-        
-        protected override void OnEnableInit() { }
+        private int _supportedSpellIndex;
+
+        protected override void OnEnableInit()
+        {
+            _supportedSpellIndex = Mathf.CeilToInt(_power);
+        }
 
         /// <summary>
         /// 获取符文列表原引用
@@ -59,6 +63,9 @@ namespace R0.SpellRel
         /// </summary>
         public void ApplySpellOnTrigger()
         {
+            var supported = Mathf.CeilToInt(_power);
+            if (supported == _supportedSpellIndex) return;  // 激活符文相同则没必要更新符文效果
+            
             var activeIndex = _power < _activeSpellIndex ? Mathf.CeilToInt(_power) : _activeSpellIndex;
             for (var i = 0; i < activeIndex; i++)
             {

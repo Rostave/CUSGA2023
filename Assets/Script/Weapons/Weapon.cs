@@ -1,8 +1,9 @@
+using R0.Bullet;
 using R0.ScriptableObjConfig;
 using R0.SpellRel;
 using UnityEngine;
 
-namespace R0.Weapon
+namespace R0.Weapons
 {
     /// <summary>
     /// 召唤物（子弹）管理类
@@ -12,6 +13,10 @@ namespace R0.Weapon
         private float _triggerCd;
         private float _nextTriggerTime;
         private bool _canTrigger;
+        
+        public float bulletSpeedMultiplier;
+        public Vector3 pointingDir;
+        public float bulletDmgMultiplier;
 
         private void Start()
         {
@@ -29,7 +34,6 @@ namespace R0.Weapon
             if (!Input.GetMouseButtonDown(0)) return;
 
             _canTrigger = false;
-            _nextTriggerTime = Time.time + _triggerCd;
             TriggerAtk();
         }
 
@@ -41,8 +45,20 @@ namespace R0.Weapon
 
         private void TriggerAtk()
         {
-            SpellScroll.Instance.ApplySpellOnTrigger();  // 开始攻击瞬间的符文结算
+            // 开始攻击瞬间的符文结算
+            SpellScroll.Instance.ApplySpellOnTrigger();
             
+            _nextTriggerTime = Time.time + _triggerCd;
+            
+            // 计算射击方向
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var position = transform.position;
+            pointingDir = (mousePos - position).normalized;
+            
+            // 生成子弹
+            var bullet = BulletPoolMgr.Instance.GetBullet();
+            bullet.transform.position = position;
+            bullet.SetBasicParam(this, 0f);
         }
 
     }
