@@ -10,11 +10,23 @@ namespace R0.Bullet
         /// <summary> transform缓存 </summary>
         private Transform _tCached, _imgTCached;
         
-        /// <summary> 速度乘量 </summary>
+        /// <summary> 速度乘量 </summary> ///
         private float _speedMultiplier;
+        
+        /// <summary> 移动速度 </summary> ///
         private float _moveSpeed;
+        
+        /// <summary> 移动方向 </summary>///
         private Vector3 _moveDir;
+        
+        /// <summary> 生命终止时间 </summary>///
         private float _lifeEndTime;
+        
+        /// <summary> 起始延时结束时间 </summary>///
+        private float _initWaitEndTime;
+        
+        /// <summary> 是否跟踪敌人 </summary>///
+        private bool _isTracingEnemy;
         
         protected SpriteRenderer SpriteRenderer;
         protected bool IsBulletFacingDir;
