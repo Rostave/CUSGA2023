@@ -12,23 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b37b709bbc44935ae9786b0bff23af1, type: 3}
   m_Name: BulletData
   m_EditorClassIdentifier: 
-  defaultSummonCd: 0
   bulletData:
-  - name: "\u6CD5\u7403"
-    moveSpeed: 0
-    atk: 0
-    isFacingDir: 0
+  - isSpellInfoLocked: 1
+    name: "\u6CD5\u7403"
+    moveSpeed: 9
+    dmg: 0
+    isFacingDir: 1
+    sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    defaultLifeTime: 0.6
     description: 
-    sprite: {fileID: 0}
-  - name: "\u5F13\u7BAD"
+  - isSpellInfoLocked: 0
+    name: "\u5F13\u7BAD"
     moveSpeed: 0
-    atk: 0
+    dmg: 0
     isFacingDir: 0
-    description: 
     sprite: {fileID: 0}
-  - name: "\u98DE\u5251"
+    defaultLifeTime: 0
+    description: 
+  - isSpellInfoLocked: 0
+    name: "\u98DE\u5251"
     moveSpeed: 0
-    atk: 0
+    dmg: 0
     isFacingDir: 0
-    description: 
     sprite: {fileID: 0}
+    defaultLifeTime: 0
+    description: 

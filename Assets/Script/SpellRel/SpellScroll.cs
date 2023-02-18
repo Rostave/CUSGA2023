@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using R0.ScriptableObjConfig;
 using R0.SingaltonBase;
 using R0.Static;
+using R0.Weapons;
 using UnityEngine;
 
 namespace R0.SpellRel
@@ -16,15 +17,16 @@ namespace R0.SpellRel
         [SerializeField] private List<Spell> spells;
 
         /// <summary> 激活到第几个符文 </summary> ///
-        private byte _activeSpellIndex;
-
+        [SerializeField] private byte activeSpellIndex;
+        
         /// <summary> 符文能量 </summary> ///
-        private float _power;
-        private int _supportedSpellIndex;
+        [SerializeField] private float power;
 
         protected override void OnEnableInit()
         {
-            _supportedSpellIndex = Mathf.CeilToInt(_power);
+            PreApplyPowerFreeSpell();
+            GetComponent<SpellScrollViewer>().Init();
+            power = SpellData.Instance.initSpellPower;
         }
 
         /// <summary>
@@ -59,29 +61,38 @@ namespace R0.SpellRel
         }
 
         /// <summary>
-        /// 应用并结算 `子弹发射前` 的符文效果
+        /// 预结算不消耗能量的符文效果
+        /// </summary>
+        public void PreApplyPowerFreeSpell()
+        {
+            var count = Math.Min(spells.Count, SpellData.Instance.powerFreeSpellCount);
+            for (var i = 0; i < count; i++)
+            {
+                spells[i].Apply();
+            }
+        }
+
+        /// <summary>
+        /// 应用并结算符文效果
         /// </summary>
         public void ApplySpellOnTrigger()
         {
-            var supported = Mathf.CeilToInt(_power);
-            if (supported == _supportedSpellIndex) return;  // 激活符文相同则没必要更新符文效果
-            
-            var activeIndex = _power < _activeSpellIndex ? Mathf.CeilToInt(_power) : _activeSpellIndex;
-            for (var i = 0; i < activeIndex; i++)
+            // 计算支持生效的符文数，不考虑非能耗符文
+            var spellDataObj = SpellData.Instance;
+            var supported = Mathf.CeilToInt(power / spellDataObj.powerPerFrame);
+            supported = Math.Min(supported, activeSpellIndex);
+
+            if (supported < spellDataObj.powerFreeSpellCount) return;
+
+            var spellData = spellDataObj.spellData;
+            for (var i = spellDataObj.powerFreeSpellCount; i < supported; i++)
             {
-                var spellData = SpellData.Instance.spellData[i];
-                if (spellData.activationTime != SpellEffectActivationTime.OnWeaponTrigger) continue;
-                
                 var spell = spells[i];
 
                 // 超出部分计算符文消耗
-                var data = SpellData.Instance;
-                if (i >= data.powerFreeSpellCount)
-                {
-                    var remain = _power - data.spellData[spell.id].powerCost;
-                    if (remain < 0) return;
-                    _power = remain;
-                }
+                var remain = power - spellData[spell.id].powerCost;
+                if (remain < 0) return;
+                power = remain;
                 
                 // 应用符文属性
                 spell.Apply();
