@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using R0.ScriptableObjConfig;
 using R0.SingaltonBase;
-using R0.Static;
-using R0.Weapons;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
