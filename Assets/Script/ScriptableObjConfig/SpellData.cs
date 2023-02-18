@@ -40,7 +40,7 @@ namespace R0.ScriptableObjConfig
         }
         
         [FoldoutGroup("【武器属性】", true), LabelText("默认子弹召唤cd")]
-        [SuffixLabel("unit/16ms", true)]
+        [SuffixLabel("sec", true)]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public float defaultSummonCd;
         
