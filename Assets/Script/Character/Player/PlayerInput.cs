@@ -18,7 +18,9 @@ public class PlayerInput : ScriptableObject,Controls.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
+        {
             onMove?.Invoke(context.ReadValue<float>());
+        }
         else if (context.phase == InputActionPhase.Canceled)
             onDisMove?.Invoke();
 
@@ -45,5 +47,14 @@ public class PlayerInput : ScriptableObject,Controls.IPlayerActions
     private void OnDisable()
     {
         DisablePlayerControl();
+    }
+
+    public void OnSs(InputAction.CallbackContext context)
+    {
+        Debug.Log(context.ReadValue<Vector2>());
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Debug.Log(context.ReadValue<Vector2>());
+        }
     }
 }

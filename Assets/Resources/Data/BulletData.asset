@@ -16,19 +16,22 @@ MonoBehaviour:
   bulletData:
   - name: "\u6CD5\u7403"
     moveSpeed: 0
-    atk: 0
+    dmg: 0
     isFacingDir: 0
-    description: 
     sprite: {fileID: 0}
+    defaultLifeTime: 0
+    description: 
   - name: "\u5F13\u7BAD"
     moveSpeed: 0
-    atk: 0
+    dmg: 0
     isFacingDir: 0
-    description: 
     sprite: {fileID: 0}
+    defaultLifeTime: 0
+    description: 
   - name: "\u98DE\u5251"
     moveSpeed: 0
-    atk: 0
+    dmg: 0
     isFacingDir: 0
-    description: 
     sprite: {fileID: 0}
+    defaultLifeTime: 0
+    description: 

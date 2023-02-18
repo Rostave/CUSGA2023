@@ -25,6 +25,7 @@ namespace Vacuname
             attribute = _setAttribute;
             rd=GetComponent<Rigidbody2D>();
             col = GetComponent<BoxCollider2D>();
+            curAcceleraTime = 0;
         }
 
         private void OnEnable()
