@@ -12,8 +12,7 @@ namespace R0.Bullet
     public class BulletPoolMgr : SingletonBehaviour<BulletPoolMgr>
     {
         public GameObject bulletPrefab;
-        public Transform bulletHome;
-        
+
         private Stack<Bullet> _bullets;
 
         protected override void OnEnableInit()
@@ -28,7 +27,7 @@ namespace R0.Bullet
         {
             if (_bullets.Count == 0)
             {
-                return Instantiate(bulletPrefab, bulletHome).GetComponent<Bullet>();
+                return Instantiate(bulletPrefab, transform).GetComponent<Bullet>();
             }
 
             var ret = _bullets.Pop();
@@ -41,6 +40,7 @@ namespace R0.Bullet
         /// </summary>
         public void Recycle(Bullet bullet)
         {
+            bullet.gameObject.SetActive(false);
             _bullets.Push(bullet);
         }
         

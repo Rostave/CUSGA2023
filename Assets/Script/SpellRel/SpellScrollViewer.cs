@@ -12,6 +12,26 @@ namespace R0.SpellRel
         public float frameInterval;
 
         private Image[] _spellImg;
+
+        /// <summary>
+        /// 初始化函数，为控制初始化顺序顾为手动调用
+        /// </summary>
+        public void Init()
+        {
+            var count = SpellData.Instance.maxSpellCapacity;
+            _spellImg = new Image[count];
+
+            var pos = transform.position;
+            for (var i = 0; i < count; i++)
+            {
+                var frame = Instantiate(framePrefab, transform);
+                frame.transform.position = pos;
+                pos.x += frameInterval;
+                _spellImg[i] = frame.transform.Find("SpellImg").GetComponent<Image>();
+            }
+
+            UpdateSpellScrollHud();
+        }
         
         /// <summary>
         /// 刷新显示符文卷轴HUD上的符文图标，应在修改符文列表后调用以同步显示
@@ -32,21 +52,6 @@ namespace R0.SpellRel
             }
         }
 
-        protected override void OnEnableInit()
-        {
-            var count = SpellData.Instance.maxSpellCapacity;
-            _spellImg = new Image[count];
-
-            var pos = transform.position;
-            for (var i = 0; i < count; i++)
-            {
-                var frame = Instantiate(framePrefab, transform);
-                frame.transform.position = pos;
-                pos.x += frameInterval;
-                _spellImg[i] = frame.transform.Find("SpellImg").GetComponent<Image>();
-            }
-
-            UpdateSpellScrollHud();
-        }
+        protected override void OnEnableInit() { }
     }
 }
