@@ -25,9 +25,21 @@ namespace Vacuname
 
         public void GetCurSpeed(float input, ref float curSpeed,ref float curAcceleraTime)
         {
-            curAcceleraTime = Mathf.Clamp(curAcceleraTime + Time.deltaTime, 0, maxAcceleraTime);
-            Debug.Log(curAcceleraTime);
-            curSpeed = Mathf.Lerp(0, maxSpeed, curAcceleraTime / maxAcceleraTime);
+            float realAccelerate;
+            float realLimit;
+            if (input < 0) realLimit = maxSpeed * -1;
+            //if(input==0)realAccelerate=
+
+
+            if (curSpeed==0)
+            {
+                curAcceleraTime = Mathf.Clamp(curAcceleraTime + Time.deltaTime, 0, maxAcceleraTime);
+                curSpeed = Mathf.Lerp(0, maxSpeed, curAcceleraTime / maxAcceleraTime);
+            }
+            else if(input==0)
+            {
+                
+            }
         }
     }
 

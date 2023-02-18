@@ -49,12 +49,8 @@ public class PlayerInput : ScriptableObject,Controls.IPlayerActions
         DisablePlayerControl();
     }
 
-    public void OnSs(InputAction.CallbackContext context)
+    public void OnSs(InputAction.CallbackContext context)//∞¥W≤‚ ‘
     {
-        Debug.Log(context.ReadValue<Vector2>());
-        if (context.phase == InputActionPhase.Performed)
-        {
-            Debug.Log(context.ReadValue<Vector2>());
-        }
+        Debug.Log(context);
     }
 }

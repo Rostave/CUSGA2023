@@ -30,16 +30,23 @@ namespace Vacuname
 
         private void OnEnable()
         {
-            input.onMove += Move;
+            //input.onMove += Move;
             input.onDisMove += DisMove;
             CameraControl.Instance.ca.m_Follow = transform;
         }
         private void OnDisable()
         {
-            input.onMove -= Move;
+            //input.onMove -= Move;
             input.onDisMove -= DisMove;
         }
         #endregion
+
+        private void Update()
+        {
+            float input = Input.GetAxis("Horizontal");
+            input = input > 0 ? 1 : input < 0 ? -1 : 0;
+            Move(input);
+        }
 
         private void DisMove()
         {
