@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79cd5e765d980c04ba2f3701ddec8d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ca: {fileID: 0}
 --- !u!4 &418882533
 Transform:
   m_ObjectHideFlags: 0
@@ -611,7 +612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1034341636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,7 +628,6 @@ MonoBehaviour:
   _setAttribute: {fileID: 11400000, guid: ac31b6b53d444d54fa40367c1fd838b4, type: 2}
   attribute: {fileID: 11400000, guid: ac31b6b53d444d54fa40367c1fd838b4, type: 2}
   input: {fileID: 11400000, guid: e32738af2ac121549bbefb1b2bdaf014, type: 2}
-  curSpeed: 0
 --- !u!61 &1034341637
 BoxCollider2D:
   m_ObjectHideFlags: 0
