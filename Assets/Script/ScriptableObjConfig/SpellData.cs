@@ -76,10 +76,9 @@ namespace R0.ScriptableObjConfig
         [LabelText("【各类型符文属性】")]
         public SpellDataStruct[] spellData;
         
-
-        [DisableInEditorMode]
-        [Button("运行模式点我更新不耗能的符文效果", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
-        private void UpdatePowerFreeSpellEffect() => SpellScroll.Instance.PreApplyPowerFreeSpell();
+        // [DisableInEditorMode]
+        // [Button("运行模式点我更新不耗能的符文效果", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
+        // private void UpdatePowerFreeSpellEffect() => SpellScroll.Instance.PreApplyPowerFreeSpell();
 
     }
 }

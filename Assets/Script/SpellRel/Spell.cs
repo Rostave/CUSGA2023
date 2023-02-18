@@ -54,6 +54,16 @@ namespace R0.SpellRel
                 case SpellEffect.SummonCd:
                     weapon.UpdateAtkCd(data.effectParam);
                     break;
+                
+                case SpellEffect.SummonMagicAmmo:
+                    weapon.GenBullets();
+                    break;
+                case SpellEffect.SummonArrow:
+                    weapon.GenBullets();
+                    break;
+                case SpellEffect.SummonSword:
+                    weapon.GenBullets();
+                    break;
                 default:
                     break;
             }

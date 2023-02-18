@@ -12,12 +12,15 @@ namespace R0.SpellRel
         public float frameInterval;
 
         private Image[] _spellImg;
+        private Image _barImg;
 
         /// <summary>
         /// 初始化函数，为控制初始化顺序顾为手动调用
         /// </summary>
         public void Init()
         {
+            _barImg = transform.Find("PowerBar").Find("Bar").GetComponent<Image>();
+            
             var count = SpellData.Instance.maxSpellCapacity;
             _spellImg = new Image[count];
 
@@ -32,7 +35,12 @@ namespace R0.SpellRel
 
             UpdateSpellScrollHud();
         }
-        
+
+        /// <summary>
+        /// 更新能量条UI显示
+        /// </summary>
+        public void UpdatePowerBarHud(float curPower) => _barImg.fillAmount = curPower / SpellData.Instance.maxSpellPower;
+
         /// <summary>
         /// 刷新显示符文卷轴HUD上的符文图标，应在修改符文列表后调用以同步显示
         /// </summary>

@@ -4,6 +4,7 @@ using R0.ScriptableObjConfig;
 using R0.SingaltonBase;
 using R0.Static;
 using R0.Weapons;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace R0.SpellRel
@@ -21,12 +22,20 @@ namespace R0.SpellRel
         
         /// <summary> 符文能量 </summary> ///
         [SerializeField] private float power;
+        public float Power
+        {
+            get => power;
+            set
+            {
+                power = value;
+                SpellScrollViewer.Instance.UpdatePowerBarHud(power);
+            }
+        }
 
         protected override void OnEnableInit()
         {
-            PreApplyPowerFreeSpell();
             GetComponent<SpellScrollViewer>().Init();
-            power = SpellData.Instance.initSpellPower;
+            Power = SpellData.Instance.initSpellPower;
         }
 
         /// <summary>
@@ -61,38 +70,28 @@ namespace R0.SpellRel
         }
 
         /// <summary>
-        /// 预结算不消耗能量的符文效果
-        /// </summary>
-        public void PreApplyPowerFreeSpell()
-        {
-            var count = Math.Min(spells.Count, SpellData.Instance.powerFreeSpellCount);
-            for (var i = 0; i < count; i++)
-            {
-                spells[i].Apply();
-            }
-        }
-
-        /// <summary>
         /// 应用并结算符文效果
         /// </summary>
         public void ApplySpellOnTrigger()
         {
-            // 计算支持生效的符文数，不考虑非能耗符文
+            // 计算支持生效的符文数
             var spellDataObj = SpellData.Instance;
             var supported = Mathf.CeilToInt(power / spellDataObj.powerPerFrame);
             supported = Math.Min(supported, activeSpellIndex);
-
-            if (supported < spellDataObj.powerFreeSpellCount) return;
+            supported = Math.Min(supported, spells.Count);
 
             var spellData = spellDataObj.spellData;
-            for (var i = spellDataObj.powerFreeSpellCount; i < supported; i++)
+            for (var i = 0; i < supported; i++)
             {
                 var spell = spells[i];
 
                 // 超出部分计算符文消耗
-                var remain = power - spellData[spell.id].powerCost;
-                if (remain < 0) return;
-                power = remain;
+                if (i >= spellDataObj.powerFreeSpellCount)
+                {
+                    var remain = power - spellData[spell.id].powerCost;
+                    if (remain < 0) break;
+                    Power = remain;
+                }
                 
                 // 应用符文属性
                 spell.Apply();

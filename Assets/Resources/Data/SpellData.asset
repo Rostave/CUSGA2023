@@ -22,15 +22,15 @@ MonoBehaviour:
   spellData:
   - isSpellInfoLocked: 0
     name: "\u6CD5\u7403\u53EC\u5524\u7B26\u6587"
-    powerCost: 1
+    powerCost: 18
     effect: 0
     effectParam: 0
     priority: 2
     description: "\u53EC\u5524\u4E00\u4E2A\u6CD5\u7403\u5C04\u5411\u76EE\u6807"
-    sprite: {fileID: 0}
+    sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   - isSpellInfoLocked: 0
     name: "\u5F13\u7BAD\u53EC\u5524\u7B26\u6587"
-    powerCost: 1
+    powerCost: 18
     effect: 1
     effectParam: 0
     priority: 2
@@ -38,7 +38,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
   - isSpellInfoLocked: 0
     name: "\u98DE\u5251\u53EC\u5524\u7B26\u6587"
-    powerCost: 1
+    powerCost: 18
     effect: 2
     effectParam: 0
     priority: 2
