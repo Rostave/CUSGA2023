@@ -11,75 +11,57 @@ namespace R0.ScriptableObjConfig
         [Serializable]
         public class SpellDataStruct
         {
-            [ToggleLeft, LabelText("单项面板锁"), VerticalGroup("row1/left")]
-            [SerializeField] private bool isSpellInfoLocked;
-
-            [LabelText("名称"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            [LabelText("名称"), VerticalGroup("row1/left")]
             public string name;
 
-            [LabelText("单次能耗"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            [LabelText("单次能耗"), VerticalGroup("row1/left")]
             public float powerCost;
 
-            [LabelText("效果"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            [LabelText("效果"), VerticalGroup("row1/left")]
             public SpellEffect effect;
             
-            [HideIf("@((int) effect) < 3")]
-            [LabelText("效果参数"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
-            public float effectParam;
-            
-            [LabelText("优先级"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
-            public int priority;
+            [LabelText("效果发动时机"), VerticalGroup("row1/left")]
+            public SpellEffectActivationTime activationTime;
 
-            [TextArea, LabelText("描述"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
+            [LabelText("效果参数"), VerticalGroup("row1/left")]
+            public float effectParam;
+
+            [TextArea, LabelText("描述")]
             public string description;
 
             [HideLabel]
             [PreviewField(58, ObjectFieldAlignment.Right)]
-            [HorizontalGroup("row1", 58), VerticalGroup("row1/right"), DisableIf("isSpellInfoLocked")]
+            [HorizontalGroup("row1", 58), VerticalGroup("row1/right")]
             public Sprite sprite;
         }
         
-        [FoldoutGroup("【武器属性】", true), LabelText("默认子弹召唤cd")]
-        [SuffixLabel("unit/16ms", true)]
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        public float defaultSummonCd;
-        
-        [FoldoutGroup("【武器属性】", true), LabelText("相邻子弹间开角")]
-        [SuffixLabel("<角度制浮点数>", true)]
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        public float bulletInterAngle;
-
         [FoldoutGroup("【符文卷轴】"), LabelText("最大符文容量")]
+        // [HorizontalGroup("scroll"), VerticalGroup("scroll/left")]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public byte maxSpellCapacity = 10;
         
         [FoldoutGroup("【符文卷轴】"), LabelText("不耗能符文数")]
+        // [HorizontalGroup("scroll"), VerticalGroup("scroll/left")]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public byte powerFreeSpellCount = 3;
         
         [FoldoutGroup("【符文卷轴】"), LabelText("最大能量容量")]
+        // [HorizontalGroup("scroll"), VerticalGroup("scroll/left")]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        public float maxSpellPower = 200f;
+        public float maxSpellPower = 10f;
         
         [FoldoutGroup("【符文卷轴】"), LabelText("初始能量")]
+        // [HorizontalGroup("scroll"), VerticalGroup("scroll/left")]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        public float initSpellPower = 200f;
+        public float initSpellPower = 1f;
         
-        [FoldoutGroup("【符文卷轴】"), LabelText("一格表示的能量")]
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        public float powerPerFrame = 20f;
-
-        [Space, Space]
-        [InfoBox("符文`优先级`属性（整数）越小，优先级越高（越先生效）")]
+        // [HideLabel]
+        // [PreviewField(58, ObjectFieldAlignment.Right)]
+        // [HorizontalGroup("scroll", 58), VerticalGroup("scroll/right")]
+        // public Sprite frameImg;
         
         [TableList]
         [LabelText("【各类型符文属性】")]
         public SpellDataStruct[] spellData;
-        
-
-        [DisableInEditorMode]
-        [Button("运行模式点我更新不耗能的符文效果", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
-        private void UpdatePowerFreeSpellEffect() => SpellScroll.Instance.PreApplyPowerFreeSpell();
-
     }
 }

@@ -1,7 +1,5 @@
 using System;
 using R0.ScriptableObjConfig;
-using R0.SpellRel;
-using R0.Static;
 using UnityEngine;
 using R0.Weapons;
 using Sirenix.OdinInspector;
@@ -30,37 +28,22 @@ namespace R0.Bullet
         private Transform _tCached, _imgTCached;
         
         /// <summary> 速度乘量 </summary> ///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private float speedMultiplier;
+        private float _speedMultiplier;
         
         /// <summary> 移动速度 </summary> ///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private float moveSpeed;
+        private float _moveSpeed;
         
         /// <summary> 移动方向 </summary>///
-        [SerializeField, DisplayAsString] private Vector3 moveDir;
+        private Vector3 _moveDir;
         
         /// <summary> 生命终止时间 </summary>///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private float lifeEndTime;
+        private float _lifeEndTime;
         
         /// <summary> 起始延时结束时间 </summary>///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private float initWaitEndTime;
+        private float _initWaitEndTime;
         
         /// <summary> 单次伤害 </summary>///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private float dmg;
-        
-        /// <summary> buff效果 </summary> ///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private SpellEffect effect;
-        
-        /// <summary> 作用在敌人身上的效果参数 </summary> ///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private float effectParamOnEnemy;
-
-        private bool _isCompleteInitWait;
+        private float _dmg;
         
         protected SpriteRenderer SpriteRenderer;
         protected bool IsBulletFacingDir;
@@ -86,49 +69,44 @@ namespace R0.Bullet
         
         private void SetBulletImgDir()
         {
-            _imgTCached.rotation = IsBulletFacingDir 
-                ? Quaternion.FromToRotation(Vector3.up, moveDir) 
-                : Const.Qua.Zero;
+            if (IsBulletFacingDir) _imgTCached.rotation = Quaternion.FromToRotation(Vector3.up, _moveDir);
         }
 
         private void Move()
         {
-            _tCached.Translate(moveDir * Time.deltaTime * speedMultiplier * moveSpeed);
+            _tCached.Translate(_moveDir * Time.deltaTime * _speedMultiplier * _moveSpeed);
         }
 
         /// <summary>
         /// 重置基本参数
         /// </summary>
-        public virtual void SetBasicParam(Weapon weapon, float initWaitTime, Vector3 dir)
+        public virtual void SetBasicParam(Weapon weapon, float initWaitTime)
         {
             var curTime = Time.time;
-            initWaitEndTime = curTime + initWaitTime;
-            _isCompleteInitWait = false;
+            _initWaitEndTime = curTime + initWaitTime;
             
             var data = BulletData.Instance.bulletData[(int) type];
-            moveSpeed = data.moveSpeed;
+            _moveSpeed = data.moveSpeed;
             IsBulletFacingDir = data.isFacingDir;
-
-            SpriteRenderer.sprite = data.sprite;
-            lifeEndTime = curTime + data.defaultLifeTime;
-            speedMultiplier = weapon.bulletSpeedMultiplier;
-            effectParamOnEnemy = weapon.effectParamOnEnemy;
-            effect = weapon.bulletEffect;
-            moveDir = dir;
+            
+            _lifeEndTime = curTime + data.defaultLifeTime;
+            _speedMultiplier = weapon.bulletSpeedMultiplier;
+            _moveDir = weapon.pointingDir;
             SetBulletImgDir();
 
-            dmg = data.dmg * weapon.bulletDmgMultiplier;
+            _dmg = data.dmg * weapon.bulletDmgMultiplier;
+        }
+
+        /// <summary>
+        /// 回收子弹进对象池
+        /// </summary>
+        public void Recycle()
+        {
+            
         }
 
         protected virtual void Update()
         {
-            if (!_isCompleteInitWait)
-            {
-                if (Time.time > initWaitEndTime) _isCompleteInitWait = true;
-                else return;
-            }
-            
-            if (Time.time > lifeEndTime) BulletPoolMgr.Instance.Recycle(this);
             Move();
         }
         
