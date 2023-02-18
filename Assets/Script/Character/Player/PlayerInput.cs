@@ -51,6 +51,6 @@ public class PlayerInput : ScriptableObject,Controls.IPlayerActions
 
     public void OnSs(InputAction.CallbackContext context)//∞¥W≤‚ ‘
     {
-        Debug.Log(context);
+        //Debug.Log(context);
     }
 }

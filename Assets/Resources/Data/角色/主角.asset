@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\u4E3B\u89D2"
   m_EditorClassIdentifier: 
   acceleraTime: 1
-  deceleraTime: 0.2
+  deceleraTime: 0.01
   maxSpeed: 10
   jumpStrength: 5
   maxHealth: 100
