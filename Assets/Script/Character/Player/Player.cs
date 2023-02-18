@@ -44,7 +44,6 @@ namespace Vacuname
         private void Update()
         {
             float input = Input.GetAxis("Horizontal");
-            input = input > 0 ? 1 : input < 0 ? -1 : 0;
             Move(input);
         }
 
@@ -53,11 +52,15 @@ namespace Vacuname
             
         }
 
+        public float test,test1;
+        
         private void Move(float input)
         {
+            test1 = input;
             float curSpeed = rd.velocity.x;
             attribute.GetCurSpeed(input,ref curSpeed,ref curAcceleraTime);
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
+            test = rd.velocity.x;
         }
 
         

@@ -9,9 +9,12 @@ namespace Vacuname
     public class Attribute : ScriptableObject
     {
         [VerticalGroup("移动")]
-        [LabelText("加速到满需要时间")]
+        [LabelText("加速到满需要的时间")]
         [TableColumnWidth(200)]
-        public float maxAcceleraTime;
+        public float acceleraTime;
+        [VerticalGroup("移动")]
+        [LabelText("不控制，减速到0需要的时间")]
+        public float deceleraTime;
 
         [VerticalGroup("移动")]
         [LabelText("最大速度")] public float maxSpeed;
@@ -25,21 +28,31 @@ namespace Vacuname
 
         public void GetCurSpeed(float input, ref float curSpeed,ref float curAcceleraTime)
         {
-            float realAccelerate;
-            float realLimit;
-            if (input < 0) realLimit = maxSpeed * -1;
-            //if(input==0)realAccelerate=
-
-
-            if (curSpeed==0)
+            float acceleraDirection=1;//加速进度的方向
+            float realLimit=maxSpeed;
+            
+            if (input == 0)
             {
-                curAcceleraTime = Mathf.Clamp(curAcceleraTime + Time.deltaTime, 0, maxAcceleraTime);
-                curSpeed = Mathf.Lerp(0, maxSpeed, curAcceleraTime / maxAcceleraTime);
+                acceleraDirection = acceleraTime/deceleraTime*-1;
+                realLimit = curSpeed >= 0 ? maxSpeed : -maxSpeed;
+                curAcceleraTime = Mathf.Clamp(curAcceleraTime + Time.deltaTime * acceleraDirection, 0, acceleraTime);
+                curSpeed = Mathf.Lerp(0, realLimit, curAcceleraTime / acceleraTime);
             }
-            else if(input==0)
+            else
             {
-                
+                if (input * curSpeed < 0)
+                {
+                    curSpeed = 0;
+                    curAcceleraTime = 0;
+                }
+                else
+                {
+                    if (input < 0) realLimit *= -1;
+                    curAcceleraTime = Mathf.Clamp(curAcceleraTime + Time.deltaTime * acceleraDirection, 0, acceleraTime);
+                    curSpeed = Mathf.Lerp(0, realLimit, curAcceleraTime / acceleraTime);
+                }
             }
+            
         }
     }
 

@@ -628,6 +628,8 @@ MonoBehaviour:
   _setAttribute: {fileID: 11400000, guid: ac31b6b53d444d54fa40367c1fd838b4, type: 2}
   attribute: {fileID: 11400000, guid: ac31b6b53d444d54fa40367c1fd838b4, type: 2}
   input: {fileID: 11400000, guid: e32738af2ac121549bbefb1b2bdaf014, type: 2}
+  test: 0
+  test1: 0
 --- !u!61 &1034341637
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -741,7 +743,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1585170736
 GameObject:
   m_ObjectHideFlags: 0
