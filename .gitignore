@@ -61,8 +61,11 @@ crashlytics-build.properties
 #=========================================
 # added on 2023.2.15
 # .idea added on 2023.2.16
+# Assets/[Pp]lugins/, Assets/[Pp]lugins.meta added on 2023.2.18
 
 # external package-build-in assets as "[Pp]lugins"
 /[Pp]lugins/
+Assets/[Pp]lugins/
+Assets/[Pp]lugins.meta
 .idea
 
