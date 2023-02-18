@@ -7,16 +7,15 @@ using UnityEngine.Events;
 namespace Vacuname
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(BoxCollider2D))]
     public class Player : MonoBehaviour
     {
         [LabelText("属性")][SerializeField]private Attribute _setAttribute;//在文件里设置的属性
         [HideInInspector]public Attribute attribute;//实际使用的属性
         [SerializeField] private PlayerInput input;
         private float curAcceleraTime;
+        private bool jumping;
 
         private Rigidbody2D rd;
-        private BoxCollider2D col;
 
         #region 初始绑定
 
@@ -24,8 +23,8 @@ namespace Vacuname
         {
             attribute = _setAttribute;
             rd=GetComponent<Rigidbody2D>();
-            col = GetComponent<BoxCollider2D>();
             curAcceleraTime = 0;
+            jumping = true;
         }
 
         private void OnEnable()
@@ -43,19 +42,36 @@ namespace Vacuname
         {
             float input = Input.GetAxisRaw("Horizontal");
             Move(input);
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+            }
         }
-        public float test,test1;
+
+        private void Jump()
+        {
+            if (!jumping)
+            {
+                rd.velocity = new Vector2(rd.velocity.x, attribute.jumpStrength);
+                jumping = true;
+            }
+                
+        }
         
         private void Move(float input)
         {
-            test1 = input;
             float curSpeed = rd.velocity.x;
             attribute.GetCurSpeed(input,ref curSpeed,ref curAcceleraTime);
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
-            test = rd.velocity.x;
         }
 
-        
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            //如果是地面layer的话
+            if (Mathf.Abs(rd.velocity.y) <= 0.1f)
+                jumping = false;
+        }
+
     }
 }
 
