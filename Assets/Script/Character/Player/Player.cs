@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,9 +26,7 @@ namespace Vacuname
         #endregion
         private Rigidbody2D rd;
 
-        #region Feedbacks
-        public MMF_Player timeSlowFeedback;
-        #endregion
+        [SerializeField]private MMF_Player timeSlowFeedback,timeFastFeedback,dashFeedback;
 
         #region 初始绑定
 
@@ -40,9 +39,6 @@ namespace Vacuname
             dashing = false;
             moveDirection = 1;
             dashColdDown = 0;
-
-            Transform Feedbacks = transform.Find("Feedbacks");
-            Feedbacks.TryGetComponentByChildName<MMF_Player>("TimeSlow",out timeSlowFeedback);
         }
 
         private void Start()
@@ -76,8 +72,9 @@ namespace Vacuname
                 timeSlowFeedback?.PlayFeedbacks();
                 TimeControl.Instance.SetTimeScale(_setAttribute.slowDownTimeScale,_setAttribute.slowDownTimer);
             }
-            else if(Input.GetKeyUp(KeyCode.Tab))
+            if(Input.GetKeyUp(KeyCode.Tab))
             {
+                timeFastFeedback?.PlayFeedbacks();
                 TimeControl.Instance.SetTimeScale(1f, _setAttribute.speedUpTimer);
             }
         }
@@ -101,6 +98,7 @@ namespace Vacuname
             dashColdDown = _setAttribute.maxDashCooldown;
             float dashTimeLeft = _setAttribute.dashDuration;
 
+            dashFeedback?.PlayFeedbacks();
             //TODO 更新Layer以暂停与怪物layer的判定
             rd.velocity = new Vector2(_setAttribute.dashSpeed * moveDirection, rd.velocity.y);
 
