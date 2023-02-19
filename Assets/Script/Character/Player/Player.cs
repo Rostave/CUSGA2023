@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace Vacuname
         #endregion
         private Rigidbody2D rd;
 
+        #region Feedbacks
+        public MMF_Player timeSlowFeedback;
+        #endregion
+
         #region 初始绑定
 
         private void Awake()
@@ -35,6 +40,8 @@ namespace Vacuname
             dashing = false;
             moveDirection = 1;
             dashColdDown = 0;
+
+            transform.TryGetComponentByChildName<MMF_Player>("TimeSlow",out timeSlowFeedback);
         }
 
         private void OnEnable()
@@ -50,6 +57,11 @@ namespace Vacuname
 
         private void Update()
         {
+            //这样调试比较方便
+
+            if(rd.gravityScale != _setAttribute.gravity)
+                rd.gravityScale = _setAttribute.gravity;
+
             Move(Input.GetAxisRaw("Horizontal"));
             Dash();
             Jump();
@@ -60,6 +72,7 @@ namespace Vacuname
         {
             if(Input.GetKeyDown(KeyCode.Tab))
             {
+                timeSlowFeedback?.PlayFeedbacks();
                 TimeControl.Instance.SetTimeScale(_setAttribute.slowDownTimeScale,_setAttribute.slowDownTimer);
             }
             else if(Input.GetKeyUp(KeyCode.Tab))
@@ -131,12 +144,11 @@ namespace Vacuname
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
         }
 
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             //TODO 加入判定：如果是地面layer的话
             jumpState = JumpState.ground;
         }
-
     }
 }
 

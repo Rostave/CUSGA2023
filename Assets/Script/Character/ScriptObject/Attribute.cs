@@ -17,6 +17,10 @@ namespace Vacuname
         public float deceleraTime;
 
         [VerticalGroup("移动")]
+        [LabelText("重力加速度")]
+        public float gravity;
+
+        [VerticalGroup("移动")]
         [LabelText("最大速度")] 
         public float maxSpeed;
 
@@ -47,10 +51,6 @@ namespace Vacuname
         [VerticalGroup("时间控制")]
         [LabelText("时间变慢倍率")]
         public float slowDownTimeScale;
-
-        [VerticalGroup("生存")]
-        [TableColumnWidth(200)]
-        [LabelText("最大生命值")] public float maxHealth;
 
         public void GetCurSpeed(float input, ref float curSpeed,ref float curAcceleraTime)
         {
