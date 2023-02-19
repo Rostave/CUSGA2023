@@ -6,25 +6,35 @@ using UnityEngine.Events;
 
 namespace Vacuname
 {
+    public enum JumpState {ground,jump,fall }
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : MonoBehaviour
     {
         [LabelText("属性")][SerializeField]private Attribute _setAttribute;//在文件里设置的属性
-        [HideInInspector]public Attribute attribute;//实际使用的属性
+        //[HideInInspector]public Attribute attribute;//实际使用的属性
+
+        #region 参与运动计算需要的参数
         [SerializeField] private PlayerInput input;
         private float curAcceleraTime;
-        private bool jumping;
-
+        private JumpState jumpState;
+        private float moveDirection;
+        private bool canDash;
+        private bool dashing;
+        private float dashColdDown;
+        #endregion
         private Rigidbody2D rd;
 
         #region 初始绑定
 
         private void Awake()
         {
-            attribute = _setAttribute;
             rd=GetComponent<Rigidbody2D>();
             curAcceleraTime = 0;
-            jumping = true;
+            jumpState = JumpState.fall;
+            canDash = true;
+            dashing = false;
+            moveDirection = 1;
+            dashColdDown = 0;
         }
 
         private void OnEnable()
@@ -40,36 +50,91 @@ namespace Vacuname
 
         private void Update()
         {
-            float input = Input.GetAxisRaw("Horizontal");
-            Move(input);
-            if(Input.GetKeyDown(KeyCode.Space))
+            Move(Input.GetAxisRaw("Horizontal"));
+            Dash();
+            Jump();
+            ControlTime();
+        }
+
+        private void ControlTime()
+        {
+            if(Input.GetKeyDown(KeyCode.Tab))
             {
-                Jump();
+                TimeControl.Instance.SetTimeScale(_setAttribute.slowDownTimeScale,_setAttribute.slowDownTimer);
             }
+            else if(Input.GetKeyUp(KeyCode.Tab))
+            {
+                TimeControl.Instance.SetTimeScale(1f, _setAttribute.speedUpTimer);
+            }
+        }
+
+        private void Dash()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+                StartCoroutine(Dashing());
+
+            if (!dashing && dashColdDown > 0)
+            {
+                dashColdDown -= Time.deltaTime;
+                canDash = dashColdDown <= 0;
+            }
+        }
+
+        IEnumerator Dashing()
+        {
+            canDash = false; // 禁止再次冲刺
+            dashing = true;
+            dashColdDown = _setAttribute.maxDashCooldown;
+            float dashTimeLeft = _setAttribute.dashDuration;
+
+            //TODO 更新Layer以暂停与怪物layer的判定
+            rd.velocity = new Vector2(_setAttribute.dashSpeed * moveDirection, rd.velocity.y);
+
+            while (dashTimeLeft > 0)
+            {
+               dashTimeLeft -= Time.deltaTime ;
+               yield return null;
+            }
+            dashing = false;
         }
 
         private void Jump()
         {
-            if (!jumping)
+            if(jumpState==JumpState.ground&&Input.GetKeyDown(KeyCode.Space))
             {
-                rd.velocity = new Vector2(rd.velocity.x, attribute.jumpStrength);
-                jumping = true;
+                rd.velocity = new Vector2(rd.velocity.x, _setAttribute.jumpStrength);
+                jumpState = JumpState.jump;
             }
-                
+            else if (jumpState == JumpState.jump && rd.velocity.y < 0)
+            {
+                jumpState = JumpState.fall;
+            }
+
         }
-        
+
         private void Move(float input)
         {
+            if (dashing)
+                return;
+            
+            //这个改变朝向以后加入鼠标就可以不要这个了，现在只是测试用
+            if(input!=0&&moveDirection!=input)
+            {
+                moveDirection = input;
+                Vector3 temp = transform.localScale;
+                temp.x = moveDirection;
+                transform.localScale = temp;
+            }    
+
             float curSpeed = rd.velocity.x;
-            attribute.GetCurSpeed(input,ref curSpeed,ref curAcceleraTime);
+            _setAttribute.GetCurSpeed(input,ref curSpeed,ref curAcceleraTime);
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
         }
 
         private void OnCollisionStay2D(Collision2D collision)
         {
-            //如果是地面layer的话
-            if (Mathf.Abs(rd.velocity.y) <= 0.1f)
-                jumping = false;
+            //TODO 加入判定：如果是地面layer的话
+            jumpState = JumpState.ground;
         }
 
     }
