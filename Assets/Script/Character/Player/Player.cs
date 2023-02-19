@@ -41,14 +41,15 @@ namespace Vacuname
             moveDirection = 1;
             dashColdDown = 0;
 
-            transform.TryGetComponentByChildName<MMF_Player>("TimeSlow",out timeSlowFeedback);
+            Transform Feedbacks = transform.Find("Feedbacks");
+            Feedbacks.TryGetComponentByChildName<MMF_Player>("TimeSlow",out timeSlowFeedback);
         }
 
-        private void OnEnable()
+        private void Start()
         {
-            //input.onMove += Move;
             CameraControl.Instance.ca.m_Follow = transform;
         }
+
         private void OnDisable()
         {
             //input.onMove -= Move;
