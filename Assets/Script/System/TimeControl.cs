@@ -13,7 +13,8 @@ public class TimeControl :SingletonBehaviour<TimeControl>
     /// <summary>
     /// 设置时间流逝速度
     /// </summary>
-    /// <param name="scale">哈哈</param>
+    /// <param name="scale">时间倍率</param>
+    /// <param name="timeToUpdate">变化消耗时间</param>
     public void SetTimeScale(float scale,float timeToUpdate)
     {
         StopAllCoroutines();
