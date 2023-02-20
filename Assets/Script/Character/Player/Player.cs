@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,11 +12,16 @@ namespace Vacuname
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : MonoBehaviour
     {
-        [LabelText("属性")][SerializeField]private Attribute _setAttribute;//在文件里设置的属性
+        [TabGroup("配置文件"), AssetsOnly,InlineEditor(InlineEditorModes.GUIOnly)]
+        [LabelText("手感设置"), SerializeField]
+        private Attribute _setAttribute;//在文件里设置的属性
         //[HideInInspector]public Attribute attribute;//实际使用的属性
 
-        #region 参与运动计算需要的参数
+        [TabGroup("配置文件"),AssetsOnly]
+        [LabelText("InputManager")]
         [SerializeField] private PlayerInput input;
+
+        #region 参与运动计算需要的参数
         private float curAcceleraTime;
         private JumpState jumpState;
         private float moveDirection;
@@ -25,9 +31,8 @@ namespace Vacuname
         #endregion
         private Rigidbody2D rd;
 
-        #region Feedbacks
-        public MMF_Player timeSlowFeedback;
-        #endregion
+        [TabGroup("反馈"),SerializeField,InlineEditor(InlineEditorModes.GUIOnly)]
+        private MMF_Player timeSlowFeedback,timeFastFeedback,dashFeedback;
 
         #region 初始绑定
 
@@ -40,9 +45,6 @@ namespace Vacuname
             dashing = false;
             moveDirection = 1;
             dashColdDown = 0;
-
-            Transform Feedbacks = transform.Find("Feedbacks");
-            Feedbacks.TryGetComponentByChildName<MMF_Player>("TimeSlow",out timeSlowFeedback);
         }
 
         private void Start()
@@ -68,7 +70,6 @@ namespace Vacuname
             Jump();
             ControlTime();
         }
-
         private void ControlTime()
         {
             if(Input.GetKeyDown(KeyCode.Tab))
@@ -76,12 +77,12 @@ namespace Vacuname
                 timeSlowFeedback?.PlayFeedbacks();
                 TimeControl.Instance.SetTimeScale(_setAttribute.slowDownTimeScale,_setAttribute.slowDownTimer);
             }
-            else if(Input.GetKeyUp(KeyCode.Tab))
+            if(Input.GetKeyUp(KeyCode.Tab))
             {
+                timeFastFeedback?.PlayFeedbacks();
                 TimeControl.Instance.SetTimeScale(1f, _setAttribute.speedUpTimer);
             }
         }
-
         private void Dash()
         {
             if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
@@ -93,7 +94,6 @@ namespace Vacuname
                 canDash = dashColdDown <= 0;
             }
         }
-
         IEnumerator Dashing()
         {
             canDash = false; // 禁止再次冲刺
@@ -101,6 +101,7 @@ namespace Vacuname
             dashColdDown = _setAttribute.maxDashCooldown;
             float dashTimeLeft = _setAttribute.dashDuration;
 
+            dashFeedback?.PlayFeedbacks();
             //TODO 更新Layer以暂停与怪物layer的判定
             rd.velocity = new Vector2(_setAttribute.dashSpeed * moveDirection, rd.velocity.y);
 
@@ -111,7 +112,6 @@ namespace Vacuname
             }
             dashing = false;
         }
-
         private void Jump()
         {
             if(jumpState==JumpState.ground&&Input.GetKeyDown(KeyCode.Space))
@@ -125,7 +125,6 @@ namespace Vacuname
             }
 
         }
-
         private void Move(float input)
         {
             if (dashing)
@@ -144,7 +143,6 @@ namespace Vacuname
             _setAttribute.GetCurSpeed(input,ref curSpeed,ref curAcceleraTime);
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
         }
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //TODO 加入判定：如果是地面layer的话
