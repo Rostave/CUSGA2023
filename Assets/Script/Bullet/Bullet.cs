@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using R0.ScriptableObjConfig;
 using R0.SpellRel;
 using R0.Static;
@@ -56,9 +57,9 @@ namespace R0.Bullet
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         [SerializeField, DisplayAsString] private SpellEffect effect;
         
-        /// <summary> 作用在敌人身上的效果参数 </summary> ///
+        /// <summary> 附着元素 </summary> ///
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private float effectParamOnEnemy;
+        [SerializeField, DisplayAsString] private List<SpellElement> elements;
 
         private bool _isCompleteInitWait;
         
@@ -106,18 +107,20 @@ namespace R0.Bullet
             _isCompleteInitWait = false;
             
             var data = BulletData.Instance.bulletData[(int) type];
-            moveSpeed = data.moveSpeed;
-            IsBulletFacingDir = data.isFacingDir;
+
+            dmg = data.dmg * weapon.bulletDmgMultiplier;
+            moveSpeed = dmg * data.dmgSpdRate;
 
             SpriteRenderer.sprite = data.sprite;
+            IsBulletFacingDir = data.isFacingDir;
             lifeEndTime = curTime + data.defaultLifeTime;
-            speedMultiplier = weapon.bulletSpeedMultiplier;
-            effectParamOnEnemy = weapon.effectParamOnEnemy;
             effect = weapon.bulletEffect;
             moveDir = dir;
             SetBulletImgDir();
-
-            dmg = data.dmg * weapon.bulletDmgMultiplier;
+            
+            elements.Clear();
+            foreach (var ele in weapon.bulletElements) elements.Add(ele);
+            
         }
 
         protected virtual void Update()

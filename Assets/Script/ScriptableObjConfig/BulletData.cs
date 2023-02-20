@@ -37,11 +37,21 @@ namespace R0.ScriptableObjConfig
 
             [TextArea, LabelText("描述"), VerticalGroup("row3"), DisableIf("isSpellInfoLocked")]
             public string description;
+
+            [DisplayAsString] public float dmgSpdRate;
         }
 
         [TableList]
         [LabelText("【各类型子弹属性】")]
         public BulletDataStruct[] bulletData;
+
+        /// <summary>
+        /// 更新伤害 / 速度 比例
+        /// </summary>
+        public void UpdateDmgSpdRate()
+        {
+            foreach (var d in bulletData) d.dmgSpdRate = d.moveSpeed / d.dmg;
+        }
         
     }
 }
