@@ -11,7 +11,11 @@ namespace Vacuname
         public override TaskStatus OnUpdate()
         {
             target = GameObject.FindWithTag("Player");
-            return TaskStatus.Success;
+            float dis = Vector2.Distance(transform.position, target.Value.transform.position);
+            if (dis <= 7.5f)
+                return TaskStatus.Success;
+            else
+                return TaskStatus.Failure;
         }
     }
 }

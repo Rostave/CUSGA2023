@@ -15,7 +15,6 @@ namespace Vacuname
         public override void OnStart()
         {
             me.Jump();
-            Debug.Log("s");
         }
 
         public override TaskStatus OnUpdate()
