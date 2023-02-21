@@ -14,6 +14,7 @@ namespace Vacuname
     {
         [TabGroup("配置文件"), AssetsOnly,InlineEditor(InlineEditorModes.GUIOnly)]
         [LabelText("手感设置"), SerializeField]
+        //[Title("@_setAttribute.acceleraTime")]
         private Attribute _setAttribute;//在文件里设置的属性
         //[HideInInspector]public Attribute attribute;//实际使用的属性
 
