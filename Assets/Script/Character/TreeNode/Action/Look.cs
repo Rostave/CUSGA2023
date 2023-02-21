@@ -10,7 +10,7 @@ namespace Vacuname
         public SharedGameObject target;
         public override TaskStatus OnUpdate()
         {
-            target = GameObject.FindWithTag("Player");
+            target.SetValue(GameObject.FindWithTag("Player"));
             float dis = Vector2.Distance(transform.position, target.Value.transform.position);
             if (dis <= 7.5f)
                 return TaskStatus.Success;

@@ -111,17 +111,20 @@ namespace Vacuname
                 jumpState = JumpState.jump;
             }
         }
-        private void Move(float input)
+        public void Move(float input)
         {
             if (dashing)
                 return;
+
+            //标准化input
+            input = input < 0 ? -1 : input > 0 ? 1 : 0;
 
             //这个改变朝向以后加入鼠标就可以不要这个了，现在只是测试用
             if (input != 0 && moveDirection != input)
             {
                 moveDirection = input;
                 Vector3 temp = transform.localScale;
-                temp.x = moveDirection;
+                temp.x = moveDirection*Mathf.Abs(temp.x);
                 transform.localScale = temp;
             }
 
