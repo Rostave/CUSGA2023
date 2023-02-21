@@ -16,15 +16,17 @@ namespace Vacuname
         {
             float input = target.Value.transform.position.x - transform.position.x;
             float distance = Vector2.Distance(transform.position, target.Value.transform.position);
-            if(distance<=1f)
+            if (distance <= 4f)
             {
                 me.Move(0);
                 return TaskStatus.Success;
             }
+            else if (distance > 7f)
+                return TaskStatus.Failure;
             else
             {
-                me.Move(input); 
-                return TaskStatus.Failure;
+                me.Move(input);
+                return TaskStatus.Running;
             }
             // 
         }

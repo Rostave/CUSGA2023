@@ -13,13 +13,14 @@ namespace Vacuname
     {
         [TabGroup("配置文件"), AssetsOnly,InlineEditor(InlineEditorModes.GUIOnly)]
         [LabelText("手感设置"), SerializeField]
-        //[Title("@_setAttribute.acceleraTime")]
         private Attribute _setAttribute;//在文件里设置的属性
-        //[HideInInspector]public Attribute attribute;//实际使用的属性
+                                        //[HideInInspector]public Attribute attribute;//实际使用的属性
 
-/*        [TabGroup("配置文件"),AssetsOnly]
-        [LabelText("InputManager")]
-        [SerializeField] private PlayerInput input;*/
+        /*        [TabGroup("配置文件"),AssetsOnly]
+                [LabelText("InputManager")]
+                [SerializeField] private PlayerInput input;*/
+
+        [SerializeField]private HitBack hitBack;
 
         #region 参与运动计算需要的参数
         private float curAcceleraTime;
@@ -69,6 +70,7 @@ namespace Vacuname
             Dash();
             Jump();
             ControlTime();
+            HandleHitBack();
         }
         private void ControlTime()
         {
@@ -124,6 +126,12 @@ namespace Vacuname
                 jumpState = JumpState.fall;
             }
 
+        }
+
+        private void HandleHitBack()
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+                hitBack.TryActive();
         }
         private void Move(float input)
         {

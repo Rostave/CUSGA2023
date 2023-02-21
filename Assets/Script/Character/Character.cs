@@ -46,10 +46,6 @@ namespace Vacuname
             dashColdDown = 0;
         }
 
-        private void Start()
-        {
-            CameraControl.Instance.ca.m_Follow = transform;
-        }
 
         private void OnDisable()
         {
