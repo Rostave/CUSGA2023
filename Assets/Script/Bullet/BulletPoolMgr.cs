@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using R0.ScriptableObjConfig;
 using R0.SingaltonBase;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace R0.Bullet
         protected override void OnEnableInit()
         {
             _bullets = new Stack<Bullet>();
+            BulletData.Instance.UpdateDmgSpdRate();
         }
 
         /// <summary>

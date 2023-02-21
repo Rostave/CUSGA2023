@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using R0.ScriptableObjConfig;
 using R0.SingaltonBase;
-using Sirenix.OdinInspector;
+using R0.Weapons;
 using UnityEngine;
 
 namespace R0.SpellRel
@@ -70,7 +70,7 @@ namespace R0.SpellRel
         /// <summary>
         /// 应用并结算符文效果
         /// </summary>
-        public void ApplySpellOnTrigger()
+        public void ApplySpellOnTrigger(BulletEmitter emitter)
         {
             // 计算支持生效的符文数
             var spellDataObj = SpellData.Instance;
@@ -83,16 +83,16 @@ namespace R0.SpellRel
             {
                 var spell = spells[i];
 
-                // 超出部分计算符文消耗
+                // 超出部分计算符文的能量消耗
                 if (i >= spellDataObj.powerFreeSpellCount)
                 {
-                    var remain = power - spellData[spell.id].powerCost;
-                    if (remain < 0) break;
+                    var remain = power - spellData[(int) spell.spellCat].powerCost;
+                    remain = Mathf.Min(remain, 0f);  // 允许过量消耗
                     Power = remain;
                 }
                 
                 // 应用符文属性
-                spell.Apply();
+                spell.Apply(emitter);
             }
         }
         
