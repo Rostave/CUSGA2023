@@ -13,10 +13,17 @@ namespace R0.SpellRel
     [Serializable]
     public enum SpellCat
     {
+        [LabelText("召唤法球")] SummonMagicAmmo,
+        [LabelText("召唤弓箭")] SummonArrow,
+        [LabelText("召唤剑")] SummonSword,
+        
         [LabelText("召唤高效符文")] SummonCdDec,
         [LabelText("增伤符文")] DmgInc,
         [LabelText("多发符文")] AmmoInc,
-        [LabelText("毒元素符文")] ToxicElement,
+        
+        [LabelText("冰元素符文")] CrystoElement,
+        [LabelText("火元素符文")] PyroElement,
+        [LabelText("毒元素符文")] ToxicoElement,
     }
     
     /// <summary>
@@ -61,7 +68,7 @@ namespace R0.SpellRel
             switch (data.effect)
             {
                 case SpellEffect.SummonBullet:
-                    emitter.GenBullets();
+                    SummonBullet();
                     break;
                 case SpellEffect.BulletCount:
                     weapon.ammoCount = Mathf.FloorToInt(data.effectParam);
@@ -70,9 +77,19 @@ namespace R0.SpellRel
                     weapon.UpdateAtkCd(data.effectParam);
                     break;
                 case SpellEffect.Element:
-                    weapon.AddElement(data.spellElement);
+                    ElementAttack();
                     break;
             }
+        }
+
+        private void SummonBullet()
+        {
+            
+        }
+
+        private void ElementAttack()
+        {
+            
         }
         
     }
