@@ -123,10 +123,7 @@ namespace R0.Weapons
     {
         [HideInInspector] public Transform tCached;
         [SerializeField] private List<BulletEmitter> emitters;
-        
-        private BulletEmitter _defaultEmitter;  // 默认发射器
-        public BulletType defaultBulletType;
-        
+
         // 效果参数
         public float bulletDmgMultiplier = 1f;
         public SpellEffect bulletEffect;
@@ -151,13 +148,11 @@ namespace R0.Weapons
         {
             BulletAngle = SpellData.Instance.bulletInterAngle;
             tCached = transform;
-            _defaultEmitter = new BulletEmitter(this, defaultBulletType);
             ResetEmitters();
         }
 
         private void Update()
         {
-            _defaultEmitter.UpdateTrigger();
             foreach (var e in emitters) e.UpdateTrigger();
         }
         

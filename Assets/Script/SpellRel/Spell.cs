@@ -34,7 +34,6 @@ namespace R0.SpellRel
     {
         [LabelText("召唤子弹")] SummonBullet,
         [LabelText("子弹多发 <个数>")] BulletCount,
-        [LabelText("射击cd变速 <秒数>")] SummonCd,
         [LabelText("元素附着 <元素类型>")] Element,
     }
 
@@ -72,9 +71,6 @@ namespace R0.SpellRel
                     break;
                 case SpellEffect.BulletCount:
                     weapon.ammoCount = Mathf.FloorToInt(data.effectParam);
-                    break;
-                case SpellEffect.SummonCd:
-                    weapon.UpdateAtkCd(data.effectParam);
                     break;
                 case SpellEffect.Element:
                     ElementAttack();
