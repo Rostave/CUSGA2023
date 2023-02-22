@@ -977,7 +977,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tCached: {fileID: 0}
   emitters: []
-  defaultBulletType: 0
   bulletDmgMultiplier: 1
   bulletEffect: 0
   ammoCount: 0
@@ -1313,6 +1312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spells: []
+  defaultSpell:
+    spellCat: 0
   activeSpellIndex: 9
   power: 0
 --- !u!1 &1459642040
@@ -2254,6 +2255,8 @@ MonoBehaviour:
   _setAttribute: {fileID: 11400000, guid: ac31b6b53d444d54fa40367c1fd838b4, type: 2}
   input: {fileID: 11400000, guid: e32738af2ac121549bbefb1b2bdaf014, type: 2}
   timeSlowFeedback: {fileID: 0}
+  timeFastFeedback: {fileID: 0}
+  dashFeedback: {fileID: 0}
 --- !u!1 &7432635852563404101
 GameObject:
   m_ObjectHideFlags: 0

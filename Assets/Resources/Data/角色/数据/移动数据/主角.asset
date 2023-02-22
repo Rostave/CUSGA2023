@@ -15,7 +15,7 @@ MonoBehaviour:
   acceleraTime: 1
   deceleraTime: 0.4
   gravity: 4
-  maxSpeed: 10
+  maxSpeed: 20
   jumpStrength: 12
   dashSpeed: 20
   dashDuration: 0.2

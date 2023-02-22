@@ -14,6 +14,7 @@ namespace R0.SpellRel
     {
         /// <summary> 符文列表 </summary> ///
         [SerializeField] private List<Spell> spells;
+        [SerializeField] private Spell defaultSpell;
 
         /// <summary> 激活到第几个符文 </summary> ///
         [SerializeField] private byte activeSpellIndex;
@@ -78,6 +79,8 @@ namespace R0.SpellRel
             supported = Math.Min(supported, activeSpellIndex);
             supported = Math.Min(supported, spells.Count);
 
+            defaultSpell.Apply(emitter);
+            
             var spellData = spellDataObj.spellData;
             for (var i = 0; i < supported; i++)
             {

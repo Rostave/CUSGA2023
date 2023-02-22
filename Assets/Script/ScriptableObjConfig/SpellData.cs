@@ -19,6 +19,9 @@ namespace R0.ScriptableObjConfig
 
             [LabelText("单次能耗"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public float powerCost;
+            
+            [LabelText("类型"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public SpellCat cat;
 
             [LabelText("效果"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public SpellEffect effect;
@@ -26,11 +29,7 @@ namespace R0.ScriptableObjConfig
             [ShowIf("@effect != SpellEffect.Element")]
             [LabelText("效果参数"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public float effectParam;
-            
-            [ShowIf("@effect == SpellEffect.Element")]
-            [LabelText("元素类型"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
-            public SpellElement spellElement;
-            
+
             [LabelText("优先级"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public int priority;
 

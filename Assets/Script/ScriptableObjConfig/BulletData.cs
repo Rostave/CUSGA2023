@@ -38,7 +38,7 @@ namespace R0.ScriptableObjConfig
             [TextArea, LabelText("描述"), VerticalGroup("row3"), DisableIf("isSpellInfoLocked")]
             public string description;
 
-            [DisplayAsString] public float dmgSpdRate;
+            [DisplayAsString, VerticalGroup("row3")] public float dmgSpdRate;
         }
 
         [TableList]
