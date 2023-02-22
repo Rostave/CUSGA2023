@@ -9,17 +9,17 @@ namespace Vacuname
     public class Attack : EnemyAction
     {
         public SharedGameObject act;
-        private BasicSkill attack;
+        private BasicSkill attackSkill;
         public override void OnAwake()
         {
             base.OnAwake();
-            attack = act.Value.GetComponent<BasicSkill>();
+            attackSkill = act.Value.GetComponent<BasicSkill>();
         }
 
         private bool cutDown;
         public override void OnStart()
         {
-            cutDown = attack.TryMakeDamage();
+            cutDown = attackSkill.TryMakeDamage();
         }
         public override TaskStatus OnUpdate()
         {
