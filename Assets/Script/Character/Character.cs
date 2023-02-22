@@ -23,8 +23,8 @@ namespace Vacuname
         public JumpState jumpState;
         public float moveDirection;
         #endregion
-        public Rigidbody2D rd;
-        public Animator anima;
+        [HideInInspector]public Rigidbody2D rd;
+        [HideInInspector] public Animator anima;
 
         [TabGroup("·´À¡"), SerializeField, InlineEditor(InlineEditorModes.GUIOnly)]
         private MMF_Player timeSlowFeedback, timeFastFeedback, dashFeedback;
