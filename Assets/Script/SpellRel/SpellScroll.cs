@@ -81,7 +81,7 @@ namespace R0.SpellRel
 
             defaultSpell.Apply(emitter);
             
-            var spellData = spellDataObj.spellData;
+            var spellData = spellDataObj.data;
             for (var i = 0; i < supported; i++)
             {
                 var spell = spells[i];

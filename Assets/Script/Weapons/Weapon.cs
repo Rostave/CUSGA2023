@@ -66,12 +66,6 @@ namespace R0.Weapons
             TriggerAtk();
         }
 
-        /// <summary>
-        /// 更新攻击间隔
-        /// </summary>
-        /// <param name="cdIncrement">攻击间隔增量，负数为减</param>
-        public void UpdateAtkCd(float cdIncrement) => triggerCd = SpellData.Instance.defaultSummonCd + cdIncrement;
-
         public void GenBullets()
         {
             // 生成子弹
@@ -163,15 +157,6 @@ namespace R0.Weapons
         public void AddElement(SpellElement element) => bulletElements.Add(element);
 
         /// <summary>
-        /// 更新射击cd
-        /// </summary>
-        /// <param name="cdIncrement"></param>
-        public void UpdateAtkCd(float cdIncrement)
-        {
-            foreach (var e in emitters) e.UpdateAtkCd(cdIncrement);
-        }
-
-        /// <summary>
         /// （符文改变后）重置发射器列表
         /// </summary>
         public void ResetEmitters()
@@ -181,8 +166,8 @@ namespace R0.Weapons
             var spells = chara.spellScroll.GetSpells();
             foreach (var spell in spells)
             {
-                var data = SpellData.Instance.spellData[(int) spell.spellCat];
-                if (data.effect != SpellEffect.SummonBullet) continue;
+                var data = SpellData.Instance.data[(int) spell.spellCat];
+                if (data.effect != SpellEffect.BulletSummon) continue;
                 AddEmitter(chara.bulletType);
             }
         }

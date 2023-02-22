@@ -9,6 +9,9 @@ namespace R0.ScriptableObjConfig
     [CreateAssetMenu(fileName = "SpellData", menuName = "符文数值", order = 0)]
     public class SpellData : SingletonScriptableObj<SpellData>
     {
+        /// <summary>
+        /// 基本符文数据管理类
+        /// </summary>
         [Serializable]
         public class SpellDataStruct
         {
@@ -27,10 +30,6 @@ namespace R0.ScriptableObjConfig
             [LabelText("单次能耗"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public float powerCost;
 
-            [ShowIf("@effect != SpellEffect.Element")]
-            [LabelText("效果参数"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
-            public List<float> effectParam;
-
             [TextArea, LabelText("描述"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public string description;
 
@@ -40,14 +39,23 @@ namespace R0.ScriptableObjConfig
             public Sprite spellSprite;
         }
 
+        /// <summary>
+        /// 子弹类型符文数据管理类
+        /// </summary>
         [Serializable]
         public class BulletSpellDataStruct : SpellDataStruct
         {
-            [LabelText("子弹伤害"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            [LabelText("子弹伤害")]
+            [VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked"), GUIColor(0.678f,0.95f,0.184f)]
             public float dmg;
             
-            [LabelText("子弹飞行速度"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            [LabelText("子弹飞行速度")]
+            [VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked"), GUIColor(0.678f,0.95f,0.184f)]
             public float moveSpd;
+            
+            [LabelText("速度伤害比")]
+            [DisplayAsString, VerticalGroup("row1/left"), GUIColor(0.678f,0.95f,0.184f)] 
+            public float dmgSpdRate;
             
             [LabelText("射击间隔"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public float cd;
@@ -66,31 +74,46 @@ namespace R0.ScriptableObjConfig
             [LabelText("散射随机角"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public float randomAngle;
             
-            [LabelText("受伤次数销毁"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            [LabelText("受伤次数销毁"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public int destroyOnPlayerDmgCount;
             
-            [LabelText("使用次数销毁"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            [LabelText("使用次数销毁"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public int destroyOnUsaageCount;
             
-            [LabelText("图片朝向速度方向"), DisableIf("isSpellInfoLocked")]
-            [TableColumnWidth(30), VerticalGroup("row1")]
+            [LabelText("图片朝向速度方向"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public bool isFacingDir;
-            
-            [DisplayAsString, VerticalGroup("row3")] public float dmgSpdRate;
         }
-
-
+        
+        /// <summary>
+        /// 元素符文数据管理类
+        /// </summary>
         [Serializable]
         public class ElementSpellDataStruct : SpellDataStruct
         {
             
         }
         
-        [FoldoutGroup("【武器属性】", true), LabelText("默认子弹召唤cd")]
-        [SuffixLabel("sec", true)]
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        public float defaultSummonCd;
+        /// <summary>
+        /// 属性符文数据管理类
+        /// </summary>
+        [Serializable]
+        public class PropModSpellDataStruct : SpellDataStruct
+        {
+            
+        }
         
+        /// <summary>
+        /// 特殊符文数据管理类
+        /// </summary>
+        [Serializable]
+        public class SpecialSpellDataStruct : SpellDataStruct
+        {
+            [ShowIf("@effect != SpellEffect.Element")]
+            [LabelText("效果参数"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public List<float> effectParam;
+        }
+
+        // 公有属性 ================================================
         [FoldoutGroup("【武器属性】", true), LabelText("相邻子弹间开角")]
         [SuffixLabel("<角度制浮点数>", true)]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
@@ -116,28 +139,61 @@ namespace R0.ScriptableObjConfig
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public float powerPerFrame = 20f;
 
+        // 独有属性 ================================================
         // [Space, Space]
         // [InfoBox("符文`优先级`属性（整数）越小，优先级越高（越先生效）")]
+
+        [Space, Space, TableList, LabelText("【子弹型符文属性】")] 
+        public List<BulletSpellDataStruct> bulletSpellData;
         
-        [TableList]
-        [LabelText("【各类型符文属性】")]
-        public List<SpellDataStruct> spellData;
+        [TableList, LabelText("【元素型符文属性】")] 
+        public List<ElementSpellDataStruct> elementSpellData;
         
-        [Button("从xlsx导入符文数据", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
-        private void UpdatePowerFreeSpellEffect() => ExcelImporter.ImportData();
+        [TableList, LabelText("【属性型符文属性】")] 
+        public List<PropModSpellDataStruct> propModSpellData;
+        
+        [TableList, LabelText("【特殊类型符文属性】")] 
+        public List<SpecialSpellDataStruct> specialSpellData;
+            
+        [HideInInspector]
+        public List<SpellDataStruct> data;  // 所有spell
+        
+        [Button("从xlsx更新符文数据", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
+        private void UpdatePowerFreeSpellEffect() => ExcelImporter.ImportSpellData();
+
+        /// <summary>
+        /// 汇总所有符文
+        /// </summary>
+        public void IntegrateSpells()
+        {
+            UpdateDmgSpdRate();
+            foreach (var s in propModSpellData) data.Add(s);
+            foreach (var s in elementSpellData) data.Add(s);
+            foreach (var s in bulletSpellData) data.Add(s);
+            foreach (var s in specialSpellData) data.Add(s);
+        }
         
         /// <summary>
         /// 更新伤害 / 速度 比例
         /// </summary>
-        public void UpdateDmgSpdRate()
+        private void UpdateDmgSpdRate()
         {
-            foreach (var d in spellData)
+            foreach (var d in bulletSpellData)
             {
-                if (d is not BulletSpellDataStruct bd) continue;
-                bd.dmgSpdRate = bd.moveSpd / bd.dmg;
-                
+                d.dmgSpdRate = d.moveSpd / d.dmg;
             }
         }
 
+        /// <summary>
+        /// 清空所有符文列表
+        /// </summary>
+        public void ClearSpellList()
+        {
+            data.Clear();
+            propModSpellData.Clear();
+            elementSpellData.Clear();
+            bulletSpellData.Clear();
+            specialSpellData.Clear();
+        }
     }
 }

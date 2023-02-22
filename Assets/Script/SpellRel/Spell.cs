@@ -32,9 +32,12 @@ namespace R0.SpellRel
     [Serializable]
     public enum SpellEffect
     {
-        [LabelText("召唤子弹")] SummonBullet,
-        [LabelText("子弹多发 <个数>")] BulletCount,
-        [LabelText("元素附着 <元素类型>")] Element,
+        [LabelText("召唤子弹")] BulletSummon,
+        [LabelText("元素附着")] ElementAttach,
+        [LabelText("属性修改")] PropMod,
+        
+        // 其他符文
+        [LabelText("子弹多发")] BulletCount,
     }
 
     /// <summary>
@@ -61,16 +64,19 @@ namespace R0.SpellRel
         /// </summary>
         public virtual void Apply(BulletEmitter emitter)
         {
-            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.spellData[(int) spellCat];
+            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.data[(int) spellCat];
             var weapon = CharaMgr.Instance.activeChara.weapon;
 
             switch (data.effect)
             {
-                case SpellEffect.SummonBullet:
+                case SpellEffect.BulletSummon:
                     SummonBullet();
                     break;
-                case SpellEffect.Element:
-                    ElementAttack();
+                case SpellEffect.ElementAttach:
+                    AttachElement();
+                    break;
+                case SpellEffect.PropMod:
+                    ModifyProperty();
                     break;
             }
         }
@@ -80,7 +86,12 @@ namespace R0.SpellRel
             
         }
 
-        private void ElementAttack()
+        private void AttachElement()
+        {
+            
+        }
+
+        private void ModifyProperty()
         {
             
         }

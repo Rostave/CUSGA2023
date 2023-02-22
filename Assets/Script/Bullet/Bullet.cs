@@ -106,7 +106,7 @@ namespace R0.Bullet
             initWaitEndTime = curTime + initWaitTime;
             _isCompleteInitWait = false;
             
-            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.spellData[(int) type];
+            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.data[(int) type];
 
             dmg = data.dmg * weapon.bulletDmgMultiplier;
             moveSpeed = dmg * data.dmgSpdRate;
