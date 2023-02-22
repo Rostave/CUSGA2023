@@ -16,6 +16,7 @@ namespace R0.ScriptableObjConfig
         private static readonly Regex NumMatchReg = new Regex("^[1-9]\\d*$");
         private const char Quote = '"';
         private const char Commas = ',';
+        private static int _a, _b, _c, _d;  // 四种符文类型计数
 
         /// <summary>
         /// 从符文列表.xlsx读入符文和子弹信息
@@ -27,11 +28,16 @@ namespace R0.ScriptableObjConfig
                 Debug.Log($"文件不存在: {CsvPath}");
                 return;
             }
-            
+
+            var data = SpellData.Instance;
             var fs = new FileStream(CsvPath, FileMode.Open, FileAccess.Read, FileShare.None);
             var dt = CsvToDataTable(fs);
 
-            SpellData.Instance.ClearSpellList();  // 清空当前数据
+            data.data.Clear();  // 清空当前数据
+            _a = 0;
+            _b = 0;
+            _c = 0; 
+            _d = 0;
             
             foreach (DataRow dr in dt.Rows)
             {
@@ -41,24 +47,28 @@ namespace R0.ScriptableObjConfig
                 SpellData.SpellDataStruct sd;
                 var effectType = dr[1].ToString().Split("_")[0];
                 var type = (SpellEffect) int.Parse(effectType);
-                
+
                 switch (type)
                 {
                     case SpellEffect.BulletSummon:
+                        if (data.bulletSpellData[_a++].isSpellInfoLocked) continue;
                         sd = new SpellData.BulletSpellDataStruct();
                         break;
                     case SpellEffect.ElementAttach:
+                        if (data.elementSpellData[_b++].isSpellInfoLocked) continue;
                         sd = new SpellData.ElementSpellDataStruct();
                         break;
                     case SpellEffect.PropMod:
+                        if (data.propModSpellData[_c++].isSpellInfoLocked) continue;
                         sd = new SpellData.PropModSpellDataStruct();
                         break;
                     default:
+                        if (data.specialSpellData[_d++].isSpellInfoLocked) continue;
                         sd = new SpellData.SpecialSpellDataStruct();
                         break;
                 }
                     
-                sd.cat = (SpellCat) int.Parse(first);
+                sd.cat = (SpellCat) (int.Parse(first) - 1);
                 sd.effect = type;
                 sd.name = dr[2].ToString();
                 sd.description = dr[4].ToString();
@@ -88,7 +98,7 @@ namespace R0.ScriptableObjConfig
         private static void GenBulletSpellData(DataRow dr, ref SpellData.SpellDataStruct sdOri)
         {
             var sd = (SpellData.BulletSpellDataStruct) sdOri;
-            sd.isFacingDir = dr[3].ToString() == "1";
+            sd.isFacingDir = int.Parse(dr[3].ToString()) > 0;
             sd.dmg = float.Parse(dr[6].ToString());
             sd.moveSpd = float.Parse(dr[7].ToString());
             sd.cd = float.Parse(dr[8].ToString());
@@ -97,19 +107,25 @@ namespace R0.ScriptableObjConfig
             sd.destroyOnPlayerDmgCount = int.Parse(dr[13].ToString());
             sd.destroyOnUsaageCount = int.Parse(dr[14].ToString());
             sd.defaultLifeTime = float.Parse(dr[16].ToString());
-            SpellData.Instance.bulletSpellData.Add(sd);
+            
+            if (_a > SpellData.Instance.bulletSpellData.Count) SpellData.Instance.bulletSpellData.Add(sd);
+            else SpellData.Instance.bulletSpellData[_a - 1] = sd;
         }
         
         private static void GenElementSpellData(DataRow dr, ref SpellData.SpellDataStruct sdOri)
         {
             var sd = (SpellData.ElementSpellDataStruct) sdOri;
-            SpellData.Instance.elementSpellData.Add(sd);
+            
+            if (_b > SpellData.Instance.elementSpellData.Count) SpellData.Instance.elementSpellData.Add(sd);
+            else SpellData.Instance.elementSpellData[_b - 1] = sd;
         }
         
         private static void GenPropModSpellData(DataRow dr, ref SpellData.SpellDataStruct sdOri)
         {
             var sd = (SpellData.PropModSpellDataStruct) sdOri;
-            SpellData.Instance.propModSpellData.Add(sd);
+            
+            if (_c > SpellData.Instance.propModSpellData.Count) SpellData.Instance.propModSpellData.Add(sd); 
+            else SpellData.Instance.propModSpellData[_c - 1] = sd; 
         }
 
         private static bool StrIsNum(string input) => NumMatchReg.IsMatch(input);

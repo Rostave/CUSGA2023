@@ -129,12 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe661f7e71c4b919f3e49940177b469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   speedMultiplier: 0
   moveSpeed: 0
   moveDir: {x: 0, y: 0, z: 0}
   lifeEndTime: 0
   initWaitEndTime: 0
   dmg: 0
-  effect: 0
-  effectParamOnEnemy: 0
+  elements: 

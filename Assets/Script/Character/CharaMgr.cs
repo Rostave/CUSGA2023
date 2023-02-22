@@ -80,7 +80,6 @@ namespace R0.Character
             activeChara.playerCtrl.gameObject.SetActive(false);  // 隐藏老角色
             activeChara = characters[(int) character];           // ====== 更换玩家组件组 ======
             activeChara.playerCtrl.gameObject.SetActive(true);   // 显示新角色
-            SpellScrollViewer.Instance.UpdateSpellScrollHud();   // 更新符文UI显示
         }
         
     }

@@ -37,6 +37,7 @@ namespace R0.Bullet
         [SerializeField, DisplayAsString] private float moveSpeed;
         
         /// <summary> 移动方向 </summary>///
+        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         [SerializeField, DisplayAsString] private Vector3 moveDir;
         
         /// <summary> 生命终止时间 </summary>///
@@ -50,11 +51,7 @@ namespace R0.Bullet
         /// <summary> 单次伤害 </summary>///
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         [SerializeField, DisplayAsString] private float dmg;
-        
-        /// <summary> buff效果 </summary> ///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private SpellEffect effect;
-        
+
         /// <summary> 附着元素 </summary> ///
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         [SerializeField, DisplayAsString] private List<SpellElement> elements;
@@ -104,15 +101,15 @@ namespace R0.Bullet
             initWaitEndTime = curTime + initWaitTime;
             _isCompleteInitWait = false;
             
-            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.data[(int) spellCat];
+            var data = SpellData.Instance.GetBulletSpellData(spellCat);
 
+            speedMultiplier = 1f;
             dmg = data.dmg * weapon.bulletDmgMultiplier;
             moveSpeed = dmg * data.dmgSpdRate;
 
             SpriteRenderer.sprite = data.bulletSprite;
             IsBulletFacingDir = data.isFacingDir;
             lifeEndTime = curTime + data.defaultLifeTime;
-            effect = weapon.bulletEffect;
             moveDir = dir;
             SetBulletImgDir();
             

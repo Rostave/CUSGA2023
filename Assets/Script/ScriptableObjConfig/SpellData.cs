@@ -16,7 +16,7 @@ namespace R0.ScriptableObjConfig
         public class SpellDataStruct
         {
             [ToggleLeft, LabelText("单项面板锁"), VerticalGroup("row1/left")]
-            [SerializeField] private bool isSpellInfoLocked;
+            [SerializeField] public bool isSpellInfoLocked;
 
             [LabelText("名称"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public string name;
@@ -161,16 +161,27 @@ namespace R0.ScriptableObjConfig
         [Button("从xlsx更新符文数据", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
         private void UpdatePowerFreeSpellEffect() => ExcelImporter.ImportSpellData();
 
+        [SerializeField, DisplayAsString] private int eleOffset, propOffset, specialOffset;
+        public BulletSpellDataStruct GetBulletSpellData(SpellCat spellCat) => bulletSpellData[(int) spellCat];
+        public ElementSpellDataStruct GetElementtSpellData(SpellCat spellCat) => elementSpellData[(int) spellCat - eleOffset];
+        public PropModSpellDataStruct GetPropModSpellData(SpellCat spellCat) => propModSpellData[(int) spellCat - propOffset];
+        public SpecialSpellDataStruct GetSpecialSpellData(SpellCat spellCat) => specialSpellData[(int) spellCat - specialOffset];
+       
+
         /// <summary>
         /// 汇总所有符文
         /// </summary>
         public void IntegrateSpells()
         {
             UpdateDmgSpdRate();
-            foreach (var s in propModSpellData) data.Add(s);
-            foreach (var s in elementSpellData) data.Add(s);
             foreach (var s in bulletSpellData) data.Add(s);
+            foreach (var s in elementSpellData) data.Add(s);
+            foreach (var s in propModSpellData) data.Add(s);
             foreach (var s in specialSpellData) data.Add(s);
+            
+            eleOffset = bulletSpellData.Count;
+            propOffset = eleOffset + elementSpellData.Count;
+            specialOffset = propOffset + propModSpellData.Count;
         }
         
         /// <summary>
@@ -184,16 +195,17 @@ namespace R0.ScriptableObjConfig
             }
         }
 
-        /// <summary>
-        /// 清空所有符文列表
-        /// </summary>
-        public void ClearSpellList()
-        {
-            data.Clear();
-            propModSpellData.Clear();
-            elementSpellData.Clear();
-            bulletSpellData.Clear();
-            specialSpellData.Clear();
-        }
+        // /// <summary>
+        // /// 清空所有符文列表
+        // /// </summary>
+        // public void ClearSpellList()
+        // {
+        //     data.Clear();
+        //     bulletSpellData.Clear();
+        //     propModSpellData.Clear();
+        //     elementSpellData.Clear();
+        //     bulletSpellData.Clear();
+        //     specialSpellData.Clear();
+        // }
     }
 }

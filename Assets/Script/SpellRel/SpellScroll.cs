@@ -10,11 +10,10 @@ namespace R0.SpellRel
     /// <summary>
     /// 符文卷轴类
     /// </summary>
-    public class SpellScroll : SingletonBehaviour<SpellScroll>
+    public class SpellScroll : MonoBehaviour
     {
         /// <summary> 符文列表 </summary> ///
         [SerializeField] private List<Spell> spells;
-        [SerializeField] private Spell defaultSpell;
 
         /// <summary> 激活到第几个符文 </summary> ///
         [SerializeField] private byte activeSpellIndex;
@@ -31,9 +30,8 @@ namespace R0.SpellRel
             }
         }
 
-        protected override void OnEnableInit()
+        private void Start()
         {
-            GetComponent<SpellScrollViewer>().Init();
             Power = SpellData.Instance.initSpellPower;
         }
 
@@ -54,7 +52,6 @@ namespace R0.SpellRel
                 // TODO : UI面板移除选择的符文
             }
             spells.Add(spell);
-            SpellScrollViewer.Instance.UpdateSpellScrollHud();
         }
         
         /// <summary>
@@ -65,13 +62,12 @@ namespace R0.SpellRel
         {
             if (index < 0 || index >= spells.Count) return;
             spells.RemoveAt(index);
-            SpellScrollViewer.Instance.UpdateSpellScrollHud();
         }
 
         /// <summary>
-        /// 应用并结算符文效果
+        /// 应用并结算非子弹类型符文效果，更新符文的isPowered标识
         /// </summary>
-        public void ApplySpellOnTrigger()
+        public void ApplyNonBulletSpell()
         {
             // 计算支持生效的符文数
             var spellDataObj = SpellData.Instance;
@@ -79,13 +75,14 @@ namespace R0.SpellRel
             supported = Math.Min(supported, activeSpellIndex);
             supported = Math.Min(supported, spells.Count);
 
-            defaultSpell.Apply();
-            
             var spellData = spellDataObj.data;
             for (var i = 0; i < supported; i++)
             {
                 var spell = spells[i];
-
+                spell.isPowered = true;
+                
+                if (spellData[(int) spell.spellCat].effect == SpellEffect.BulletSummon) continue;
+                
                 // 超出部分计算符文的能量消耗
                 if (i >= spellDataObj.powerFreeSpellCount)
                 {
@@ -96,6 +93,12 @@ namespace R0.SpellRel
                 
                 // 应用符文属性
                 spell.Apply();
+            }
+
+            for (var i = supported; i < spells.Count; i++)
+            {
+                var spell = spells[i];
+                spell.isPowered = false;
             }
         }
         
