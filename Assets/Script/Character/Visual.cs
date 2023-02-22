@@ -7,7 +7,7 @@ namespace Vacuname
 {
     public class Visual: MonoBehaviour
     {
-        public float visionRadius = 10, visionAngle = 60f;
+        public float visionRadius, visionAngle;
         private Character character;
         private LayerMask layerMask;
         private void Awake()
@@ -17,30 +17,23 @@ namespace Vacuname
             layerMask += LayerMask.GetMask("Player");
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            TrySeePlayer();
-        }
 
-        public bool TrySeePlayer()
+        public bool TrySeePlayer(out GameObject respon)
         {
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, visionRadius,layerMask);
-            foreach(var col in cols)
+            respon = null;
+            foreach (var col in cols)
             {
                 if (col.isTrigger)
                 {
                     if (IsInSector(col.transform.position))
-                        Debug.Log("w");
-                    else
-                        Debug.Log("s");
-
+                    {
+                        respon = col.gameObject;
+                        return true;
+                    }
                 }
-                    
             }
-            
             return false;
-
         }
 
         private bool IsInSector(Vector2 point)
@@ -75,7 +68,7 @@ namespace Vacuname
         {
             Gizmos.color = Color.yellow;
 
-            float direction = character.moveDirection >= 0 ? 1 : -1;
+            float direction = transform.parent.localScale.x >= 0 ? 1 : -1;
             Vector3 from = Quaternion.Euler(0, 0, -visionAngle / 2) * Vector2.right*direction * visionRadius;
             Vector3 to = Quaternion.Euler(0, 0, visionAngle / 2) * Vector2.right * direction * visionRadius;
 

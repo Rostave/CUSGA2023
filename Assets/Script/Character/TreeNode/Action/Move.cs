@@ -11,6 +11,7 @@ namespace Vacuname
         //public SharedFloat attackDistance;
         public SharedInt direction;
         public SharedGameObject target;
+        public SharedVector3 targetPos;
 
         public override TaskStatus OnUpdate()
         {
@@ -18,11 +19,14 @@ namespace Vacuname
             float distance = Vector2.Distance(transform.position, target.Value.transform.position);
             if (distance <= 3f)
             {
-                me.rd.velocity = new Vector2(0, me.rd.velocity.y);
+                me.Move(0,true);
                 return TaskStatus.Success;
             }
-            else if (distance > 20f)
+            else if (distance > 27)
+            {
+                me.Move(0, true);
                 return TaskStatus.Failure;
+            }
             else
             {
                 me.Move(input);

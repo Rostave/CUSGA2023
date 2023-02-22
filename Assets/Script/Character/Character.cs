@@ -45,8 +45,17 @@ namespace Vacuname
                 jumpState = JumpState.jump;
             }
         }
-        public void Move(float input)
+        public void Move(float input,bool setDirectly=false)
         {
+            float curSpeed;
+            if (setDirectly)//直接设置速度的情况
+            {
+                curSpeed = input;
+                rd.velocity = new Vector2(curSpeed, rd.velocity.y);
+                anima.SetFloat("Move", Mathf.Abs(curSpeed));
+                return;
+            }
+
             //标准化input
             input = input < 0 ? -1 : input > 0 ? 1 : 0;
 
@@ -59,9 +68,11 @@ namespace Vacuname
                 transform.localScale = temp;
             }
 
-            float curSpeed = rd.velocity.x;
+            curSpeed = rd.velocity.x;
             _setAttribute.GetCurSpeed(input, ref curSpeed, ref curAcceleraTime);
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
+
+            anima.SetFloat("Move", Mathf.Abs(curSpeed));
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
