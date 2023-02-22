@@ -106,12 +106,12 @@ namespace R0.Bullet
             initWaitEndTime = curTime + initWaitTime;
             _isCompleteInitWait = false;
             
-            var data = BulletData.Instance.bulletData[(int) type];
+            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.spellData[(int) type];
 
             dmg = data.dmg * weapon.bulletDmgMultiplier;
             moveSpeed = dmg * data.dmgSpdRate;
 
-            SpriteRenderer.sprite = data.sprite;
+            SpriteRenderer.sprite = data.bulletSprite;
             IsBulletFacingDir = data.isFacingDir;
             lifeEndTime = curTime + data.defaultLifeTime;
             effect = weapon.bulletEffect;

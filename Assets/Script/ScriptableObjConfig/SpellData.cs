@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using R0.SpellRel;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -17,21 +18,18 @@ namespace R0.ScriptableObjConfig
             [LabelText("名称"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public string name;
 
-            [LabelText("单次能耗"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
-            public float powerCost;
-            
             [LabelText("类型"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public SpellCat cat;
-
+            
             [LabelText("效果"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public SpellEffect effect;
             
+            [LabelText("单次能耗"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public float powerCost;
+
             [ShowIf("@effect != SpellEffect.Element")]
             [LabelText("效果参数"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
-            public float effectParam;
-
-            [LabelText("优先级"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
-            public int priority;
+            public List<float> effectParam;
 
             [TextArea, LabelText("描述"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public string description;
@@ -39,7 +37,53 @@ namespace R0.ScriptableObjConfig
             [HideLabel]
             [PreviewField(58, ObjectFieldAlignment.Right)]
             [HorizontalGroup("row1", 58), VerticalGroup("row1/right"), DisableIf("isSpellInfoLocked")]
-            public Sprite sprite;
+            public Sprite spellSprite;
+        }
+
+        [Serializable]
+        public class BulletSpellDataStruct : SpellDataStruct
+        {
+            [LabelText("子弹伤害"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public float dmg;
+            
+            [LabelText("子弹飞行速度"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public float moveSpd;
+            
+            [LabelText("射击间隔"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public float cd;
+            
+            [LabelText("生命时长"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public float defaultLifeTime;
+
+            [HideLabel]
+            [PreviewField(58, ObjectFieldAlignment.Right)]
+            [HorizontalGroup("row1", 58), VerticalGroup("row1/right"), DisableIf("isSpellInfoLocked")]
+            public Sprite bulletSprite;
+            
+            [TextArea, LabelText("攻击形式"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
+            public string atkDesc;
+
+            [LabelText("散射随机角"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
+            public float randomAngle;
+            
+            [LabelText("受伤次数销毁"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public int destroyOnPlayerDmgCount;
+            
+            [LabelText("使用次数销毁"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
+            public int destroyOnUsaageCount;
+            
+            [LabelText("图片朝向速度方向"), DisableIf("isSpellInfoLocked")]
+            [TableColumnWidth(30), VerticalGroup("row1")]
+            public bool isFacingDir;
+            
+            [DisplayAsString, VerticalGroup("row3")] public float dmgSpdRate;
+        }
+
+
+        [Serializable]
+        public class ElementSpellDataStruct : SpellDataStruct
+        {
+            
         }
         
         [FoldoutGroup("【武器属性】", true), LabelText("默认子弹召唤cd")]
@@ -72,16 +116,28 @@ namespace R0.ScriptableObjConfig
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         public float powerPerFrame = 20f;
 
-        [Space, Space]
-        [InfoBox("符文`优先级`属性（整数）越小，优先级越高（越先生效）")]
+        // [Space, Space]
+        // [InfoBox("符文`优先级`属性（整数）越小，优先级越高（越先生效）")]
         
         [TableList]
         [LabelText("【各类型符文属性】")]
-        public SpellDataStruct[] spellData;
+        public List<SpellDataStruct> spellData;
         
-        // [DisableInEditorMode]
-        // [Button("运行模式点我更新不耗能的符文效果", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
-        // private void UpdatePowerFreeSpellEffect() => SpellScroll.Instance.PreApplyPowerFreeSpell();
+        [Button("从xlsx导入符文数据", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
+        private void UpdatePowerFreeSpellEffect() => ExcelImporter.ImportData();
+        
+        /// <summary>
+        /// 更新伤害 / 速度 比例
+        /// </summary>
+        public void UpdateDmgSpdRate()
+        {
+            foreach (var d in spellData)
+            {
+                if (d is not BulletSpellDataStruct bd) continue;
+                bd.dmgSpdRate = bd.moveSpd / bd.dmg;
+                
+            }
+        }
 
     }
 }

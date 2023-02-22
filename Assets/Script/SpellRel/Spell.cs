@@ -61,16 +61,13 @@ namespace R0.SpellRel
         /// </summary>
         public virtual void Apply(BulletEmitter emitter)
         {
-            var data = SpellData.Instance.spellData[(int) spellCat];
+            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.spellData[(int) spellCat];
             var weapon = CharaMgr.Instance.activeChara.weapon;
 
             switch (data.effect)
             {
                 case SpellEffect.SummonBullet:
                     SummonBullet();
-                    break;
-                case SpellEffect.BulletCount:
-                    weapon.ammoCount = Mathf.FloorToInt(data.effectParam);
                     break;
                 case SpellEffect.Element:
                     ElementAttack();

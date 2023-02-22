@@ -55,7 +55,7 @@ namespace R0.SpellRel
                 else
                 {
                     _spellImg[i].enabled = true;
-                    _spellImg[i].sprite = spellData.spellData[(int) spells[i].spellCat].sprite;
+                    _spellImg[i].sprite = spellData.spellData[(int) spells[i].spellCat].spellSprite;
                 }
             }
         }

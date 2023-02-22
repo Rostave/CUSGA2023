@@ -19,7 +19,7 @@ namespace R0.Bullet
         protected override void OnEnableInit()
         {
             _bullets = new Stack<Bullet>();
-            BulletData.Instance.UpdateDmgSpdRate();
+            SpellData.Instance.UpdateDmgSpdRate();
         }
 
         /// <summary>
