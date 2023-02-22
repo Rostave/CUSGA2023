@@ -21,10 +21,7 @@ namespace Vacuname
         #region 参与运动计算需要的参数
         private float curAcceleraTime;
         public JumpState jumpState;
-        private float moveDirection;
-        private bool canDash;
-        private bool dashing;
-        private float dashColdDown;
+        public float moveDirection;
         #endregion
         public Rigidbody2D rd;
         public Animator anima;
@@ -32,72 +29,13 @@ namespace Vacuname
         [TabGroup("反馈"), SerializeField, InlineEditor(InlineEditorModes.GUIOnly)]
         private MMF_Player timeSlowFeedback, timeFastFeedback, dashFeedback;
 
-        #region 初始绑定
-
         private void Awake()
         {
             rd = GetComponent<Rigidbody2D>();
             anima = GetComponent<Animator>();
             curAcceleraTime = 0;
             jumpState = JumpState.fall;
-            canDash = true;
-            dashing = false;
             moveDirection = 1;
-            dashColdDown = 0;
-        }
-
-
-        private void OnDisable()
-        {
-            //input.onMove -= Move;
-        }
-        #endregion
-
-        private void Update()
-        {
-
-        }
-        private void ControlTime()
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                timeSlowFeedback?.PlayFeedbacks();
-                TimeControl.Instance.SetTimeScale(_setAttribute.slowDownTimeScale, _setAttribute.slowDownTimer);
-            }
-            if (Input.GetKeyUp(KeyCode.Tab))
-            {
-                timeFastFeedback?.PlayFeedbacks();
-                TimeControl.Instance.SetTimeScale(1f, _setAttribute.speedUpTimer);
-            }
-        }
-        private void Dash()
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-                StartCoroutine(Dashing());
-
-            if (!dashing && dashColdDown > 0)
-            {
-                dashColdDown -= Time.deltaTime;
-                canDash = dashColdDown <= 0;
-            }
-        }
-        IEnumerator Dashing()
-        {
-            canDash = false; // 禁止再次冲刺
-            dashing = true;
-            dashColdDown = _setAttribute.maxDashCooldown;
-            float dashTimeLeft = _setAttribute.dashDuration;
-
-            dashFeedback?.PlayFeedbacks();
-            //TODO 更新Layer以暂停与怪物layer的判定
-            rd.velocity = new Vector2(_setAttribute.dashSpeed * moveDirection, rd.velocity.y);
-
-            while (dashTimeLeft > 0)
-            {
-                dashTimeLeft -= Time.deltaTime;
-                yield return null;
-            }
-            dashing = false;
         }
         public void Jump()
         {
@@ -109,9 +47,6 @@ namespace Vacuname
         }
         public void Move(float input)
         {
-            if (dashing)
-                return;
-
             //标准化input
             input = input < 0 ? -1 : input > 0 ? 1 : 0;
 
