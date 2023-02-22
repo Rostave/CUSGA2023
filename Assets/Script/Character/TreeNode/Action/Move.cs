@@ -21,7 +21,7 @@ namespace Vacuname
                 me.rd.velocity = new Vector2(0, me.rd.velocity.y);
                 return TaskStatus.Success;
             }
-            else if (distance > 7f)
+            else if (distance > 20f)
                 return TaskStatus.Failure;
             else
             {

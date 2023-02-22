@@ -12,7 +12,7 @@ namespace Vacuname
         {
             target.SetValue(GameObject.FindWithTag("Player"));
             float dis = Vector2.Distance(transform.position, target.Value.transform.position);
-            if (dis <= 7.5f)
+            if (dis <= 15f)
                 return TaskStatus.Success;
             else
                 return TaskStatus.Failure;

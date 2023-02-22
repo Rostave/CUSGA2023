@@ -12,6 +12,7 @@ namespace Vacuname
             atkRange = GetComponent<PolygonCollider2D>();
             atkRange.enabled = false;
         }
+
         public bool TryMakeDamage()
         {
             atkRange.enabled = true;
