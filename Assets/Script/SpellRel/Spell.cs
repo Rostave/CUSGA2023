@@ -1,4 +1,5 @@
 ﻿using System;
+using R0.Bullet;
 using R0.Character;
 using R0.ScriptableObjConfig;
 using R0.Weapons;
@@ -52,49 +53,41 @@ namespace R0.SpellRel
     }
     
     /// <summary>
-    /// 基础符文类
+    /// 基础符文抽象类
     /// </summary>
     [Serializable]
-    public class Spell
+    public abstract class Spell
     {
         public SpellCat spellCat;
 
         /// <summary>
         /// 应用符文效果
         /// </summary>
-        public virtual void Apply(BulletEmitter emitter)
-        {
-            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.data[(int) spellCat];
-            var weapon = CharaMgr.Instance.activeChara.weapon;
+        public abstract void Apply();
+    }
 
-            switch (data.effect)
+    public class BulletSpell : Spell
+    {
+        private BulletEmitter _emitter;
+
+        public override void Apply()
+        {
+            var bulletType = spellCat switch
             {
-                case SpellEffect.BulletSummon:
-                    SummonBullet();
-                    break;
-                case SpellEffect.ElementAttach:
-                    AttachElement();
-                    break;
-                case SpellEffect.PropMod:
-                    ModifyProperty();
-                    break;
-            }
+                SpellCat.SummonMagicAmmo => BulletType.MagicAmmo,
+                SpellCat.SummonArrow => BulletType.Arrow,
+                SpellCat.SummonSword => BulletType.Sword,
+            };
+            _emitter.GenBullets(bulletType);
         }
 
-        private void SummonBullet()
+        /// <summary>
+        /// 绑定子弹发射器
+        /// </summary>
+        /// <param name="emitter">子弹发射器对象</param>
+        public void BindEmitter(BulletEmitter emitter)
         {
-            
+            _emitter = emitter;
         }
-
-        private void AttachElement()
-        {
-            
-        }
-
-        private void ModifyProperty()
-        {
-            
-        }
-        
     }
 }

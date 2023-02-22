@@ -71,7 +71,7 @@ namespace R0.SpellRel
         /// <summary>
         /// 应用并结算符文效果
         /// </summary>
-        public void ApplySpellOnTrigger(BulletEmitter emitter)
+        public void ApplySpellOnTrigger()
         {
             // 计算支持生效的符文数
             var spellDataObj = SpellData.Instance;
@@ -79,7 +79,7 @@ namespace R0.SpellRel
             supported = Math.Min(supported, activeSpellIndex);
             supported = Math.Min(supported, spells.Count);
 
-            defaultSpell.Apply(emitter);
+            defaultSpell.Apply();
             
             var spellData = spellDataObj.data;
             for (var i = 0; i < supported; i++)
@@ -95,7 +95,7 @@ namespace R0.SpellRel
                 }
                 
                 // 应用符文属性
-                spell.Apply(emitter);
+                spell.Apply();
             }
         }
         
