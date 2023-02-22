@@ -15,9 +15,9 @@ namespace R0.Bullet
     [Serializable]
     public enum BulletType
     {
-        [LabelText("法球")] MgicAmmo, 
-        [LabelText("弓箭")] Arrow, 
-        [LabelText("飞剑")] Sword, 
+        [LabelText("法球")] MagicAmmo,
+        [LabelText("弓箭")] Arrow,
+        [LabelText("剑")] Sword,
     }
     
     /// <summary>
@@ -25,8 +25,6 @@ namespace R0.Bullet
     /// </summary>
     public class Bullet : MonoBehaviour
     {
-        public BulletType type;
-        
         /// <summary> transform缓存 </summary>
         private Transform _tCached, _imgTCached;
         
@@ -100,13 +98,13 @@ namespace R0.Bullet
         /// <summary>
         /// 重置基本参数
         /// </summary>
-        public virtual void SetBasicParam(Weapon weapon, float initWaitTime, Vector3 dir)
+        public virtual void SetBasicParam(Weapon weapon, SpellCat spellCat, float initWaitTime, Vector3 dir)
         {
             var curTime = Time.time;
             initWaitEndTime = curTime + initWaitTime;
             _isCompleteInitWait = false;
             
-            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.data[(int) type];
+            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.data[(int) spellCat];
 
             dmg = data.dmg * weapon.bulletDmgMultiplier;
             moveSpeed = dmg * data.dmgSpdRate;

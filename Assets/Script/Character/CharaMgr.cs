@@ -27,7 +27,6 @@ namespace R0.Character
     {
         public Chara character;
         public Player playerCtrl;
-        public BulletType bulletType;
         public Weapon weapon;
         public SpellScroll spellScroll;
     }

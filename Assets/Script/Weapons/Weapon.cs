@@ -6,6 +6,7 @@ using R0.ScriptableObjConfig;
 using R0.SpellRel;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 namespace R0.Weapons
@@ -26,23 +27,23 @@ namespace R0.Weapons
     [Serializable]
     public class BulletEmitter
     {
-        private BulletType _bulletType;
+        private SpellCat _spellCat;  // 自己对应的子弹类型符文
+        
         public BulletEmitter()
         {
             _canTrigger = true;
         }
         
-        public BulletEmitter(Weapon weapon, BulletType bulletType)
+        public BulletEmitter(Weapon weapon)
         {
             _canTrigger = true;
             _weapon = weapon;
-            _bulletType = bulletType;
         }
 
-        public void BindWeapon(Weapon weapon, BulletType bulletType)
+        public void BindWeapon(Weapon weapon, SpellCat spellCat)
         {
             _weapon = weapon;
-            _bulletType = bulletType;
+            _spellCat = spellCat;
         }
 
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
@@ -66,22 +67,26 @@ namespace R0.Weapons
             TriggerAtk();
         }
 
-        public void GenBullets()
+        public void GenBullets(BulletType bulletType)
         {
             // 生成子弹
             var curPos = _weapon.tCached.position;
             var ammoCount = _weapon.ammoCount;
+            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.data[(int) _spellCat];
+            var pointingQAngle = Quaternion.FromToRotation(Vector3.up, _weapon.pointingDir);
+            
             if (ammoCount > 1)
             {
                 var halfAngle = (ammoCount - 1) * _weapon.BulletAngle * 0.5f;
-                var pointingQAngle = Quaternion.FromToRotation(Vector3.up, _weapon.pointingDir);
                 var qAngle = pointingQAngle * Quaternion.AngleAxis(-halfAngle, Vector3.forward);
                 for (var i = 0; i < ammoCount; i++)
                 {
                     var bullet = BulletPoolMgr.Instance.GetBullet();
                     bullet.transform.position = curPos;
-                    var moveDir = (qAngle * Vector3.up).normalized;
-                    bullet.SetBasicParam(_weapon, 0f, moveDir);
+                    var randomAngle = Random.Range(-data.randomAngle, data.randomAngle);
+                    var qua = qAngle * Quaternion.AngleAxis(randomAngle, Vector3.forward);
+                    var moveDir = (qua * Vector3.up).normalized;
+                    bullet.SetBasicParam(_weapon, _spellCat, 0f, moveDir);
 
                     qAngle *= _weapon.bulletInterQAngle;
                 }
@@ -90,7 +95,10 @@ namespace R0.Weapons
             
             var bullet1 = BulletPoolMgr.Instance.GetBullet();
             bullet1.transform.position = _weapon.tCached.position;
-            bullet1.SetBasicParam(_weapon, 0f, _weapon.pointingDir);
+            var randomAngle1 = Random.Range(-data.randomAngle, data.randomAngle);
+            var qua1 = pointingQAngle * Quaternion.AngleAxis(randomAngle1, Vector3.forward);
+            var moveDir1 = (qua1 * Vector3.up).normalized;
+            bullet1.SetBasicParam(_weapon, _spellCat, 0f, moveDir1);
         }
 
         private void TriggerAtk()
@@ -104,7 +112,7 @@ namespace R0.Weapons
             
             // 开始攻击瞬间的符文结算
             _weapon.bulletElements.Clear();
-            SpellScroll.Instance.ApplySpellOnTrigger(this);
+            SpellScroll.Instance.ApplySpellOnTrigger();
             
             _nextTriggerTime = Time.time + triggerCd;
         }
@@ -168,14 +176,15 @@ namespace R0.Weapons
             {
                 var data = SpellData.Instance.data[(int) spell.spellCat];
                 if (data.effect != SpellEffect.BulletSummon) continue;
-                AddEmitter(chara.bulletType);
+                AddEmitter((BulletSpell) spell);
             }
         }
        
-        private void AddEmitter(BulletType bulletType)
+        private void AddEmitter(BulletSpell spell)
         {
             var emitter = BulletEmitterPoolMgr.GetEmitter();
-            emitter.BindWeapon(this, bulletType);
+            emitter.BindWeapon(this, spell.spellCat);
+            spell.BindEmitter(emitter);
             emitters.Add(emitter);
         }
     }
