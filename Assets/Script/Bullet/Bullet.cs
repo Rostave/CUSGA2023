@@ -83,7 +83,7 @@ namespace R0.Bullet
         private void SetBulletImgDir()
         {
             _imgTCached.rotation = IsBulletFacingDir 
-                ? Quaternion.FromToRotation(Vector3.up, moveDir) 
+                ? Quaternion.FromToRotation(Vector3.up, moveDir)
                 : Const.Qua.Zero;
         }
 
@@ -129,6 +129,10 @@ namespace R0.Bullet
             if (Time.time > lifeEndTime) BulletPoolMgr.Instance.Recycle(this);
             Move();
         }
-        
+
+        public void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Enemy")) BulletPoolMgr.Instance.Recycle(this);
+        }
     }
 }

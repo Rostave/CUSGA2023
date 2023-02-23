@@ -67,7 +67,7 @@ MonoBehaviour:
     dmgSpdRate: 0.5
     cd: 1
     defaultLifeTime: 3
-    bulletSprite: {fileID: 21300002, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    bulletSprite: {fileID: 1862629910, guid: d2fc6cd01d215d24ebae7d0fb3dda355, type: 3}
     atkDesc: "\"\u6CD5\u7403\u51FB\u4E2D\u654C\u4EBA\uFF0C\r\n\u5BF9\u654C\u4EBA\u9020\u6210\u6570\u503C\u4F24\u5BB3\""
     randomAngle: 15
     destroyOnPlayerDmgCount: -1
