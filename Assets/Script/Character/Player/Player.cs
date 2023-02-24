@@ -9,42 +9,31 @@ using UnityEngine.Events;
 namespace Vacuname
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour
+    public class Player : Character
     {
-        [TabGroup("配置文件"), AssetsOnly,InlineEditor(InlineEditorModes.GUIOnly)]
-        [LabelText("手感设置"), SerializeField]
-        private Attribute _setAttribute;//在文件里设置的属性
-                                        //[HideInInspector]public Attribute attribute;//实际使用的属性
 
-        /*        [TabGroup("配置文件"),AssetsOnly]
-                [LabelText("InputManager")]
-                [SerializeField] private PlayerInput input;*/
+        [TabGroup("配置文件"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
+        [LabelText("时间设置"), SerializeField]
+        protected TimeAttribute timeAttribute;
 
         [SerializeField]private HitBack hitBack;
 
-        #region 参与运动计算需要的参数
-        private float curAcceleraTime;
-        private JumpState jumpState;
-        private float moveDirection;
+        #region 冲刺计算参数
         private bool canDash;
         private bool dashing;
         private float dashColdDown;
         #endregion
-        private Rigidbody2D rd;
 
         [TabGroup("反馈"),SerializeField,InlineEditor(InlineEditorModes.GUIOnly)]
         private MMF_Player timeSlowFeedback,timeFastFeedback,dashFeedback;
 
         #region 初始绑定
-
-        private void Awake()
+        protected override void Awake()
         {
-            rd=GetComponent<Rigidbody2D>();
-            curAcceleraTime = 0;
-            jumpState = JumpState.fall;
+            base.Awake();
+
             canDash = true;
             dashing = false;
-            moveDirection = 1;
             dashColdDown = 0;
         }
 
@@ -52,19 +41,14 @@ namespace Vacuname
         {
             CameraControl.Instance.ca.m_Follow = transform;
         }
-
-        private void OnDisable()
-        {
-            //input.onMove -= Move;
-        }
         #endregion
 
         private void Update()
         {
             //这样调试比较方便
 
-            if(rd.gravityScale != _setAttribute.gravity)
-                rd.gravityScale = _setAttribute.gravity;
+            if(rd.gravityScale != moveAttribute.gravity)
+                rd.gravityScale = moveAttribute.gravity;
 
             Move(Input.GetAxisRaw("Horizontal"));
             Dash();
@@ -77,12 +61,12 @@ namespace Vacuname
             if(Input.GetKeyDown(KeyCode.Tab))
             {
                 timeSlowFeedback?.PlayFeedbacks();
-                TimeControl.Instance.SetTimeScale(_setAttribute.slowDownTimeScale,_setAttribute.slowDownTimer);
+                TimeControl.Instance.SetTimeScale(timeAttribute.slowDownTimeScale, timeAttribute.slowDownTimer);
             }
             if(Input.GetKeyUp(KeyCode.Tab))
             {
                 timeFastFeedback?.PlayFeedbacks();
-                TimeControl.Instance.SetTimeScale(1f, _setAttribute.speedUpTimer);
+                TimeControl.Instance.SetTimeScale(1f, timeAttribute.speedUpTimer);
             }
         }
         private void Dash()
@@ -96,16 +80,34 @@ namespace Vacuname
                 canDash = dashColdDown <= 0;
             }
         }
+        public override void Jump()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                base.Jump();
+            }
+            else if (jumpState == JumpState.jump && rd.velocity.y < 0)
+            {
+                jumpState = JumpState.fall;
+            }
+
+        }
+        public override void Move(float input, bool setDirectly = false)
+        {
+            if (dashing)
+                return;
+            base.Move(input, setDirectly);
+        }
         IEnumerator Dashing()
         {
             canDash = false; // 禁止再次冲刺
             dashing = true;
-            dashColdDown = _setAttribute.maxDashCooldown;
-            float dashTimeLeft = _setAttribute.dashDuration;
+            dashColdDown = moveAttribute.maxDashCooldown;
+            float dashTimeLeft = moveAttribute.dashDuration;
 
             dashFeedback?.PlayFeedbacks();
             //TODO 更新Layer以暂停与怪物layer的判定
-            rd.velocity = new Vector2(_setAttribute.dashSpeed * moveDirection, rd.velocity.y);
+            rd.velocity = new Vector2(moveAttribute.dashSpeed * moveDirection, rd.velocity.y);
 
             while (dashTimeLeft > 0)
             {
@@ -114,47 +116,10 @@ namespace Vacuname
             }
             dashing = false;
         }
-        private void Jump()
-        {
-            if(jumpState==JumpState.ground&&Input.GetKeyDown(KeyCode.Space))
-            {
-                rd.velocity = new Vector2(rd.velocity.x, _setAttribute.jumpStrength);
-                jumpState = JumpState.jump;
-            }
-            else if (jumpState == JumpState.jump && rd.velocity.y < 0)
-            {
-                jumpState = JumpState.fall;
-            }
-
-        }
-
         private void HandleHitBack()
         {
             if (Input.GetKeyDown(KeyCode.E))
-                hitBack.TryActive();
-        }
-        private void Move(float input)
-        {
-            if (dashing)
-                return;
-            
-            //这个改变朝向以后加入鼠标就可以不要这个了，现在只是测试用
-            if(input!=0&&moveDirection!=input)
-            {
-                moveDirection = input;
-                Vector3 temp = transform.localScale;
-                temp.x = moveDirection;
-                transform.localScale = temp;
-            }    
-
-            float curSpeed = rd.velocity.x;
-            _setAttribute.GetCurSpeed(input,ref curSpeed,ref curAcceleraTime);
-            rd.velocity = new Vector2(curSpeed, rd.velocity.y);
-        }
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            //TODO 加入判定：如果是地面layer的话
-            jumpState = JumpState.ground;
+                hitBack.Effect();
         }
     }
 }

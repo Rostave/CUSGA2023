@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace Vacuname
 {
-    public class HitBack : MonoBehaviour
+    public class HitBack : BasicSkill
     {
-        public float maxBackCoolDown;
-        public float curBackCoolDown;
-        public float remainActTime, initActTime;
-        private PolygonCollider2D col;
-        private void Awake()
+        [SerializeField]private float maxBackCoolDown;
+        [SerializeField] private float initActTime;
+        private float curBackCoolDown;
+        private float remainActTime;
+        
+        protected override void Awake()
         {
-            col = GetComponent<PolygonCollider2D>();
-            col.enabled = false;
+            base.Awake();
             curBackCoolDown = 0;
         }
 
@@ -24,25 +24,23 @@ namespace Vacuname
                 curBackCoolDown -= Time.deltaTime;
         }
 
-        public void TryActive()
+        public override void Effect()
         {
             if (curBackCoolDown <= 0)
                 StartCoroutine(Activiting());
         }
-
-
         IEnumerator Activiting()
         {
             curBackCoolDown = maxBackCoolDown;
             remainActTime = initActTime;
-            col.enabled = true;
+            range.enabled = true;
 
             while (remainActTime > 0)
             {
                 remainActTime -= Time.deltaTime;
                 yield return null;
             }
-            col.enabled = false;
+            range.enabled = false;
         }
 
     }
