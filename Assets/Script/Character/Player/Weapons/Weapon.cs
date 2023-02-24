@@ -64,7 +64,6 @@ namespace R0.Weapons
             return _pointingAngle;
         }
 
-
         /// <summary>
         /// 清空效果参数
         /// </summary>

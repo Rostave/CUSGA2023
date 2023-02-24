@@ -12,11 +12,11 @@ namespace Vacuname
     [RequireComponent(typeof(Rigidbody2D))]
     public class Character : MonoBehaviour
     {
-        [TabGroup("ÅäÖÃÎÄ¼ş"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
-        [LabelText("ÒÆ¶¯ÉèÖÃ"), SerializeField]
+        [TabGroup("é…ç½®æ–‡ä»¶"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
+        [LabelText("ç§»åŠ¨è®¾ç½®"), SerializeField]
         protected MoveAttribute moveAttribute;
 
-        #region ¶¯»­ÓÃµÄÊÂ¼şÖĞĞÄ
+        #region åŠ¨ç”»ç”¨çš„äº‹ä»¶ä¸­å¿ƒ
         private Dictionary<string, UnityAction> eventDic;
         public Dictionary<string, UnityAction> GetEventDic()
         {
@@ -32,7 +32,7 @@ namespace Vacuname
         }
         #endregion
 
-        #region ²ÎÓëÔË¶¯¼ÆËãĞèÒªµÄ²ÎÊı
+        #region å‚ä¸è¿åŠ¨è®¡ç®—éœ€è¦çš„å‚æ•°
         protected float curAcceleraTime;
         [HideInInspector]public JumpState jumpState;
         #region protected float moveDirection;
@@ -77,7 +77,7 @@ namespace Vacuname
         public virtual void Move(float input,bool setDirectly=false)
         {
             float curSpeed;
-            if (setDirectly)//Ö±½ÓÉèÖÃËÙ¶ÈµÄÇé¿ö
+            if (setDirectly)//ç›´æ¥è®¾ç½®é€Ÿåº¦çš„æƒ…å†µ
             {
                 curSpeed = input;
                 rd.velocity = new Vector2(curSpeed, rd.velocity.y);
@@ -85,7 +85,7 @@ namespace Vacuname
                 return;
             }
 
-            //±ê×¼»¯input
+            //æ ‡å‡†åŒ–input
             input.Normalize();
 
             if (input != 0 && moveDirection != input)
@@ -105,7 +105,7 @@ namespace Vacuname
 
         protected void OnCollisionEnter2D(Collision2D collision)
         {
-            //TODO ¼ÓÈëÅĞ¶¨£ºÈç¹ûÊÇµØÃælayerµÄ»°
+            //TODO åŠ å…¥åˆ¤å®šï¼šå¦‚æœæ˜¯åœ°é¢layerçš„è¯
             jumpState = JumpState.ground;
         }
 
