@@ -46,9 +46,9 @@ namespace Vacuname
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            if (character.moveDirection > 0 && Mathf.Abs(angle) > visionAngle / 2)
+            if (character.GetMoveDirection() > 0 && Mathf.Abs(angle) > visionAngle / 2)
                 return false;
-            else if (character.moveDirection < 0 && Mathf.Abs(angle) < 180 - visionAngle / 2)
+            else if (character.GetMoveDirection() < 0 && Mathf.Abs(angle) < 180 - visionAngle / 2)
                 return false;
 
             //射线检测障碍物
@@ -56,7 +56,7 @@ namespace Vacuname
             layer+=LayerMask.GetMask("Enemy");
             layer = ~layer;
             RaycastHit2D hit = Physics2D.Linecast((Vector2)transform.position, point,layer);//无视敌人的图层，免得自己被自己挡住
-            Debug.Log(hit.collider.gameObject);
+            Debug.Log("发现玩家");
             if (hit.collider.CompareTag("Player"))//线条碰到的第一个物体是玩家才能看到
                 return true;
             else

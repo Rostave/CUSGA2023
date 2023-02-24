@@ -13,23 +13,52 @@ namespace Vacuname
     public class Character : MonoBehaviour
     {
         [TabGroup("配置文件"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
-        [LabelText("手感设置"), SerializeField]
-        //[Title("@_setAttribute.acceleraTime")]
-        public Attribute _setAttribute;//在文件里设置的属性
-        //[HideInInspector]public Attribute attribute;//实际使用的属性
+        [LabelText("移动设置"), SerializeField]
+        protected MoveAttribute moveAttribute;
+
+        #region 动画用的事件中心
+        private Dictionary<string, UnityAction> eventDic;
+        public Dictionary<string, UnityAction> GetEventDic()
+        {
+            if (eventDic == null) eventDic = new Dictionary<string, UnityAction>();
+            return eventDic;
+        }
+        public void AnimaEvent(string name)
+        {
+            if (eventDic.ContainsKey(name))
+            {
+                eventDic[name].Invoke();
+            }
+        }
+        #endregion
 
         #region 参与运动计算需要的参数
-        private float curAcceleraTime;
-        public JumpState jumpState;
-        public float moveDirection;
+        protected float curAcceleraTime;
+        [HideInInspector]public JumpState jumpState;
+        #region protected float moveDirection;
+        protected float moveDirection;
+        public float GetMoveDirection()
+        {
+            return moveDirection;
+        }
+        public void SetMoveDirection(float input)
+        {
+            input.Normalize();
+            if (input != 0 && moveDirection != input)
+            {
+                moveDirection = input;
+                Vector3 temp = transform.localScale;
+                temp.x = moveDirection * Mathf.Abs(temp.x);
+                transform.localScale = temp;
+            }
+        }
         #endregion
+        #endregion
+
         [HideInInspector]public Rigidbody2D rd;
         [HideInInspector] public Animator anima;
 
-        [TabGroup("反馈"), SerializeField, InlineEditor(InlineEditorModes.GUIOnly)]
-        private MMF_Player timeSlowFeedback, timeFastFeedback, dashFeedback;
-
-        private void Awake()
+        protected virtual void Awake()
         {
             rd = GetComponent<Rigidbody2D>();
             anima = GetComponent<Animator>();
@@ -37,15 +66,15 @@ namespace Vacuname
             jumpState = JumpState.fall;
             moveDirection = 1;
         }
-        public void Jump()
+        public virtual void Jump()
         {
             if (jumpState == JumpState.ground)
             {
-                rd.velocity = new Vector2(rd.velocity.x, _setAttribute.jumpStrength);
+                rd.velocity = new Vector2(rd.velocity.x, moveAttribute.jumpStrength);
                 jumpState = JumpState.jump;
             }
         }
-        public void Move(float input,bool setDirectly=false)
+        public virtual void Move(float input,bool setDirectly=false)
         {
             float curSpeed;
             if (setDirectly)//直接设置速度的情况
@@ -57,9 +86,8 @@ namespace Vacuname
             }
 
             //标准化input
-            input = input < 0 ? -1 : input > 0 ? 1 : 0;
+            input.Normalize();
 
-            //这个改变朝向以后加入鼠标就可以不要这个了，现在只是测试用
             if (input != 0 && moveDirection != input)
             {
                 moveDirection = input;
@@ -69,16 +97,18 @@ namespace Vacuname
             }
 
             curSpeed = rd.velocity.x;
-            _setAttribute.GetCurSpeed(input, ref curSpeed, ref curAcceleraTime);
+            moveAttribute.GetCurSpeed(input, ref curSpeed, ref curAcceleraTime);
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
 
             anima.SetFloat("Move", Mathf.Abs(curSpeed));
         }
-        private void OnCollisionEnter2D(Collision2D collision)
+
+        protected void OnCollisionEnter2D(Collision2D collision)
         {
             //TODO 加入判定：如果是地面layer的话
             jumpState = JumpState.ground;
         }
+
     }
 }
 
