@@ -47,8 +47,10 @@ namespace R0.SpellRel
         {
             // 开始攻击瞬间的符文结算
             var chara = CharaMgr.Instance.activeChara;
-            chara.weapon.bulletElements.Clear();
+            
+            chara.weapon.ResetEffectParam();  // weapon重置效果参数
             chara.spellScroll.ApplyNonBulletSpell();  // 结算其他非子弹类型符文
+            
             Apply();  // 自己结算
             _nextTriggerTime = Time.time + _triggerCd;
         }

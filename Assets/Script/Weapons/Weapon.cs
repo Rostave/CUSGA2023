@@ -52,7 +52,7 @@ namespace R0.Weapons
         public Quaternion GetPointingAngle()
         {
             if (Time.time < _lastUpdatePointingAngleTime) return _pointingAngle;
-            _lastUpdatePointingAngleTime = Time.time + 0.5f * Time.deltaTime;  // 一帧只更新一次即可
+            _lastUpdatePointingAngleTime = Time.time + 0.8f * Time.deltaTime;  // 一帧只更新一次即可
             
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
@@ -64,6 +64,15 @@ namespace R0.Weapons
             return _pointingAngle;
         }
 
-        
+
+        /// <summary>
+        /// 清空效果参数
+        /// </summary>
+        public void ResetEffectParam()
+        {
+            bulletDmgMultiplier = 1f;
+            ammoCount = 1;
+            bulletElements.Clear();
+        }
     }
 }
