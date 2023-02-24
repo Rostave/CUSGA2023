@@ -19,7 +19,6 @@ namespace R0.Bullet
         protected override void OnEnableInit()
         {
             _bullets = new Stack<Bullet>();
-            SpellData.Instance.UpdateDmgSpdRate();
         }
 
         /// <summary>

@@ -15,9 +15,9 @@ namespace R0.Bullet
     [Serializable]
     public enum BulletType
     {
-        [LabelText("法球")] MgicAmmo, 
-        [LabelText("弓箭")] Arrow, 
-        [LabelText("飞剑")] Sword, 
+        [LabelText("法球")] MagicAmmo,
+        [LabelText("弓箭")] Arrow,
+        [LabelText("剑")] Sword,
     }
     
     /// <summary>
@@ -25,8 +25,6 @@ namespace R0.Bullet
     /// </summary>
     public class Bullet : MonoBehaviour
     {
-        public BulletType type;
-        
         /// <summary> transform缓存 </summary>
         private Transform _tCached, _imgTCached;
         
@@ -39,6 +37,7 @@ namespace R0.Bullet
         [SerializeField, DisplayAsString] private float moveSpeed;
         
         /// <summary> 移动方向 </summary>///
+        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         [SerializeField, DisplayAsString] private Vector3 moveDir;
         
         /// <summary> 生命终止时间 </summary>///
@@ -52,11 +51,7 @@ namespace R0.Bullet
         /// <summary> 单次伤害 </summary>///
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         [SerializeField, DisplayAsString] private float dmg;
-        
-        /// <summary> buff效果 </summary> ///
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-        [SerializeField, DisplayAsString] private SpellEffect effect;
-        
+
         /// <summary> 附着元素 </summary> ///
         [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
         [SerializeField, DisplayAsString] private List<SpellElement> elements;
@@ -88,7 +83,7 @@ namespace R0.Bullet
         private void SetBulletImgDir()
         {
             _imgTCached.rotation = IsBulletFacingDir 
-                ? Quaternion.FromToRotation(Vector3.up, moveDir) 
+                ? Quaternion.FromToRotation(Vector3.up, moveDir)
                 : Const.Qua.Zero;
         }
 
@@ -100,21 +95,21 @@ namespace R0.Bullet
         /// <summary>
         /// 重置基本参数
         /// </summary>
-        public virtual void SetBasicParam(Weapon weapon, float initWaitTime, Vector3 dir)
+        public virtual void SetBasicParam(Weapon weapon, SpellCat spellCat, float initWaitTime, Vector3 dir)
         {
             var curTime = Time.time;
             initWaitEndTime = curTime + initWaitTime;
             _isCompleteInitWait = false;
             
-            var data = (SpellData.BulletSpellDataStruct) SpellData.Instance.spellData[(int) type];
+            var data = SpellData.Instance.GetBulletSpellData(spellCat);
 
+            speedMultiplier = 1f;
             dmg = data.dmg * weapon.bulletDmgMultiplier;
             moveSpeed = dmg * data.dmgSpdRate;
 
             SpriteRenderer.sprite = data.bulletSprite;
             IsBulletFacingDir = data.isFacingDir;
             lifeEndTime = curTime + data.defaultLifeTime;
-            effect = weapon.bulletEffect;
             moveDir = dir;
             SetBulletImgDir();
             
@@ -134,6 +129,10 @@ namespace R0.Bullet
             if (Time.time > lifeEndTime) BulletPoolMgr.Instance.Recycle(this);
             Move();
         }
-        
+
+        public void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Enemy")) BulletPoolMgr.Instance.Recycle(this);
+        }
     }
 }

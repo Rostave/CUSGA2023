@@ -38,9 +38,9 @@ namespace Vacuname
 
         private bool IsInSector(Vector2 point)
         {
-            // ¼ÆËãµãµ½ÉÈÐÎÖÐÐÄµÄÏòÁ¿
+            // è®¡ç®—ç‚¹åˆ°æ‰‡å½¢ä¸­å¿ƒçš„å‘é‡
             Vector2 direction = point - (Vector2)transform.position;
-            // Èç¹ûµãµ½ÉÈÐÎÖÐÐÄµÄ¾àÀë´óÓÚ°ë¾¶£¬²»ÔÚÉÈÐÎÄÚ
+            // å¦‚æžœç‚¹åˆ°æ‰‡å½¢ä¸­å¿ƒçš„è·ç¦»å¤§äºŽåŠå¾„ï¼Œä¸åœ¨æ‰‡å½¢å†…
             if (direction.magnitude > visionRadius)
                 return false;
 
@@ -51,13 +51,13 @@ namespace Vacuname
             else if (character.moveDirection < 0 && Mathf.Abs(angle) < 180 - visionAngle / 2)
                 return false;
 
-            //ÉäÏß¼ì²âÕÏ°­Îï
+            //å°„çº¿æ£€æµ‹éšœç¢ç‰©
             LayerMask layer = new LayerMask();
             layer+=LayerMask.GetMask("Enemy");
             layer = ~layer;
-            RaycastHit2D hit = Physics2D.Linecast((Vector2)transform.position, point,layer);//ÎÞÊÓµÐÈËµÄÍ¼²ã£¬ÃâµÃ×Ô¼º±»×Ô¼ºµ²×¡
+            RaycastHit2D hit = Physics2D.Linecast((Vector2)transform.position, point,layer);//æ— è§†æ•Œäººçš„å›¾å±‚ï¼Œå…å¾—è‡ªå·±è¢«è‡ªå·±æŒ¡ä½
             Debug.Log(hit.collider.gameObject);
-            if (hit.collider.CompareTag("Player"))//ÏßÌõÅöµ½µÄµÚÒ»¸öÎïÌåÊÇÍæ¼Ò²ÅÄÜ¿´µ½
+            if (hit.collider.CompareTag("Player"))//çº¿æ¡ç¢°åˆ°çš„ç¬¬ä¸€ä¸ªç‰©ä½“æ˜¯çŽ©å®¶æ‰èƒ½çœ‹åˆ°
                 return true;
             else
                 return false;
