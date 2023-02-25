@@ -105,8 +105,8 @@ namespace Vacuname
 
         protected void OnCollisionEnter2D(Collision2D collision)
         {
-            //TODO 加入判定：如果是地面layer的话
-            jumpState = JumpState.ground;
+            if(collision.gameObject.layer==LayerMask.GetMask("Ground"))
+                jumpState = JumpState.ground;
         }
 
     }
