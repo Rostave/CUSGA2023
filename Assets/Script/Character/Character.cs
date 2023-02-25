@@ -56,7 +56,7 @@ namespace Vacuname
         #endregion
 
         [HideInInspector]public Rigidbody2D rd;
-        [HideInInspector] public Animator anima;
+        [HideInInspector]public Animator anima;
 
         protected virtual void Awake()
         {

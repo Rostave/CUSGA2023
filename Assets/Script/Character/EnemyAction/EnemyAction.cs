@@ -7,7 +7,7 @@ namespace Vacuname
 {
     public class EnemyAction : Action
     {
-        protected Character me;
+        protected BaseEnemy me;
         protected Animator anima;
         protected Rigidbody2D rd;
         protected TaskStatus taskStatus;
@@ -18,9 +18,9 @@ namespace Vacuname
 
         public override void OnAwake()
         {
-            me=GetComponent<Character>();
-            anima = me.anima;
-            rd = me.rd;
+            me=GetComponent<BaseEnemy>();
+            anima = GetComponent<Animator>();
+            rd = GetComponent<Rigidbody2D>();
         }
 
         internal void SetTaskStatus(object failure)

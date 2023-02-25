@@ -17,14 +17,12 @@ namespace Vacuname
 
         public override TaskStatus OnUpdate()
         {
-            GameObject g;
-            if (visual.TrySeePlayer(out g))
+            if (visual.TrySeePlayer(out GameObject g))
             {
                 target.Value = g;
-                return TaskStatus.Success;
-            }
-            else
                 return TaskStatus.Failure;
+            }
+            return TaskStatus.Success;
         }
     }
 }
