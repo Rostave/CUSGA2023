@@ -9,14 +9,15 @@ namespace Vacuname
     public class Move:EnemyAction
     {
         //public SharedFloat attackDistance;
-        public SharedInt direction;
+        public EnemySkill curSkill;
+        [HideInInspector]public SharedInt direction;
         public SharedGameObject target;
 
         public override TaskStatus OnUpdate()
         {
             float input = target.Value.transform.position.x - transform.position.x;
             float distance = Vector2.Distance(transform.position, target.Value.transform.position);
-            if (distance <= 3f)//¹¥»÷¾àÀë
+            if (distance <= curSkill.attackDistance)//¹¥»÷¾àÀë
             {
                 me.Move(0,true);
                 return TaskStatus.Success;

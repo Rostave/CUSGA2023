@@ -13,8 +13,8 @@ namespace Vacuname
         private void Awake()
         {
             character = GetComponentInParent<Character>();
-            layerMask = new LayerMask();
-            layerMask += LayerMask.GetMask("Player");
+            layerMask = LayerMask.NameToLayer("Player");
+            layerMask = ~layerMask;
         }
 
 
@@ -52,8 +52,7 @@ namespace Vacuname
                 return false;
 
             //射线检测障碍物
-            LayerMask layer = new LayerMask();
-            layer+=LayerMask.GetMask("Enemy");
+            LayerMask layer = LayerMask.NameToLayer("Enemy");
             layer = ~layer;
             RaycastHit2D hit = Physics2D.Linecast((Vector2)transform.position, point,layer);//无视敌人的图层，免得自己被自己挡住
             Debug.Log("发现玩家");
