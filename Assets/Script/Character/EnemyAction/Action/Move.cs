@@ -36,7 +36,7 @@ namespace Vacuname
             else if (target.Value != null && distance > me.visual.visionRadius)//跟丢
             {
                 me.Move(0, true);
-                //target.Value=null;
+                target.Value=null;
                 return TaskStatus.Failure;
             }
             else//那就往那个地方前进

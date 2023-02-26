@@ -13,8 +13,7 @@ namespace Vacuname
         private void Awake()
         {
             character = GetComponentInParent<Character>();
-            layerMask = LayerMask.NameToLayer("Player");
-            layerMask = ~layerMask;
+            layerMask = 1<<LayerMask.NameToLayer("Player");
         }
 
 
@@ -52,10 +51,9 @@ namespace Vacuname
                 return false;
 
             //射线检测障碍物
-            LayerMask layer = LayerMask.NameToLayer("Enemy");
+            LayerMask layer = 1<<LayerMask.NameToLayer("Enemy");
             layer = ~layer;
             RaycastHit2D hit = Physics2D.Linecast((Vector2)transform.position, point,layer);//无视敌人的图层，免得自己被自己挡住
-            Debug.Log("发现玩家");
             if (hit.collider.CompareTag("Player"))//线条碰到的第一个物体是玩家才能看到
                 return true;
             else

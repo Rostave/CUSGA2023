@@ -12,10 +12,12 @@ namespace Vacuname
 
         public override TaskStatus OnUpdate()
         {
+            range.enabled = true;
             Bounds bounds = range.bounds;
             float randomX = Random.Range(bounds.min.x, bounds.max.x);
             float randomY = Random.Range(bounds.min.y, bounds.max.y);
             patrolPos.Value= new Vector2(randomX, randomY);
+            range.enabled = false;
             return TaskStatus.Success;
         }
 
