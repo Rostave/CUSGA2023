@@ -23,22 +23,31 @@ namespace Vacuname
                 if (a.CompareTag("Player"))
                 {
                     p = a.GetComponent<Player>();
-                    p.feedbacks.TryPlay("Hit");
                 }
                 else if (a.CompareTag("Sheild"))
                 {
                     blocked = true;
-                    me.feedbacks.TryPlay("Blocked");
                     Debug.Log(string.Format("<color=#ff0000>{0}</color>", "Blocked"));
                     break;
                 }
             }
+            
             range.enabled = false;
 
             if (blocked)
+            {
+                me.feedbacks.TryPlay("Blocked");
                 enemyAction.SetTaskStatus(TaskStatus.Failure);
+            }
             else
+            {
+                if(p!=null)//没有被挡且打中了
+                {
+                    p.feedbacks.TryPlay("Hit");
+                }
                 enemyAction.SetTaskStatus(TaskStatus.Success);
+            }
+                
         }
     }
 }
