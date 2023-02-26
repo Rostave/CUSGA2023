@@ -105,7 +105,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7586408153367139407, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
+    - {fileID: 7586408153367139406, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
 --- !u!1 &7528741074767601889 stripped
 GameObject:
@@ -135,6 +137,30 @@ MonoBehaviour:
     m_FrequencyGain: 1
     m_Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &6861273919989448428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528741074767601889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d66462bf720d28469c8db4b2e52720c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChannelMode: 0
+  Channel: 0
+  MMChannelDefinition: {fileID: 0}
+  DefaultShakeAmplitude: 0.5
+  DefaultShakeFrequency: 10
+  IdleAmplitude: 0
+  IdleFrequency: 1
+  LerpSpeed: 5
+  TestDuration: 0.3
+  TestAmplitude: 2
+  TestFrequency: 20
+  TestShakeButton: 0
 --- !u!4 &7528741075403015141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7586408153738327886, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}

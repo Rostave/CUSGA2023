@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4793412095795245573}
+  - component: {fileID: 8992832289417777041}
   m_Layer: 0
   m_Name: Feedbacks
   m_TagString: Untagged
@@ -35,6 +36,86 @@ Transform:
   m_Father: {fileID: 4793412097506941699}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8992832289417777041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793412095795245574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b609a506405dc47b7b861d9b4ff764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 4793412096860646715}
+    - {fileID: 4793412096666606654}
+    - {fileID: 4793412096614569673}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: feedbackDic
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[MoreMountains.Feedbacks.MMF_Player,
+        MoreMountains.Feedbacks]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Dash
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: TimeFast
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: TimeSlow
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &4793412095800264826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,9 +1442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b4dd6b22b695248b823aac0b6cfc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
   maxBackCoolDown: 0.5
-  curBackCoolDown: 0
-  remainActTime: 0
   initActTime: 1
 --- !u!1 &4793412097258086793
 GameObject:
@@ -6282,14 +6362,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveAttribute: {fileID: 11400000, guid: ac31b6b53d444d54fa40367c1fd838b4, type: 2}
+  feedbacks: {fileID: 8992832289417777041}
   jumpState: 0
   rd: {fileID: 0}
   anima: {fileID: 0}
   timeAttribute: {fileID: 11400000, guid: ef61da67881facc42b92880bfb8b2f1f, type: 2}
   hitBack: {fileID: 4793412097078764683}
-  timeSlowFeedback: {fileID: 4793412096614569673}
-  timeFastFeedback: {fileID: 4793412096666606654}
-  dashFeedback: {fileID: 4793412096860646715}
 --- !u!50 &4793412097506941704
 Rigidbody2D:
   serializedVersion: 4

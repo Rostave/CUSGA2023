@@ -27,7 +27,8 @@ namespace Vacuname
                 else if (a.CompareTag("Sheild"))
                 {
                     blocked = true;
-                    Debug.LogError("Blocked");
+                    me.feedbacks.TryPlayFeedback("Blocked");
+                    Debug.Log(string.Format("<color=#ff0000>{0}</color>", "Blocked"));
                     break;
                 }
             }

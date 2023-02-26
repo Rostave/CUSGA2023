@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3b56a167e700e4abe03571d2032389, type: 3}
   m_Name: "\u65F6\u95F4_\u4E3B\u89D2"
   m_EditorClassIdentifier: 
-  slowDownTimer: 0
-  speedUpTimer: 0
-  slowDownTimeScale: 0
+  slowDownTimer: 0.1
+  speedUpTimer: 1
+  slowDownTimeScale: 0.1

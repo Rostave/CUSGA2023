@@ -16,7 +16,7 @@ namespace Vacuname
         [LabelText("移动设置"), SerializeField]
         protected MoveAttribute moveAttribute;
 
-        #region 动画用的事件中心
+        #region 动画用事件字典
         private Dictionary<string, UnityAction> eventDic;
         public Dictionary<string, UnityAction> GetEventDic()
         {
@@ -30,6 +30,11 @@ namespace Vacuname
                 eventDic[name].Invoke();
             }
         }
+        #endregion
+
+        #region 反馈字典
+        [TabGroup("反馈"), InlineEditor(InlineEditorModes.GUIOnly)]
+        public FeedbackDictionary feedbacks;
         #endregion
 
         #region 参与运动计算需要的参数

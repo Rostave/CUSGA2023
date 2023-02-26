@@ -24,9 +24,6 @@ namespace Vacuname
         private float dashColdDown;
         #endregion
 
-        [TabGroup("反馈"),SerializeField,InlineEditor(InlineEditorModes.GUIOnly)]
-        private MMF_Player timeSlowFeedback,timeFastFeedback,dashFeedback;
-
         #region 初始绑定
         protected override void Awake()
         {
@@ -60,12 +57,12 @@ namespace Vacuname
         {
             if(Input.GetKeyDown(KeyCode.Tab))
             {
-                timeSlowFeedback?.PlayFeedbacks();
+                feedbacks.TryPlayFeedback("TimeSlow");
                 TimeControl.Instance.SetTimeScale(timeAttribute.slowDownTimeScale, timeAttribute.slowDownTimer);
             }
             if(Input.GetKeyUp(KeyCode.Tab))
             {
-                timeFastFeedback?.PlayFeedbacks();
+                feedbacks.TryPlayFeedback("TimeFast");
                 TimeControl.Instance.SetTimeScale(1f, timeAttribute.speedUpTimer);
             }
         }
@@ -105,7 +102,7 @@ namespace Vacuname
             dashColdDown = moveAttribute.maxDashCooldown;
             float dashTimeLeft = moveAttribute.dashDuration;
 
-            dashFeedback?.PlayFeedbacks();
+            feedbacks.TryPlayFeedback("Dash");
             //TODO 更新Layer以暂停与怪物layer的判定
             rd.velocity = new Vector2(moveAttribute.dashSpeed * moveDirection, rd.velocity.y);
 
