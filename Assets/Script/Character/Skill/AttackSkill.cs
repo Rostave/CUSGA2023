@@ -23,11 +23,12 @@ namespace Vacuname
                 if (a.CompareTag("Player"))
                 {
                     p = a.GetComponent<Player>();
+                    p.feedbacks.TryPlay("Hit");
                 }
                 else if (a.CompareTag("Sheild"))
                 {
                     blocked = true;
-                    me.feedbacks.TryPlayFeedback("Blocked");
+                    me.feedbacks.TryPlay("Blocked");
                     Debug.Log(string.Format("<color=#ff0000>{0}</color>", "Blocked"));
                     break;
                 }

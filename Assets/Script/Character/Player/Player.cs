@@ -57,13 +57,11 @@ namespace Vacuname
         {
             if(Input.GetKeyDown(KeyCode.Tab))
             {
-                feedbacks.TryPlayFeedback("TimeSlow");
-                TimeControl.Instance.SetTimeScale(timeAttribute.slowDownTimeScale, timeAttribute.slowDownTimer);
+                feedbacks.TryPlay("TimeSlow");
             }
             if(Input.GetKeyUp(KeyCode.Tab))
             {
-                feedbacks.TryPlayFeedback("TimeFast");
-                TimeControl.Instance.SetTimeScale(1f, timeAttribute.speedUpTimer);
+                feedbacks.TryPlay("TimeFast");
             }
         }
         private void Dash()
@@ -102,7 +100,7 @@ namespace Vacuname
             dashColdDown = moveAttribute.maxDashCooldown;
             float dashTimeLeft = moveAttribute.dashDuration;
 
-            feedbacks.TryPlayFeedback("Dash");
+            feedbacks.TryPlay("Dash");
             //TODO 更新Layer以暂停与怪物layer的判定
             rd.velocity = new Vector2(moveAttribute.dashSpeed * moveDirection, rd.velocity.y);
 
