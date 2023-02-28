@@ -1,5 +1,5 @@
 
-调整2.png
+knight1.png
 size: 2005,977
 format: RGBA8888
 filter: Linear,Linear
