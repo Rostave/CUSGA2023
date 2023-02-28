@@ -45,7 +45,7 @@ namespace R0.ScriptableObjConfig
                 if (!StrIsNum(first)) continue;
 
                 SpellData.SpellDataStruct sd;
-                var effectType = dr[1].ToString().Split("_")[0];
+                var effectType = dr[1].ToString().Split('_')[0];
                 var type = (SpellEffect) int.Parse(effectType);
 
                 switch (type)

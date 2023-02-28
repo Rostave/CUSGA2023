@@ -15,7 +15,7 @@ namespace Vacuname
 
         public override TaskStatus OnUpdate()
         {
-            if(target.Value!=null&&patrolPos.Value!=NumberTool.NullV2)//·¢ÏÖÍæ¼Ò£¬ÖÐ¶ÏÑ²Âß
+            if(target.Value!=null&&patrolPos.Value!=NumberTool.NullV2)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½Ð¶ï¿½Ñ²ï¿½ï¿½
             {
                 patrolPos.Value = NumberTool.NullV2;
                 return TaskStatus.Failure;
@@ -23,23 +23,30 @@ namespace Vacuname
 
             float closeDistance = curSkill == null ? GetComponent<SpriteRenderer>().sprite.GetHeight() : curSkill.attackDistance;
 
-            Vector2 targetPos = target.Value != null ? target.Value.transform.position : 
-                patrolPos.Value != NumberTool.NullV2 ? patrolPos.Value : transform.position;
+            // Vector2 targetPos = target.Value != null ? target.Value.transform.position : 
+                // patrolPos.Value != NumberTool.NullV2 ? patrolPos.Value : transform.position;
+            Vector2 targetPos;
+            if (target.Value != null) targetPos = target.Value.transform.position;
+            else
+            {
+                if (patrolPos.Value != NumberTool.NullV2) targetPos = patrolPos.Value;
+                else targetPos = transform.position;
+            }
 
             float distance = Vector2.Distance(transform.position, targetPos);
             float input = targetPos.x - transform.position.x;
-            if (distance <= closeDistance)//µ½´ïÁË
+            if (distance <= closeDistance)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             {
                 me.Move(0,true);
                 return TaskStatus.Success;
             }
-            else if (target.Value != null && distance > me.visual.visionRadius)//¸ú¶ª
+            else if (target.Value != null && distance > me.visual.visionRadius)//ï¿½ï¿½ï¿½ï¿½
             {
                 me.Move(0, true);
                 target.Value=null;
                 return TaskStatus.Failure;
             }
-            else//ÄÇ¾ÍÍùÄÇ¸öµØ·½Ç°½ø
+            else//ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½Ø·ï¿½Ç°ï¿½ï¿½
             {
                 me.Move(input);
                 return TaskStatus.Running;
