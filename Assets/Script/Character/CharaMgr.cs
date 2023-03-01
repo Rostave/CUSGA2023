@@ -67,6 +67,7 @@ namespace R0.Character
         public void StopSwitchChara()
         {
             if (_charaSwitchCoroutine != null) StopCoroutine(_charaSwitchCoroutine);
+            // 
         }
 
         private IEnumerator SwitchCharaCoroutine(Chara character)

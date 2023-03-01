@@ -10,6 +10,7 @@ using UnityEngine.Events;
 
 namespace Vacuname
 {
+    // 编码测试 - R0
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : Character
     {
