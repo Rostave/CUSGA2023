@@ -1,6 +1,7 @@
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using Sirenix.OdinInspector;
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,11 +63,12 @@ namespace Vacuname
 
         [HideInInspector]public Rigidbody2D rd;
         [HideInInspector]public Animator anima;
+        public SkeletonAnimation s_anima;
 
         protected virtual void Awake()
         {
             rd = GetComponent<Rigidbody2D>();
-            anima = GetComponent<Animator>();
+            TryGetComponent<Animator>(out anima);
             curAcceleraTime = 0;
             jumpState = JumpState.fall;
             moveDirection = 1;
@@ -86,7 +88,7 @@ namespace Vacuname
             {
                 curSpeed = input;
                 rd.velocity = new Vector2(curSpeed, rd.velocity.y);
-                anima.SetFloat("Move", Mathf.Abs(curSpeed));
+                anima?.SetFloat("Move", Mathf.Abs(curSpeed));
                 return;
             }
 
@@ -105,7 +107,7 @@ namespace Vacuname
             moveAttribute.GetCurSpeed(input, ref curSpeed, ref curAcceleraTime);
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
 
-            anima.SetFloat("Move", Mathf.Abs(curSpeed));
+            anima?.SetFloat("Move", Mathf.Abs(curSpeed));
         }
 
         protected void OnCollisionEnter2D(Collision2D collision)
