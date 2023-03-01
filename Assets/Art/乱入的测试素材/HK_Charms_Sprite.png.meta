@@ -24,7 +24,6 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -44,7 +43,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -1227,60 +1226,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      HK_Charms_Sprite_6: 114834950
-      HK_Charms_Sprite_37: -696821329
-      HK_Charms_Sprite_24: 146103925
-      HK_Charms_Sprite_9: 2100345883
-      HK_Charms_Sprite_22: -794681297
-      HK_Charms_Sprite_43: -1759767387
-      HK_Charms_Sprite_31: 703509539
-      HK_Charms_Sprite_29: -1158825335
-      HK_Charms_Sprite_49: -1970191707
-      HK_Charms_Sprite_1: 1162860873
-      HK_Charms_Sprite_23: -1662615826
-      HK_Charms_Sprite_35: 343639104
-      HK_Charms_Sprite_34: -2079588628
-      HK_Charms_Sprite_51: 457720296
-      HK_Charms_Sprite_4: 185081654
-      HK_Charms_Sprite_40: 2104468615
-      HK_Charms_Sprite_10: -564820390
-      HK_Charms_Sprite_0: -1357921913
-      HK_Charms_Sprite_20: -1297632483
-      HK_Charms_Sprite_48: 315559941
-      HK_Charms_Sprite_46: 1245252185
-      HK_Charms_Sprite_19: 204824399
-      HK_Charms_Sprite_26: -899289313
-      HK_Charms_Sprite_15: 1213571817
-      HK_Charms_Sprite_25: 812019328
-      HK_Charms_Sprite_39: -88208784
-      HK_Charms_Sprite_45: -1449837046
-      HK_Charms_Sprite_27: 457774786
-      HK_Charms_Sprite_41: 2013493701
-      HK_Charms_Sprite_12: -59779524
-      HK_Charms_Sprite_52: -1199437840
-      HK_Charms_Sprite_33: 1871688885
-      HK_Charms_Sprite_2: -151464353
-      HK_Charms_Sprite_36: 200853807
-      HK_Charms_Sprite_13: 791775157
-      HK_Charms_Sprite_8: 142078691
-      HK_Charms_Sprite_11: 2139431260
-      HK_Charms_Sprite_14: 2058300506
-      HK_Charms_Sprite_3: 895707288
-      HK_Charms_Sprite_18: -1058436447
-      HK_Charms_Sprite_7: -60930231
-      HK_Charms_Sprite_5: 1100362389
-      HK_Charms_Sprite_16: -15476279
-      HK_Charms_Sprite_28: -174323679
-      HK_Charms_Sprite_42: 1749263804
-      HK_Charms_Sprite_32: 1276813325
-      HK_Charms_Sprite_50: 1884329947
-      HK_Charms_Sprite_44: 1103905023
-      HK_Charms_Sprite_38: 2068959853
-      HK_Charms_Sprite_30: -1163800336
-      HK_Charms_Sprite_17: -317060771
-      HK_Charms_Sprite_47: -1472709228
-      HK_Charms_Sprite_21: 1628019486
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
