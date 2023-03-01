@@ -40,7 +40,7 @@ namespace Vacuname
                 me.Move(0,true);
                 return TaskStatus.Success;
             }
-            else if (target.Value != null && distance > me.visual.visionRadius)//����
+            else if (target.Value != null && distance > me.visual.chaseRadius)//����
             {
                 me.Move(0, true);
                 target.Value=null;
