@@ -27,6 +27,7 @@ namespace R0.SpellRel
                 var frame = Instantiate(framePrefab, transform);
                 frame.transform.position = pos;
                 pos.x += frameInterval;
+                frame.transform.SetAsFirstSibling();
             }
         }
 

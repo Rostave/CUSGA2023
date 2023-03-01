@@ -1893,6 +1893,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpellScrollCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6565310884573517911, guid: c2a09275e03bade438e6a6752b2b753a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2119434554235449150, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2a09275e03bade438e6a6752b2b753a, type: 3}
 --- !u!1001 &7850439947434898540
