@@ -19,7 +19,7 @@ namespace Vacuname
         public override void OnAwake()
         {
             me=GetComponent<BaseEnemy>();
-            anima = GetComponent<Animator>();
+            TryGetComponent<Animator>(out anima);
             rd = GetComponent<Rigidbody2D>();
         }
 
