@@ -3111,7 +3111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583219681750472439}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.4608, y: -3.4749408, z: 5.92}
+  m_LocalPosition: {x: -5.4608, y: 3.6035202, z: 5.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1583219682494733015}
@@ -4664,7 +4664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074541449160, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.541333
+      value: 3.537128
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074541449160, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4704,7 +4704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074767601891, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.541333
+      value: 3.537128
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074767601891, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4712,11 +4712,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074856017263, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_BiasY
-      value: -0.14700003
+      value: -0.3670012
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074856017263, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_ScreenY
-      value: 0.38
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074856017263, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_DeadZoneWidth
@@ -4728,11 +4728,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074856017263, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_DeadZoneHeight
-      value: 0.09
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074856017263, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_SoftZoneHeight
       value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528741074856017263, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
+      propertyPath: m_TrackedObjectOffset.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7528741074856017263, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_TrackedObjectOffset.z
