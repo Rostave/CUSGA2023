@@ -8,11 +8,14 @@ namespace R0.Static
     public static class Const
     {
         /// <summary>
-        /// 动画器(Animator)字符串哈希
+        /// 动画器(SkeletonAnimation)字符串哈希
         /// </summary>
         public static class Ani
         {
-            public static readonly int Idle = Animator.StringToHash("Idle");
+            public static readonly string Idle = "Hurt";
+            public static readonly string Rest = "rest";
+            public static readonly string Move = "move";
+            public static readonly string Jump = "jump";
         }
         
         /// <summary>

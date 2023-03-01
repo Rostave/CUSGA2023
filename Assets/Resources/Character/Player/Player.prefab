@@ -5999,7 +5999,7 @@ MonoBehaviour:
   jumpState: 0
   rd: {fileID: 0}
   anima: {fileID: 0}
-  s_anima: {fileID: 433349461}
+  s_anima: {fileID: 0}
   timeAttribute: {fileID: 11400000, guid: ef61da67881facc42b92880bfb8b2f1f, type: 2}
   hitBack: {fileID: 4793412097078764683}
 --- !u!50 &4793412097506941704
@@ -6074,7 +6074,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2a75ff368e8cb204aa781be885e89055, type: 2}
+  - {fileID: 2100000, guid: e245a9261dbe6b24783eb4ce9b295af6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6116,7 +6116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: d28a65df846bf434ba8782fd9468ace6, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 9faada7fafbe1fc4a8ef762826885512, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -6135,11 +6135,11 @@ MonoBehaviour:
   maskInteraction: 2
   maskMaterials:
     materialsMaskDisabled:
-    - {fileID: 2100000, guid: 30d033d1466e94f429b21336ab1da401, type: 2}
+    - {fileID: 2100000, guid: 2e29cec4efd592c43834422f9d6f34d7, type: 2}
     materialsInsideMask: []
     materialsOutsideMask:
-    - {fileID: 2100000, guid: 2a75ff368e8cb204aa781be885e89055, type: 2}
+    - {fileID: 2100000, guid: e245a9261dbe6b24783eb4ce9b295af6, type: 2}
   disableRenderingOnOverride: 1
-  _animationName: idle
+  _animationName: 
   loop: 1
   timeScale: 1
