@@ -921,10 +921,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": 12.000012397766114,
+            "y": 274.3999938964844,
+            "width": 200.0,
+            "height": 40.799991607666019
         }
     },
     "m_Slots": [

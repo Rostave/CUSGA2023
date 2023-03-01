@@ -3,6 +3,8 @@ using MoreMountains.Tools;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using R0;
+using R0.Static;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,20 +13,26 @@ namespace Vacuname
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : Character
     {
+        public enum AnimState
+        {
+            Idle, Move, Jump, Rest
+        }
 
-        [TabGroup("ÅäÖÃÎÄ¼þ"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
-        [LabelText("Ê±¼äÉèÖÃ"), SerializeField]
+        [TabGroup("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
+        [LabelText("Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"), SerializeField]
         protected TimeAttribute timeAttribute;
+
+        protected AnimState animState;
 
         [SerializeField]private HitBack hitBack;
 
-        #region ³å´Ì¼ÆËã²ÎÊý
+        #region ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         private bool canDash;
         private bool dashing;
         private float dashColdDown;
         #endregion
 
-        #region ³õÊ¼°ó¶¨
+        #region ï¿½ï¿½Ê¼ï¿½ï¿½
         protected override void Awake()
         {
             base.Awake();
@@ -37,12 +45,13 @@ namespace Vacuname
         private void Start()
         {
             CameraControl.Instance.ca.m_Follow = transform;
+            animState = AnimState.Idle;
         }
         #endregion
 
         private void Update()
         {
-            //ÕâÑùµ÷ÊÔ±È½Ï·½±ã
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±È½Ï·ï¿½ï¿½ï¿½
 
             if(rd.gravityScale != moveAttribute.gravity)
                 rd.gravityScale = moveAttribute.gravity;
@@ -91,17 +100,32 @@ namespace Vacuname
         {
             if (dashing)
                 return;
+
+            if (Mathf.Abs(input) < 1e-6)
+            {
+                if (animState != AnimState.Idle)
+                {
+                    PlayerSAnimHelper.PlayAnim(s_anima, Const.Ani.Idle);
+                    animState = AnimState.Idle;
+                }
+            }
+            else if (animState != AnimState.Move)
+            {
+                PlayerSAnimHelper.PlayAnim(s_anima, Const.Ani.Move);
+                animState = AnimState.Move;
+            }
+
             base.Move(input, setDirectly);
         }
         IEnumerator Dashing()
         {
-            canDash = false; // ½ûÖ¹ÔÙ´Î³å´Ì
+            canDash = false; // ï¿½ï¿½Ö¹ï¿½Ù´Î³ï¿½ï¿½
             dashing = true;
             dashColdDown = moveAttribute.maxDashCooldown;
             float dashTimeLeft = moveAttribute.dashDuration;
 
             feedbacks.TryPlay("Dash");
-            //TODO ¸üÐÂLayerÒÔÔÝÍ£Óë¹ÖÎïlayerµÄÅÐ¶¨
+            //TODO ï¿½ï¿½ï¿½ï¿½Layerï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½layerï¿½ï¿½ï¿½Ð¶ï¿½
             rd.velocity = new Vector2(moveAttribute.dashSpeed * moveDirection, rd.velocity.y);
 
             while (dashTimeLeft > 0)
