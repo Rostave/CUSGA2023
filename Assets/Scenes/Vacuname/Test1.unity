@@ -394,11 +394,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4793412097506941707, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
   m_PrefabInstance: {fileID: 4793412097342077023}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &433349461 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4793412097506941699, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-  m_PrefabInstance: {fileID: 4793412097342077023}
-  m_PrefabAsset: {fileID: 0}
 --- !u!50 &433349463 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 4793412097506941704, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
@@ -1688,18 +1683,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 374813538, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 374813540, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
-      propertyPath: Emitter.TargetObject
-      value: 
-      objectReference: {fileID: 433349460}
-    - target: {fileID: 374813540, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
-      propertyPath: Emitter.TargetComponent
-      value: 
-      objectReference: {fileID: 433349461}
     - target: {fileID: 7528741073946819806, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
       propertyPath: m_Name
       value: Core
@@ -1749,5 +1732,5 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 374813541, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
+    - {fileID: 1313180487, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 17239f8a898c65841b08b35a2acba0ae, type: 3}

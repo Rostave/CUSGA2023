@@ -1,3 +1,4 @@
+using Chronos;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,11 @@ namespace Vacuname
             if (curBackCoolDown <= 0)
                 StartCoroutine(Activiting());
         }
+        public void Success()
+{
+            
+        }
+
         IEnumerator Activiting()
         {
             curBackCoolDown = maxBackCoolDown;

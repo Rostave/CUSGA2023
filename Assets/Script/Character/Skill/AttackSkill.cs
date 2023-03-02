@@ -12,8 +12,7 @@ namespace Vacuname
             range.enabled = true;
             var contactFilter2D = new ContactFilter2D();
             contactFilter2D.useTriggers = true;
-            int layer = ~gameObject.layer;
-            contactFilter2D.SetLayerMask(layer);
+            contactFilter2D.SetLayerMask(~gameObject.layer);
             List<Collider2D> hits = new List<Collider2D>();
             range.OverlapCollider(contactFilter2D, hits);
             Player p = null;
@@ -27,6 +26,8 @@ namespace Vacuname
                 else if (a.CompareTag("Sheild"))
                 {
                     blocked = true;
+                    if (a.transform.TryGetComponent(out HitBack hitback))
+                        hitback.Success();
                     Debug.Log(string.Format("<color=#ff0000>{0}</color>", "Blocked"));
                     break;
                 }
@@ -38,6 +39,7 @@ namespace Vacuname
             {
                 me.feedbacks.TryPlay("Blocked");
                 enemyAction.SetTaskStatus(TaskStatus.Failure);
+
             }
             else
             {

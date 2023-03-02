@@ -10,7 +10,6 @@ using UnityEngine.Events;
 
 namespace Vacuname
 {
-    // 编码测试 - R0
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : Character
     {
@@ -19,21 +18,23 @@ namespace Vacuname
             Idle, Move, Jump, Rest
         }
 
-        [TabGroup("�����ļ�"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
-        [LabelText("ʱ������"), SerializeField]
-        protected TimeAttribute timeAttribute;
-
         protected AnimState animState;
 
+        #region Hitback
         [SerializeField]private HitBack hitBack;
+        public HitBack GetGitBack()
+        {
+            return hitBack;
+        }
+        #endregion
 
-        #region ��̼������
+        #region 移动所需变量
         private bool canDash;
         private bool dashing;
         private float dashColdDown;
         #endregion
 
-        #region ��ʼ��
+        #region 初始化
         protected override void Awake()
         {
             base.Awake();
@@ -52,7 +53,6 @@ namespace Vacuname
 
         private void Update()
         {
-            //�������ԱȽϷ���
 
             if(rd.gravityScale != moveAttribute.gravity)
                 rd.gravityScale = moveAttribute.gravity;
@@ -126,7 +126,7 @@ namespace Vacuname
             float dashTimeLeft = moveAttribute.dashDuration;
 
             feedbacks.TryPlay("Dash");
-            //TODO ����Layer����ͣ�����layer���ж�
+            gameObject.layer = LayerMask.NameToLayer("Invincible");
             rd.velocity = new Vector2(moveAttribute.dashSpeed * moveDirection, rd.velocity.y);
 
             while (dashTimeLeft > 0)
@@ -134,6 +134,7 @@ namespace Vacuname
                dashTimeLeft -= Time.deltaTime ;
                yield return null;
             }
+            gameObject.layer = LayerMask.NameToLayer("Player");
             dashing = false;
         }
         private void HandleHitBack()

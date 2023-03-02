@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 7386009766798247164}
   m_Layer: 7
   m_Name: Spine
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +181,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2e29cec4efd592c43834422f9d6f34d7, type: 2}
+  - {fileID: 2100000, guid: e245a9261dbe6b24783eb4ce9b295af6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -199,8 +199,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1434251745
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &7386009766798247164
@@ -233,9 +233,11 @@ MonoBehaviour:
   calculateTangents: 0
   maskInteraction: 2
   maskMaterials:
-    materialsMaskDisabled: []
+    materialsMaskDisabled:
+    - {fileID: 2100000, guid: 2e29cec4efd592c43834422f9d6f34d7, type: 2}
     materialsInsideMask: []
-    materialsOutsideMask: []
+    materialsOutsideMask:
+    - {fileID: 2100000, guid: e245a9261dbe6b24783eb4ce9b295af6, type: 2}
   disableRenderingOnOverride: 1
   _animationName: idle
   loop: 1
@@ -2067,6 +2069,8 @@ GameObject:
   - component: {fileID: 4793412097078764681}
   - component: {fileID: 4793412097078764682}
   - component: {fileID: 4793412097078764683}
+  - component: {fileID: 5260073466239404560}
+  - component: {fileID: 2646627592865248715}
   m_Layer: 7
   m_Name: "\u5F39\u53CD\u62A4\u76FE"
   m_TagString: Sheild
@@ -2133,6 +2137,37 @@ MonoBehaviour:
   skillName: 
   maxBackCoolDown: 0.5
   initActTime: 1
+--- !u!114 &5260073466239404560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793412097078764684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0144e3ad8a88947298e2dca62625e6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localTimeScale: 1
+  _paused: 0
+  _parentKey: 
+  _parentBlend: 0
+  _key: Root
+--- !u!114 &2646627592865248715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793412097078764684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a10179de595094539a3ca7ba94d6b1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debug: 0
+  _maxParticleLoops: 10
 --- !u!1 &4793412097258086793
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,7 +2196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4793412097258086793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.6, y: -0.5, z: 0}
+  m_LocalPosition: {x: -4.24, y: -1.9, z: 0}
   m_LocalScale: {x: 0.83, y: 0.87, z: 1}
   m_Children: []
   m_Father: {fileID: 4793412096860646714}
@@ -7035,6 +7070,8 @@ GameObject:
   - component: {fileID: 4793412097506941704}
   - component: {fileID: 4793412097506941702}
   - component: {fileID: 4793412097506941703}
+  - component: {fileID: 433349462}
+  - component: {fileID: 433349466}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -7079,7 +7116,6 @@ MonoBehaviour:
   rd: {fileID: 4793412097506941704}
   anima: {fileID: 0}
   s_anima: {fileID: 7386009766798247164}
-  timeAttribute: {fileID: 11400000, guid: ef61da67881facc42b92880bfb8b2f1f, type: 2}
   hitBack: {fileID: 4793412097078764683}
 --- !u!50 &4793412097506941704
 Rigidbody2D:
@@ -7134,3 +7170,36 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 4.627518, y: 13.583487}
   m_Direction: 0
+--- !u!114 &433349462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793412097506941707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e02c4a0d9b6c47e09fc7c7924d2b953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localTimeScale: 1
+  _paused: 0
+  _parentKey: 
+  _parentBlend: 0
+--- !u!114 &433349466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793412097506941707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6090da511f8374135a15dd8655adcd44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recordingInterval: 0.5
+  _mode: 0
+  _globalClockKey: 
+  _rewindable: 0
+  _recordingDuration: 30
