@@ -8,7 +8,7 @@ namespace Vacuname
     public class Look : EnemyConditional
     {
         public SharedGameObject target;
-        private Visual visual;
+        [SerializeField]private Visual visual;
 
         public override void OnAwake()
         {
