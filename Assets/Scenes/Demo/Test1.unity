@@ -3305,6 +3305,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 433349461, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
+      propertyPath: zSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 433349461, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
+      propertyPath: _animationName
+      value: jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 433349461, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: skeletonDataAsset
       value: 
       objectReference: {fileID: 11400000, guid: 9faada7fafbe1fc4a8ef762826885512, type: 2}
@@ -3319,15 +3327,15 @@ PrefabInstance:
     - target: {fileID: 433349461, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: maskMaterials.materialsOutsideMask.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 145f4f2200f6b294f8299171b6b5c857, type: 2}
+      objectReference: {fileID: 2100000, guid: e245a9261dbe6b24783eb4ce9b295af6, type: 2}
     - target: {fileID: 433349461, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: maskMaterials.materialsMaskDisabled.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 30d033d1466e94f429b21336ab1da401, type: 2}
+      objectReference: {fileID: 2100000, guid: 2e29cec4efd592c43834422f9d6f34d7, type: 2}
     - target: {fileID: 433349462, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e245a9261dbe6b24783eb4ce9b295af6, type: 2}
+      objectReference: {fileID: 2100000, guid: 2e29cec4efd592c43834422f9d6f34d7, type: 2}
     - target: {fileID: 433349464, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: m_Mesh
       value: 
