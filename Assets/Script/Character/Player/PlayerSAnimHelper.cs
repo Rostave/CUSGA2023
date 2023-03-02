@@ -9,5 +9,12 @@ namespace R0
         {
             sa.AnimationState.SetAnimation(trackIndex, animName, loop);
         }
+        
+        public static void SwitchSkeletonData(SkeletonAnimation sa, SkeletonDataAsset sda)
+        {
+            sa.ClearState();
+            sa.skeletonDataAsset = sda;
+            sa.Initialize(true);
+        }
     }
 }

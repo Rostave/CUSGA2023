@@ -12,7 +12,7 @@ namespace R0.Static
         /// </summary>
         public static class Ani
         {
-            public static readonly string Idle = "Hurt";
+            public static readonly string Idle = "idle";
             public static readonly string Rest = "rest";
             public static readonly string Move = "move";
             public static readonly string Jump = "jump";

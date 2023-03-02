@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using R0;
+using R0.Character;
 using R0.Static;
 using UnityEngine;
 using UnityEngine.Events;
@@ -106,12 +107,14 @@ namespace Vacuname
             {
                 if (animState != AnimState.Idle)
                 {
+                    PlayerSAnimHelper.SwitchSkeletonData(s_anima, CharaMgr.Instance.KnightSkeletonDataAssets[1]);
                     PlayerSAnimHelper.PlayAnim(s_anima, Const.Ani.Idle);
                     animState = AnimState.Idle;
                 }
             }
             else if (animState != AnimState.Move)
             {
+                PlayerSAnimHelper.SwitchSkeletonData(s_anima, CharaMgr.Instance.KnightSkeletonDataAssets[0]);
                 PlayerSAnimHelper.PlayAnim(s_anima, Const.Ani.Move);
                 animState = AnimState.Move;
             }

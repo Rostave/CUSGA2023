@@ -6,6 +6,8 @@ using R0.SingaltonBase;
 using R0.SpellRel;
 using R0.Weapons;
 using Sirenix.OdinInspector;
+using Spine;
+using Spine.Unity;
 using UnityEngine;
 using Vacuname;
 
@@ -45,6 +47,8 @@ namespace R0.Character
         private bool _canSwitchChara;
         private float _charaSwitchEndTime;
         private Coroutine _charaSwitchCoroutine;
+
+        [FoldoutGroup("角色骨骼")] public SkeletonDataAsset[] KnightSkeletonDataAssets;
 
         protected override void OnEnableInit() { }
 
