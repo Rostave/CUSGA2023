@@ -23,10 +23,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7850439946179894991}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7850439946769793487}
   - {fileID: 7850439946883532431}
@@ -60,7 +59,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7850439946179894984}
   m_RootOrder: 0
@@ -105,7 +103,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7850439946179894984}
   m_RootOrder: 1
@@ -131,3 +128,6 @@ MonoBehaviour:
   playerHome: {fileID: 0}
   spellSrollHome: {fileID: 0}
   charaSwitchWaitTime: 2
+  KnightSkeletonDataAssets:
+  - {fileID: 11400000, guid: 9faada7fafbe1fc4a8ef762826885512, type: 2}
+  - {fileID: 11400000, guid: d28a65df846bf434ba8782fd9468ace6, type: 2}

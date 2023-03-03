@@ -31,7 +31,8 @@ namespace Vacuname
                 StartCoroutine(Activiting());
         }
         public void Success()
-{
+        {
+            
             
         }
 
