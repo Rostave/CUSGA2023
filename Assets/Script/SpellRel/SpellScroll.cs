@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using R0.ScriptableObjConfig;
 using R0.SingaltonBase;
 using R0.Weapons;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace R0.SpellRel
@@ -100,6 +101,17 @@ namespace R0.SpellRel
                 var spell = spells[i];
                 spell.isPowered = false;
             }
+        }
+
+        [Space, Space, LabelText("符文预制体")] public GameObject spellPrefab;
+        [Button("从xlsx更新符文数据", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
+        [DisableIf("@spellPrefab == null")]
+        private void AddSpellFromInspector()
+        {
+            var spell = Instantiate(spellPrefab, transform);
+            spellPrefab = null;
+            AppendSpell(spell.GetComponent<Spell>());
+            SpellScrollViewer.Instance.UpdateSpellScrollHud(this);
         }
         
     }

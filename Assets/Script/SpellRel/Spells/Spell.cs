@@ -72,6 +72,7 @@ namespace R0.SpellRel
         protected virtual void Start()
         {
             Img = GetComponent<Image>();
+            if (Img != null) Img.sprite = SpellData.Instance.data[(int) spellCat].spellSprite;
         }
     }
     

@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpellScrollCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7142722306315429552, guid: c2a09275e03bade438e6a6752b2b753a, type: 3}
+      propertyPath: spellCat
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2a09275e03bade438e6a6752b2b753a, type: 3}
 --- !u!114 &101342207 stripped
@@ -2074,11 +2078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9468f91265044e0a0a6678fd4087bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1795183663 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4757486097229826320, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-  m_PrefabInstance: {fileID: 4793412097342077023}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1836360637 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1435237326, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
@@ -4413,14 +4412,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1193601215}
-    - target: {fileID: 1216496091094469559, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 30d033d1466e94f429b21336ab1da401, type: 2}
-    - target: {fileID: 2444760209337302428, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4793412097506941699, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4465,31 +4456,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4793412097506941701, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-      propertyPath: anima
-      value: 
-      objectReference: {fileID: 1795183663}
     - target: {fileID: 4793412097506941707, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4793412097506941707, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5567487053780151747, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6859822548758034281, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6886593948410381646, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 145f4f2200f6b294f8299171b6b5c857, type: 2}
-    - target: {fileID: 7909338237185397944, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}

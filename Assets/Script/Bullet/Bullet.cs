@@ -132,7 +132,7 @@ namespace R0.Bullet
 
         public void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy")) BulletPoolMgr.Instance.Recycle(this);
+            BulletPoolMgr.Instance.Recycle(this);
         }
     }
 }
