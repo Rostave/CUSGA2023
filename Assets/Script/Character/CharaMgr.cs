@@ -48,7 +48,8 @@ namespace R0.Character
         private float _charaSwitchEndTime;
         private Coroutine _charaSwitchCoroutine;
 
-        [FoldoutGroup("角色骨骼")] public SkeletonDataAsset[] KnightSkeletonDataAssets;
+        [FoldoutGroup("角色骨骼数据")] public SkeletonDataAsset[] knightSkeletonDataAssets;
+        [FoldoutGroup("角色骨骼数据")] public RuntimeAnimatorController[] knightAnimControllers;
 
         protected override void OnEnableInit() { }
 

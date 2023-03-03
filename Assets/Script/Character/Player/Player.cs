@@ -107,15 +107,23 @@ namespace Vacuname
             {
                 if (animState != AnimState.Idle)
                 {
-                    PlayerSAnimHelper.SwitchSkeletonData(s_anima, CharaMgr.Instance.KnightSkeletonDataAssets[1]);
-                    PlayerSAnimHelper.PlayAnim(s_anima, Const.Ani.Idle);
+                    if (CharaMgr.Instance.activeChara.character == Chara.Knight)
+                    {
+                        PlayerSAnimHelper.SwitchSkeletonData(sm_anima, CharaMgr.Instance.knightSkeletonDataAssets[1]);
+                        anima.runtimeAnimatorController = CharaMgr.Instance.knightAnimControllers[1];
+                    }
+                    anima.SetTrigger(Const.Ani.Idle);
                     animState = AnimState.Idle;
                 }
             }
             else if (animState != AnimState.Move)
             {
-                PlayerSAnimHelper.SwitchSkeletonData(s_anima, CharaMgr.Instance.KnightSkeletonDataAssets[0]);
-                PlayerSAnimHelper.PlayAnim(s_anima, Const.Ani.Move);
+                if (CharaMgr.Instance.activeChara.character == Chara.Knight)
+                {
+                    PlayerSAnimHelper.SwitchSkeletonData(sm_anima, CharaMgr.Instance.knightSkeletonDataAssets[0]);
+                    anima.runtimeAnimatorController = CharaMgr.Instance.knightAnimControllers[0];
+                }
+                anima.SetTrigger(Const.Ani.Move);
                 animState = AnimState.Move;
             }
 

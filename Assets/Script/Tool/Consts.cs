@@ -12,10 +12,12 @@ namespace R0.Static
         /// </summary>
         public static class Ani
         {
-            public static readonly string Idle = "idle";
-            public static readonly string Rest = "rest";
-            public static readonly string Move = "move";
-            public static readonly string Jump = "jump";
+            public static readonly int Idle = Animator.StringToHash("idle");
+            public static readonly int Rest = Animator.StringToHash("rest");
+            public static readonly int Move = Animator.StringToHash("move");
+            public static readonly int Die = Animator.StringToHash("die");
+            public static readonly int Hurt = Animator.StringToHash("hurt");
+            public static readonly int Jump = Animator.StringToHash("jump");
         }
         
         /// <summary>
