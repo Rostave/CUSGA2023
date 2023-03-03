@@ -7039,7 +7039,7 @@ GameObject:
   - component: {fileID: 4793412097506941702}
   - component: {fileID: 4793412097506941703}
   - component: {fileID: 433349462}
-  - component: {fileID: 433349466}
+  - component: {fileID: 433349464}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -7152,9 +7152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _localTimeScale: 1
   _paused: 0
-  _parentKey: Root
+  _parentKey: 
   _parentBlend: 0
---- !u!114 &433349466
+--- !u!114 &433349464
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7168,6 +7168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recordingInterval: 0.5
   _mode: 0
-  _globalClockKey: Root
+  _globalClockKey: 
   _rewindable: 0
   _recordingDuration: 30

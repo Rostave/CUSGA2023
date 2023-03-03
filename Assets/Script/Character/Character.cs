@@ -17,9 +17,7 @@ namespace Vacuname
         [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
         [LabelText("移动设置"), SerializeField]
         protected MoveAttribute moveAttribute;
-
-        [TabGroup("配置"), AssetsOnly]
-        protected Timeline time;
+        protected Timeline time;//有问题，在编辑器编辑提示什么ASSET，不过暂时没出毛病
 
         #region 动画用事件字典
         private Dictionary<string, UnityAction> eventDic;
@@ -72,6 +70,7 @@ namespace Vacuname
 
         protected virtual void Awake()
         {
+            time = GetComponent<Timeline>();
             rd = GetComponent<Rigidbody2D>();
             TryGetComponent<Animator>(out anima);
             curAcceleraTime = 0;
@@ -82,7 +81,7 @@ namespace Vacuname
         {
             if (jumpState == JumpState.ground)
             {
-                rd.velocity = new Vector2(rd.velocity.x, moveAttribute.jumpStrength);
+                time.rigidbody2D.velocity = new Vector2(time.rigidbody2D.velocity.x, moveAttribute.jumpStrength);
                 jumpState = JumpState.jump;
             }
         }
@@ -93,8 +92,7 @@ namespace Vacuname
             {
                 curSpeed = input;
 
-                //time.rigidbody2D.velocity = new Vector2(curSpeed, rd.velocity.y);
-                rd.velocity = new Vector2(curSpeed, rd.velocity.y);
+                time.rigidbody2D.velocity = new Vector2(curSpeed, time.rigidbody2D.velocity.y);
                 anima?.SetFloat("Move", Mathf.Abs(curSpeed));
                 return;
             }
@@ -110,10 +108,9 @@ namespace Vacuname
                 transform.localScale = temp;
             }
 
-            curSpeed = rd.velocity.x;
+            curSpeed = time.rigidbody2D.velocity.x;
             moveAttribute.GetCurSpeed(input, ref curSpeed, ref curAcceleraTime);
-            rd.velocity = new Vector2(curSpeed, rd.velocity.y);
-            //time.rigidbody2D.velocity = new Vector2(curSpeed, rd.velocity.y);
+            time.rigidbody2D.velocity = new Vector2(curSpeed, time.rigidbody2D.velocity.y);
 
             anima?.SetFloat("Move", Mathf.Abs(curSpeed));
         }
