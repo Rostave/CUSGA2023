@@ -181,7 +181,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e245a9261dbe6b24783eb4ce9b295af6, type: 2}
+  - {fileID: 2100000, guid: 30d033d1466e94f429b21336ab1da401, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -233,11 +233,9 @@ MonoBehaviour:
   calculateTangents: 0
   maskInteraction: 2
   maskMaterials:
-    materialsMaskDisabled:
-    - {fileID: 2100000, guid: 2e29cec4efd592c43834422f9d6f34d7, type: 2}
+    materialsMaskDisabled: []
     materialsInsideMask: []
-    materialsOutsideMask:
-    - {fileID: 2100000, guid: e245a9261dbe6b24783eb4ce9b295af6, type: 2}
+    materialsOutsideMask: []
   disableRenderingOnOverride: 1
   _animationName: idle
   loop: 1
@@ -2069,8 +2067,6 @@ GameObject:
   - component: {fileID: 4793412097078764681}
   - component: {fileID: 4793412097078764682}
   - component: {fileID: 4793412097078764683}
-  - component: {fileID: 5260073466239404560}
-  - component: {fileID: 2646627592865248715}
   m_Layer: 7
   m_Name: "\u5F39\u53CD\u62A4\u76FE"
   m_TagString: Sheild
@@ -2135,39 +2131,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: 
-  maxBackCoolDown: 0.5
+  maxBackCoolDown: 1.8
+  startTime: 0
   initActTime: 1
---- !u!114 &5260073466239404560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4793412097078764684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0144e3ad8a88947298e2dca62625e6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _localTimeScale: 1
-  _paused: 0
-  _parentKey: 
-  _parentBlend: 0
-  _key: Root
---- !u!114 &2646627592865248715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4793412097078764684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a10179de595094539a3ca7ba94d6b1c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debug: 0
-  _maxParticleLoops: 10
+  bulletTimeScale: 0.5
+  bulletTime: 5
 --- !u!1 &4793412097258086793
 GameObject:
   m_ObjectHideFlags: 0
@@ -7184,7 +7152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _localTimeScale: 1
   _paused: 0
-  _parentKey: 
+  _parentKey: Root
   _parentBlend: 0
 --- !u!114 &433349466
 MonoBehaviour:
@@ -7200,6 +7168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recordingInterval: 0.5
   _mode: 0
-  _globalClockKey: 
+  _globalClockKey: Root
   _rewindable: 0
   _recordingDuration: 30

@@ -1,3 +1,4 @@
+using Chronos;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using Sirenix.OdinInspector;
@@ -13,9 +14,12 @@ namespace Vacuname
     [RequireComponent(typeof(Rigidbody2D))]
     public class Character : MonoBehaviour
     {
-        [TabGroup("配置文件"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
+        [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
         [LabelText("移动设置"), SerializeField]
         protected MoveAttribute moveAttribute;
+
+        [TabGroup("配置"), AssetsOnly]
+        protected Timeline time;
 
         #region 动画用事件字典
         private Dictionary<string, UnityAction> eventDic;
@@ -63,6 +67,7 @@ namespace Vacuname
 
         [HideInInspector]public Rigidbody2D rd;
         [HideInInspector]public Animator anima;
+        [TabGroup("配置")]
         public SkeletonAnimation s_anima;
 
         protected virtual void Awake()
@@ -87,6 +92,8 @@ namespace Vacuname
             if (setDirectly)//直接设置速度的情况
             {
                 curSpeed = input;
+
+                //time.rigidbody2D.velocity = new Vector2(curSpeed, rd.velocity.y);
                 rd.velocity = new Vector2(curSpeed, rd.velocity.y);
                 anima?.SetFloat("Move", Mathf.Abs(curSpeed));
                 return;
@@ -106,6 +113,7 @@ namespace Vacuname
             curSpeed = rd.velocity.x;
             moveAttribute.GetCurSpeed(input, ref curSpeed, ref curAcceleraTime);
             rd.velocity = new Vector2(curSpeed, rd.velocity.y);
+            //time.rigidbody2D.velocity = new Vector2(curSpeed, rd.velocity.y);
 
             anima?.SetFloat("Move", Mathf.Abs(curSpeed));
         }

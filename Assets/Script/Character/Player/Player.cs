@@ -22,7 +22,7 @@ namespace Vacuname
         protected AnimState animState;
 
         #region Hitback
-        [SerializeField]private HitBack hitBack;
+        [SerializeField,TabGroup("技能"),InlineEditor(InlineEditorModes.GUIOnly)]private HitBack hitBack;
         public HitBack GetGitBack()
         {
             return hitBack;
