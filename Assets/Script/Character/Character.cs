@@ -1,3 +1,4 @@
+using Chronos;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using Sirenix.OdinInspector;
@@ -13,9 +14,10 @@ namespace Vacuname
     [RequireComponent(typeof(Rigidbody2D))]
     public class Character : MonoBehaviour
     {
-        [TabGroup("配置文件"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
+        [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
         [LabelText("移动设置"), SerializeField]
         protected MoveAttribute moveAttribute;
+        protected Timeline time;//有问题，在编辑器编辑提示什么ASSET，不过暂时没出毛病
 
         #region 动画用事件字典
         private Dictionary<string, UnityAction> eventDic;
@@ -62,14 +64,15 @@ namespace Vacuname
         #endregion
 
         [HideInInspector]public Rigidbody2D rd;
-        public Animator anima;
-        // public SkeletonAnimation s_anima;
-        public SkeletonMecanim sm_anima;
-        
+        [HideInInspector]public Animator anima;
+        [TabGroup("配置")]
+        public SkeletonAnimation s_anima;
+
         protected virtual void Awake()
         {
+            time = GetComponent<Timeline>();
             rd = GetComponent<Rigidbody2D>();
-            // TryGetComponent<Animator>(out anima);
+            TryGetComponent<Animator>(out anima);
             curAcceleraTime = 0;
             jumpState = JumpState.fall;
             moveDirection = 1;
@@ -78,7 +81,7 @@ namespace Vacuname
         {
             if (jumpState == JumpState.ground)
             {
-                rd.velocity = new Vector2(rd.velocity.x, moveAttribute.jumpStrength);
+                time.rigidbody2D.velocity = new Vector2(time.rigidbody2D.velocity.x, moveAttribute.jumpStrength);
                 jumpState = JumpState.jump;
             }
         }
@@ -88,8 +91,9 @@ namespace Vacuname
             if (setDirectly)//直接设置速度的情况
             {
                 curSpeed = input;
-                rd.velocity = new Vector2(curSpeed, rd.velocity.y);
-                // anima?.SetFloat("Move", Mathf.Abs(curSpeed));
+
+                time.rigidbody2D.velocity = new Vector2(curSpeed, time.rigidbody2D.velocity.y);
+                anima?.SetFloat("Move", Mathf.Abs(curSpeed));
                 return;
             }
 
@@ -104,11 +108,11 @@ namespace Vacuname
                 transform.localScale = temp;
             }
 
-            curSpeed = rd.velocity.x;
+            curSpeed = time.rigidbody2D.velocity.x;
             moveAttribute.GetCurSpeed(input, ref curSpeed, ref curAcceleraTime);
-            rd.velocity = new Vector2(curSpeed, rd.velocity.y);
+            time.rigidbody2D.velocity = new Vector2(curSpeed, time.rigidbody2D.velocity.y);
 
-            // anima?.SetFloat("Move", Mathf.Abs(curSpeed));
+            anima?.SetFloat("Move", Mathf.Abs(curSpeed));
         }
 
         protected void OnCollisionEnter2D(Collision2D collision)

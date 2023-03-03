@@ -12,7 +12,7 @@ namespace Vacuname
             range.enabled = true;
             var contactFilter2D = new ContactFilter2D();
             contactFilter2D.useTriggers = true;
-            contactFilter2D.SetLayerMask(~gameObject.layer);
+            contactFilter2D.SetLayerMask(LayerMask.GetMask("Player"));
             List<Collider2D> hits = new List<Collider2D>();
             range.OverlapCollider(contactFilter2D, hits);
             Player p = null;
@@ -28,7 +28,6 @@ namespace Vacuname
                     blocked = true;
                     if (a.transform.TryGetComponent(out HitBack hitback))
                         hitback.Success();
-                    Debug.Log(string.Format("<color=#ff0000>{0}</color>", "Blocked"));
                     break;
                 }
             }

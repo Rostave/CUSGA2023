@@ -22,7 +22,7 @@ namespace Vacuname
         protected AnimState animState;
 
         #region Hitback
-        [SerializeField]private HitBack hitBack;
+        [SerializeField,TabGroup("技能"),InlineEditor(InlineEditorModes.GUIOnly)]private HitBack hitBack;
         public HitBack GetGitBack()
         {
             return hitBack;
@@ -55,8 +55,8 @@ namespace Vacuname
         private void Update()
         {
 
-            if(rd.gravityScale != moveAttribute.gravity)
-                rd.gravityScale = moveAttribute.gravity;
+            if(time.rigidbody2D.gravityScale != moveAttribute.gravity)
+                time.rigidbody2D.gravityScale = moveAttribute.gravity;
 
             Move(Input.GetAxisRaw("Horizontal"));
             Dash();
@@ -92,7 +92,7 @@ namespace Vacuname
             {
                 base.Jump();
             }
-            else if (jumpState == JumpState.jump && rd.velocity.y < 0)
+            else if (jumpState == JumpState.jump && time.rigidbody2D.velocity.y < 0)
             {
                 jumpState = JumpState.fall;
             }
@@ -131,19 +131,19 @@ namespace Vacuname
         }
         IEnumerator Dashing()
         {
-            canDash = false; // ��ֹ�ٴγ��
+            canDash = false;
             dashing = true;
             dashColdDown = moveAttribute.maxDashCooldown;
             float dashTimeLeft = moveAttribute.dashDuration;
 
             feedbacks.TryPlay("Dash");
             gameObject.layer = LayerMask.NameToLayer("Invincible");
-            rd.velocity = new Vector2(moveAttribute.dashSpeed * moveDirection, rd.velocity.y);
+            time.rigidbody2D.velocity = new Vector2(moveAttribute.dashSpeed * moveDirection, time.rigidbody2D.velocity.y);
 
             while (dashTimeLeft > 0)
             {
-               dashTimeLeft -= Time.deltaTime ;
-               yield return null;
+                dashTimeLeft -= Time.deltaTime;
+                yield return null;
             }
             gameObject.layer = LayerMask.NameToLayer("Player");
             dashing = false;

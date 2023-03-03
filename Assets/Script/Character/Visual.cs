@@ -14,7 +14,7 @@ namespace Vacuname
         private void Awake()
         {
             character = GetComponentInParent<Character>();
-            layerMask = 1<<LayerMask.NameToLayer("Player");
+            layerMask = LayerMask.GetMask("Player", "Invincible");
             chaseRadius = chaseRadius < visionRadius ? visionRadius : chaseRadius;
         }
 
