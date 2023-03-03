@@ -218,6 +218,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpellScrollCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6100651385884611034, guid: c2a09275e03bade438e6a6752b2b753a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8604543546171898900, guid: 312133134c9e7174aa65f10915fafdfc, type: 3}
+    - target: {fileID: 6100651386197075660, guid: c2a09275e03bade438e6a6752b2b753a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6102871762365081534, guid: 312133134c9e7174aa65f10915fafdfc, type: 3}
+    - target: {fileID: 6100651386197075661, guid: c2a09275e03bade438e6a6752b2b753a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7142722306315429552, guid: c2a09275e03bade438e6a6752b2b753a, type: 3}
       propertyPath: spellCat
       value: 2
