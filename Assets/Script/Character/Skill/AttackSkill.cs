@@ -28,7 +28,6 @@ namespace Vacuname
                     blocked = true;
                     if (a.transform.TryGetComponent(out HitBack hitback))
                         hitback.Success();
-                    Debug.Log(string.Format("<color=#ff0000>{0}</color>", "Blocked"));
                     break;
                 }
             }

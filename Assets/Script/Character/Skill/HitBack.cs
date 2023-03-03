@@ -58,7 +58,6 @@ namespace Vacuname
                 remainActTime -= Time.deltaTime;
                 yield return null;
             }
-            Debug.Log("»¤¶ÜÏûÊ§");
             range.enabled = false;
         }
 
