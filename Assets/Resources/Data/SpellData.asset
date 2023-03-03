@@ -54,7 +54,7 @@ MonoBehaviour:
     randomAngle: 10
     destroyOnPlayerDmgCount: 5
     destroyOnUsaageCount: -1
-    isFacingDir: 0
+    isFacingDir: 1
   - isSpellInfoLocked: 1
     name: "\u79D8\u672F\u6CD5\u7403"
     cat: 2

@@ -82,15 +82,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7586408152855657315, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.3
+      value: -23.942238
       objectReference: {fileID: 0}
     - target: {fileID: 7586408152855657315, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.7700005
+      value: 6.356393
       objectReference: {fileID: 0}
     - target: {fileID: 7586408152855657315, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.079998
+      value: -14.821522
       objectReference: {fileID: 0}
     - target: {fileID: 7586408152855657324, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: m_ClearFlags
@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7586408152855657324, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: orthographic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7586408152855657324, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: orthographic size
@@ -154,15 +154,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7586408153367139400, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.3
+      value: -23.942238
       objectReference: {fileID: 0}
     - target: {fileID: 7586408153367139400, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.7700005
+      value: 6.356393
       objectReference: {fileID: 0}
     - target: {fileID: 7586408153367139400, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.079998
+      value: -14.821522
       objectReference: {fileID: 0}
     - target: {fileID: 7586408153367139401, guid: b5d180bc1c0424b498ffa006f76b64b5, type: 3}
       propertyPath: m_Lens.OrthographicSize
