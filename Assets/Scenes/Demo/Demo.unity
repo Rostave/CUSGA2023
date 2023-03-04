@@ -4476,6 +4476,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6330468103086521774, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8992832289417777041, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: serializationData.Prefab
       value: 
@@ -9879,6 +9883,7 @@ MonoBehaviour:
   rd: {fileID: 7133113232632175294}
   anima: {fileID: 879914747198065779}
   sm_anima: {fileID: 1002012881859479423}
+  animState: 0
   hitBack: {fileID: 7133113232204195133}
 --- !u!4 &7133113232632175285
 Transform:

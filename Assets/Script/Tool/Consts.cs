@@ -12,12 +12,14 @@ namespace R0.Static
         /// </summary>
         public static class Ani
         {
-            public static readonly int Idle = Animator.StringToHash("idle");
-            public static readonly int Rest = Animator.StringToHash("rest");
-            public static readonly int Move = Animator.StringToHash("move");
-            public static readonly int Die = Animator.StringToHash("die");
-            public static readonly int Hurt = Animator.StringToHash("hurt");
-            public static readonly int Jump = Animator.StringToHash("jump");
+            public static readonly int Idle = Animator.StringToHash("Idle");
+            public static readonly int Rest = Animator.StringToHash("Rest");
+            public static readonly int Move = Animator.StringToHash("Move");
+            public static readonly int Die = Animator.StringToHash("Die");
+            public static readonly int Hurt = Animator.StringToHash("Hurt");
+            public static readonly int JumpUp = Animator.StringToHash("JumpUp");
+            public static readonly int JumpFall = Animator.StringToHash("JumpFall");
+            // public static readonly int VelocityY = Animator.StringToHash("VelocityY");
         }
         
         /// <summary>
@@ -68,6 +70,8 @@ namespace R0.Static
             // public static readonly Quaternion AClk100 = Quaternion.AngleAxis(100f, Vector3.forward);
             // public static readonly Quaternion Clk160 = Quaternion.AngleAxis(-160f, Vector3.forward);
         }
-        
+
+        public static readonly float IdlePrecision = 1e-6f;
+        public static readonly float JumpPrecision = 2f;
     }
 }

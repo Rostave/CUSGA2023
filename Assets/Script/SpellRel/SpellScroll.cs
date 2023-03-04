@@ -73,8 +73,11 @@ namespace R0.SpellRel
             // 计算支持生效的符文数
             var spellDataObj = SpellData.Instance;
             var supported = Mathf.CeilToInt(power / spellDataObj.powerPerFrame);
+            // Debug.Log(supported);
             supported = Math.Min(supported, activeSpellIndex);
+            // Debug.Log(supported);
             supported = Math.Min(supported, spells.Count);
+            // Debug.Log(supported);
 
             var spellData = spellDataObj.data;
             for (var i = 0; i < supported; i++)
@@ -91,7 +94,8 @@ namespace R0.SpellRel
                     remain = Mathf.Min(remain, 0f);  // 允许过量消耗
                     Power = remain;
                 }
-                
+                Debug.Log($"{i}, {power}");
+
                 // 应用符文属性
                 spell.Apply();
             }

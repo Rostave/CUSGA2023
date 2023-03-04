@@ -1,3 +1,4 @@
+using System;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using Sirenix.OdinInspector;
@@ -16,10 +17,10 @@ namespace Vacuname
     {
         public enum AnimState
         {
-            Idle, Move, Jump, Rest
+            Idle, Move, Rest, JumpUp, JumpFall
         }
 
-        protected AnimState animState;
+        [SerializeField]protected AnimState animState;
 
         #region Hitback
         [SerializeField,TabGroup("技能"),InlineEditor(InlineEditorModes.GUIOnly)]private HitBack hitBack;
@@ -63,6 +64,7 @@ namespace Vacuname
             Jump();
             ControlTime();
             HandleHitBack();
+            AnimStateUpdate();
         }
         private void ControlTime()
         {
@@ -96,37 +98,11 @@ namespace Vacuname
             {
                 jumpState = JumpState.fall;
             }
-
         }
         public override void Move(float input, bool setDirectly = false)
         {
             if (dashing)
                 return;
-
-            if (Mathf.Abs(input) < 1e-6)
-            {
-                if (animState != AnimState.Idle)
-                {
-                    if (CharaMgr.Instance.activeChara.character == Chara.Knight)
-                    {
-                        PlayerSAnimHelper.SwitchSkeletonData(sm_anima, CharaMgr.Instance.knightSkeletonDataAssets[1]);
-                        anima.runtimeAnimatorController = CharaMgr.Instance.knightAnimControllers[1];
-                    }
-                    anima.SetTrigger(Const.Ani.Idle);
-                    animState = AnimState.Idle;
-                }
-            }
-            else if (animState != AnimState.Move)
-            {
-                if (CharaMgr.Instance.activeChara.character == Chara.Knight)
-                {
-                    PlayerSAnimHelper.SwitchSkeletonData(sm_anima, CharaMgr.Instance.knightSkeletonDataAssets[0]);
-                    anima.runtimeAnimatorController = CharaMgr.Instance.knightAnimControllers[0];
-                }
-                anima.SetTrigger(Const.Ani.Move);
-                animState = AnimState.Move;
-            }
-
             base.Move(input, setDirectly);
         }
         IEnumerator Dashing()
@@ -153,6 +129,75 @@ namespace Vacuname
             if (Input.GetKeyDown(KeyCode.E))
                 hitBack.Effect();
         }
+
+        protected override void OnCharacterLandGround()
+        {
+            base.OnCharacterLandGround();
+
+            // if (jumpState == JumpState.ground) return;
+            // if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) < Const.IdlePrecision)
+            // {
+            //     anima.SetTrigger(Const.Ani.Idle);
+            //     animState = AnimState.Idle;
+            //     Debug.Log("idle2");
+            // }
+            // else
+            // {
+            //     anima.SetTrigger(Const.Ani.Move);
+            //     animState = AnimState.Move;
+            //     Debug.Log("move2");
+            // }
+        }
+
+        private void AnimStateUpdate()
+        {
+            // Debug.Log(time.rigidbody2D.velocity.y);
+            if (Mathf.Abs(rd.velocity.y) > Const.JumpPrecision)
+            {
+                // 跳跃
+                if (time.rigidbody2D.velocity.y > 0)
+                {
+                    if (animState < AnimState.JumpUp)
+                    {
+                        anima.SetTrigger(Const.Ani.JumpUp);
+                        animState = AnimState.JumpUp;
+                        Debug.Log("up");
+                    }
+                }
+                else
+                {
+                    if (animState < AnimState.JumpFall)
+                    {
+                        anima.SetTrigger(Const.Ani.JumpFall);
+                        animState = AnimState.JumpFall;
+                        Debug.Log("fall");
+                    }
+                }
+
+                // anima.SetFloat(Const.Ani.VelocityY, rd.velocity.y);
+            }
+            else
+            {
+                // 水平
+                if (animState == AnimState.JumpUp) return;
+                if (Mathf.Abs(Input.GetAxis("Horizontal")) < Const.IdlePrecision)
+                {
+                    if (animState != AnimState.Idle)
+                    {
+                        anima.SetTrigger(Const.Ani.Idle);
+                        animState = AnimState.Idle;
+                        Debug.Log("idle");
+                    }
+                }
+                else if (animState < AnimState.Move)
+                {
+                    anima.SetTrigger(Const.Ani.Move);
+                    animState = AnimState.Move;
+                    Debug.Log("move");
+                }
+            }
+        }
+        
     }
 }
 

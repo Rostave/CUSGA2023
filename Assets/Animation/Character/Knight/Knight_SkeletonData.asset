@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
+  m_Name: Knight_SkeletonData
+  m_EditorClassIdentifier: 
+  atlasAssets:
+  - {fileID: 11400000, guid: e94bd27b97462844aabb35bb0edea50a, type: 2}
+  scale: 0.01
+  skeletonJSON: {fileID: 4900000, guid: b049b18698a39c64f8a706199b28ff2e, type: 3}
+  isUpgradingBlendModeMaterials: 0
+  blendModeMaterials:
+    requiresBlendModeMaterials: 1
+    applyAdditiveMaterial: 1
+    additiveMaterials:
+    - pageName: Knight.png
+      material: {fileID: 2100000, guid: 28e34e4ff508d544eade24b736ec1a52, type: 2}
+    multiplyMaterials:
+    - pageName: Knight.png
+      material: {fileID: 2100000, guid: 62d3c911a1d901b488c09c73b9d12ad0, type: 2}
+    screenMaterials: []
+  skeletonDataModifiers: []
+  fromAnimation: []
+  toAnimation: []
+  duration: []
+  defaultMix: 0.2
+  controller: {fileID: 9100000, guid: 3e77fb69687b6bc4a8e4e2c52ab98942, type: 2}
