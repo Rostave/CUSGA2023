@@ -66,13 +66,15 @@ namespace Vacuname
         [HideInInspector]public Rigidbody2D rd;
         [HideInInspector]public Animator anima;
         [TabGroup("配置")]
-        public SkeletonAnimation s_anima;
+        // public SkeletonAnimation s_anima;
+        public SkeletonMecanim sm_anima;
 
         protected virtual void Awake()
         {
             time = GetComponent<Timeline>();
             rd = GetComponent<Rigidbody2D>();
             TryGetComponent<Animator>(out anima);
+            if (anima == null) transform.Find("Spine").TryGetComponent<Animator>(out anima);
             curAcceleraTime = 0;
             jumpState = JumpState.fall;
             moveDirection = 1;

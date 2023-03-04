@@ -90,7 +90,8 @@ namespace R0.ScriptableObjConfig
         [Serializable]
         public class ElementSpellDataStruct : SpellDataStruct
         {
-            
+            [LabelText("元素属性"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
+            public SpellElement elementType;
         }
         
         /// <summary>

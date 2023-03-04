@@ -128,6 +128,9 @@ MonoBehaviour:
   playerHome: {fileID: 0}
   spellSrollHome: {fileID: 0}
   charaSwitchWaitTime: 2
-  KnightSkeletonDataAssets:
+  knightSkeletonDataAssets:
   - {fileID: 11400000, guid: 9faada7fafbe1fc4a8ef762826885512, type: 2}
   - {fileID: 11400000, guid: d28a65df846bf434ba8782fd9468ace6, type: 2}
+  knightAnimControllers:
+  - {fileID: 9100000, guid: d786fa4654580da4db505d5054eb8008, type: 2}
+  - {fileID: 9100000, guid: 4a85b87ace887be408030e5e99fa7ef7, type: 2}

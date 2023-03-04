@@ -1,10 +1,11 @@
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
 namespace UnityEditor.Experimental.Rendering.Universal
 {
     [CustomEditor(typeof(Renderer2DData), true)]
-    internal class Renderer2DDataEditor : Editor
+    internal class Renderer2DDataEditor : ScriptableRendererDataEditor  // （原Editor）魔改，使继承自ScriptableRendererDataEditor
     {
         class Styles
         {
@@ -183,6 +184,9 @@ namespace UnityEditor.Experimental.Rendering.Universal
 
             m_WasModified |= serializedObject.hasModifiedProperties;
             serializedObject.ApplyModifiedProperties();
+            
+            // 魔改，执行父级OnInspectorGUI()
+            base.OnInspectorGUI();
         }
     }
 }

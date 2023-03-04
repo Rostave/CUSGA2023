@@ -13,6 +13,9 @@ namespace R0.SpellRel
         public float frameInterval;
         
         private Image _barImg;
+        private Vector3[] _framePos;
+        
+        protected override void OnEnableInit() { }
         
         public void Awake()
         {
@@ -20,12 +23,14 @@ namespace R0.SpellRel
             _barImg = t.Find("PowerBar/Bar").GetComponent<Image>();
             
             var count = SpellData.Instance.maxSpellCapacity;
+            _framePos = new Vector3[count];
 
             var pos = t.position;
             for (var i = 0; i < count; i++)
             {
                 var frame = Instantiate(framePrefab, transform);
                 frame.transform.position = pos;
+                _framePos[i] = pos;
                 pos.x += frameInterval;
                 frame.transform.SetAsFirstSibling();
             }
@@ -36,6 +41,14 @@ namespace R0.SpellRel
         /// </summary>
         public void UpdatePowerBarHud(float curPower) => _barImg.fillAmount = curPower / SpellData.Instance.maxSpellPower;
 
-        protected override void OnEnableInit() { }
+        public void UpdateSpellScrollHud(SpellScroll spellScroll)
+        {
+            var spells = spellScroll.GetSpells();
+            for (var i = 0; i < spells.Count; i++)
+            {
+                spells[i].transform.position = _framePos[i];
+            }
+        }
+        
     }
 }

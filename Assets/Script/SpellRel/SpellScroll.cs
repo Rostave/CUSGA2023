@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using R0.ScriptableObjConfig;
 using R0.SingaltonBase;
 using R0.Weapons;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace R0.SpellRel
@@ -13,7 +14,7 @@ namespace R0.SpellRel
     public class SpellScroll : MonoBehaviour
     {
         /// <summary> 符文列表 </summary> ///
-        [SerializeField] private List<Spell> spells;
+        [SerializeField, DisplayAsString] private List<Spell> spells;
 
         /// <summary> 激活到第几个符文 </summary> ///
         [SerializeField] private byte activeSpellIndex;
@@ -100,6 +101,21 @@ namespace R0.SpellRel
                 var spell = spells[i];
                 spell.isPowered = false;
             }
+        }
+
+        [Space, Space, LabelText("符文预制体")] public List<GameObject> spellPrefab;
+        [Button("添加至符文卷轴", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
+        [DisableIf("@spellPrefab.Count == 0")]
+        private void AddSpellFromInspector()
+        {
+            foreach (var s in spellPrefab)
+            {
+                var spell = Instantiate(s, transform);
+                AppendSpell(spell.GetComponent<Spell>());
+            }
+            
+            spellPrefab.Clear();
+            SpellScrollViewer.Instance.UpdateSpellScrollHud(this);
         }
         
     }

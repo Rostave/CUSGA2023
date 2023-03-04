@@ -27,8 +27,8 @@ MonoBehaviour:
     description: "\"\u5145\u6EE1\u7740\u575A\u5B9A\u610F\u5FD7\u7684\u5DE8\u5251\uFF0C\u91CD\u91CF\u6781\u91CD\uFF0C\u975E\u6B63\u5E38\u4EBA\u7C7B\u80FD\u591F\u9A7E\u9A6D\r\n\u524D\u4E3B\u4EBA\u7528\u5176\u95EF\u8361\u5927\u9646\uFF0C\u51FB\u6740\u65E0\u6570\u975E\u4EBA\u4E4B\u7269\""
     spellSprite: {fileID: 4647473238952685714, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
     dmg: 40
-    moveSpd: 10
-    dmgSpdRate: 0.25
+    moveSpd: 30
+    dmgSpdRate: 0.75
     cd: 2.5
     defaultLifeTime: -1
     bulletSprite: {fileID: 5262698826492613611, guid: d2fc6cd01d215d24ebae7d0fb3dda355, type: 3}
@@ -45,16 +45,16 @@ MonoBehaviour:
     description: "\"\u88AB\u4EBA\u7C7B\u5F8B\u6CD5\u6240\u538C\u6076\u7684\u7981\u5FCC\u79D8\u6CD5\r\n\u5B83\u5F88\u5F3A\u5927\uFF0C\u4F46\u4E5F\u5F88\u8106\u5F31\r\n\u66FE\u7ECF\u6709\u4F4D\u79D8\u6CD5\u5E08\u4E3A\u4E86\u4FDD\u62A4\u5176\u59BB\u5B50\u4F7F\u7528\u6B64\u6CD5\u5E08\u800C\u89E6\u53D1\u4E86\u5F8B\u6CD5\r\n\u5728\u90A3\u4E4B\u540E\u8FD9\u4E2A\u79D8\u6CD5\u7B26\u6587\u5C31\u6D88\u5931\u4E86\""
     spellSprite: {fileID: 2119434554235449150, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
     dmg: 100
-    moveSpd: 10
-    dmgSpdRate: 0.1
+    moveSpd: 30
+    dmgSpdRate: 0.3
     cd: 5
     defaultLifeTime: 10
-    bulletSprite: {fileID: 2551967623486156149, guid: d2fc6cd01d215d24ebae7d0fb3dda355, type: 3}
+    bulletSprite: {fileID: 5262698826492613611, guid: d2fc6cd01d215d24ebae7d0fb3dda355, type: 3}
     atkDesc: "\"\u5F80\u73A9\u5BB6\u67AA\u53E3\u4F4D\u7F6E\u5C04\u51FA\u4E00\u4E2A\u5DE8\u5927\u7684\u96C6\u675F\u79D8\u6CD5\r\n\u4F7F\u7528\u540E\u73A9\u5BB6\u4F1A\u540E\u90002\u4E2A\u8EAB\u4F4D\""
     randomAngle: 10
     destroyOnPlayerDmgCount: 5
     destroyOnUsaageCount: -1
-    isFacingDir: 0
+    isFacingDir: 1
   - isSpellInfoLocked: 1
     name: "\u79D8\u672F\u6CD5\u7403"
     cat: 2
@@ -63,11 +63,11 @@ MonoBehaviour:
     description: "\"\u521D\u7EA7\u7684\u79D8\u6CD5\u5E08\u90FD\u4F1A\u4F7F\u7528\u7684\u6CD5\u7403\u653B\u51FB\r\n\u201C\u738B\u201D\u6700\u521D\u6240\u9886\u609F\u7684\u7B26\u6587\""
     spellSprite: {fileID: 8435456857972207648, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
     dmg: 20
-    moveSpd: 10
-    dmgSpdRate: 0.5
+    moveSpd: 40
+    dmgSpdRate: 2
     cd: 1
     defaultLifeTime: 3
-    bulletSprite: {fileID: 5262698826492613611, guid: d2fc6cd01d215d24ebae7d0fb3dda355, type: 3}
+    bulletSprite: {fileID: 2551967623486156149, guid: d2fc6cd01d215d24ebae7d0fb3dda355, type: 3}
     atkDesc: "\"\u6CD5\u7403\u51FB\u4E2D\u654C\u4EBA\uFF0C\r\n\u5BF9\u654C\u4EBA\u9020\u6210\u6570\u503C\u4F24\u5BB3\""
     randomAngle: 15
     destroyOnPlayerDmgCount: -1
@@ -80,14 +80,16 @@ MonoBehaviour:
     effect: 1
     powerCost: 1.5
     description: "\u6D41\u6D6A\u79D8\u6CD5\u5E08\u51EF\u67CF\u5728\u5730\u4E0B\u6D8C\u6D46\u4E2D\u9886\u609F\u7684\u7B26\u6587\uFF0C\u653E\u5728\u624B\u4E2D\u5F02\u5E38\u7684\u70BD\u70ED\uFF0C\u70C8\u706B\u80FD\u711A\u70E7\u4EBA\u5FC3\u3002"
-    spellSprite: {fileID: 185081654, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
+    spellSprite: {fileID: -3621577447069039359, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
+    elementType: 1
   - isSpellInfoLocked: 1
     name: "\u5DE8\u86C7\u4E4B\u7259"
     cat: 4
     effect: 1
     powerCost: 1
     description: "\"\u53D1\u73B0\u8005\u662F\u5728\u5DE8\u9F99\u4E4B\u9876\u627E\u5230\u6B64\u7B26\u6587\r\n\u6B64\u7B26\u6587\u542B\u6709\u5267\u6BD2\u7684\u529B\u91CF\r\n\""
-    spellSprite: {fileID: 21300004, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    spellSprite: {fileID: -9029920064155179084, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
+    elementType: 2
   propModSpellData:
   - isSpellInfoLocked: 1
     name: "\u5965\u5C14\u8FE1\u4E1C\u4E4B\u6012"
@@ -111,35 +113,35 @@ MonoBehaviour:
     effect: 0
     powerCost: 3
     description: "\"\u5145\u6EE1\u7740\u575A\u5B9A\u610F\u5FD7\u7684\u5DE8\u5251\uFF0C\u91CD\u91CF\u6781\u91CD\uFF0C\u975E\u6B63\u5E38\u4EBA\u7C7B\u80FD\u591F\u9A7E\u9A6D\r\n\u524D\u4E3B\u4EBA\u7528\u5176\u95EF\u8361\u5927\u9646\uFF0C\u51FB\u6740\u65E0\u6570\u975E\u4EBA\u4E4B\u7269\""
-    spellSprite: {fileID: -1357921913, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
-  - isSpellInfoLocked: 0
+    spellSprite: {fileID: 4647473238952685714, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
+  - isSpellInfoLocked: 1
     name: "\u955C\u4E4B\u805A\u96C6"
     cat: 1
     effect: 0
     powerCost: 5
     description: "\"\u88AB\u4EBA\u7C7B\u5F8B\u6CD5\u6240\u538C\u6076\u7684\u7981\u5FCC\u79D8\u6CD5\r\n\u5B83\u5F88\u5F3A\u5927\uFF0C\u4F46\u4E5F\u5F88\u8106\u5F31\r\n\u66FE\u7ECF\u6709\u4F4D\u79D8\u6CD5\u5E08\u4E3A\u4E86\u4FDD\u62A4\u5176\u59BB\u5B50\u4F7F\u7528\u6B64\u6CD5\u5E08\u800C\u89E6\u53D1\u4E86\u5F8B\u6CD5\r\n\u5728\u90A3\u4E4B\u540E\u8FD9\u4E2A\u79D8\u6CD5\u7B26\u6587\u5C31\u6D88\u5931\u4E86\""
-    spellSprite: {fileID: 0}
+    spellSprite: {fileID: 2119434554235449150, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
   - isSpellInfoLocked: 1
     name: "\u79D8\u672F\u6CD5\u7403"
     cat: 2
     effect: 0
     powerCost: 1.5
     description: "\"\u521D\u7EA7\u7684\u79D8\u6CD5\u5E08\u90FD\u4F1A\u4F7F\u7528\u7684\u6CD5\u7403\u653B\u51FB\r\n\u201C\u738B\u201D\u6700\u521D\u6240\u9886\u609F\u7684\u7B26\u6587\""
-    spellSprite: {fileID: 185081654, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
+    spellSprite: {fileID: 8435456857972207648, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
   - isSpellInfoLocked: 1
     name: "\u5FC3\u5982\u706B\u711A"
     cat: 3
     effect: 1
     powerCost: 1.5
     description: "\u6D41\u6D6A\u79D8\u6CD5\u5E08\u51EF\u67CF\u5728\u5730\u4E0B\u6D8C\u6D46\u4E2D\u9886\u609F\u7684\u7B26\u6587\uFF0C\u653E\u5728\u624B\u4E2D\u5F02\u5E38\u7684\u70BD\u70ED\uFF0C\u70C8\u706B\u80FD\u711A\u70E7\u4EBA\u5FC3\u3002"
-    spellSprite: {fileID: 185081654, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
+    spellSprite: {fileID: -3621577447069039359, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
   - isSpellInfoLocked: 1
     name: "\u5DE8\u86C7\u4E4B\u7259"
     cat: 4
     effect: 1
     powerCost: 1
     description: "\"\u53D1\u73B0\u8005\u662F\u5728\u5DE8\u9F99\u4E4B\u9876\u627E\u5230\u6B64\u7B26\u6587\r\n\u6B64\u7B26\u6587\u542B\u6709\u5267\u6BD2\u7684\u529B\u91CF\r\n\""
-    spellSprite: {fileID: 21300004, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    spellSprite: {fileID: -9029920064155179084, guid: d4d19e44c82ae294face75317f6c2583, type: 3}
   - isSpellInfoLocked: 1
     name: "\u5965\u5C14\u8FE1\u4E1C\u4E4B\u6012"
     cat: 5
