@@ -5,36 +5,36 @@ using Sirenix.OdinInspector;
 
 namespace Vacuname
 {
-    [CreateAssetMenu(fileName = "ĞÂ½ÇÉ«ÊôĞÔ", menuName = "½ÇÉ«/ÊôĞÔ", order = 0)]
+    [CreateAssetMenu(fileName = "æ–°è§’è‰²å±æ€§", menuName = "è§’è‰²/å±æ€§", order = 0)]
     public class MoveAttribute: ScriptableObject
     {
-        [LabelText("¼ÓËÙµ½ÂúĞèÒªµÄÊ±¼ä")]
+        [LabelText("åŠ é€Ÿåˆ°æ»¡éœ€è¦çš„æ—¶é—´")]
         [TableColumnWidth(200)]
         public float acceleraTime;
-        [LabelText("²»¿ØÖÆ£¬¼õËÙµ½0ĞèÒªµÄÊ±¼ä")]
+        [LabelText("ä¸æ§åˆ¶ï¼Œå‡é€Ÿåˆ°0éœ€è¦çš„æ—¶é—´")]
         public float deceleraTime;
 
-        [LabelText("ÖØÁ¦ÏµÊı")]
+        [LabelText("é‡åŠ›ç³»æ•°")]
         public float gravity;
 
-        [LabelText("×î´óËÙ¶È")] 
+        [LabelText("æœ€å¤§é€Ÿåº¦")] 
         public float maxSpeed;
 
-        [LabelText("ÌøÔ¾Ç¿¶È")] 
+        [LabelText("è·³è·ƒå¼ºåº¦")] 
         public float jumpStrength;
 
-        [LabelText("³å´ÌËÙ¶È")]
+        [LabelText("å†²åˆºé€Ÿåº¦")]
         public float dashSpeed;
 
-        [LabelText("³å´Ì³ÖĞøÊ±¼ä")]
+        [LabelText("å†²åˆºæŒç»­æ—¶é—´")]
         public float dashDuration; 
 
-        [LabelText("³å´ÌÀäÈ´Ê±¼ä")]
+        [LabelText("å†²åˆºå†·å´æ—¶é—´")]
         public float maxDashCooldown;
 
         public void GetCurSpeed(float input, ref float curSpeed,ref float curAcceleraTime)
         {
-            float acceleraDirection=1;//¼ÓËÙ½ø¶ÈµÄ·½Ïò
+            float acceleraDirection=1;//åŠ é€Ÿè¿›åº¦çš„æ–¹å‘
             float realLimit=maxSpeed;
             
             if (input == 0)

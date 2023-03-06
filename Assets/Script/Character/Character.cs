@@ -1,3 +1,4 @@
+using System;
 using Chronos;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
@@ -5,6 +6,7 @@ using Sirenix.OdinInspector;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
+using R0.Static;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -102,7 +104,7 @@ namespace Vacuname
             //标准化input
             input.Normalize();
 
-            if (input != 0 && moveDirection != input)
+            if (input != 0 && Math.Abs(moveDirection - input) > Const.IdleTolerance)
             {
                 moveDirection = input;
                 Vector3 temp = transform.localScale;
@@ -122,12 +124,9 @@ namespace Vacuname
             if (collision.gameObject.layer==LayerMask.NameToLayer("Ground"))
                 if (collision.transform.position.y < transform.position.y)
                 {
-                    OnCharacterLandGround();
                     jumpState = JumpState.ground;
                 }
         }
-        
-        protected virtual void OnCharacterLandGround() {}
 
     }
 }

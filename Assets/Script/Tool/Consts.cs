@@ -71,7 +71,7 @@ namespace R0.Static
             // public static readonly Quaternion Clk160 = Quaternion.AngleAxis(-160f, Vector3.forward);
         }
 
-        public static readonly float IdlePrecision = 1e-6f;
-        public static readonly float JumpPrecision = 2f;
+        public static readonly float IdleTolerance =1e-5f;
+        public static readonly float JumpTolerance = 0.01f;
     }
 }

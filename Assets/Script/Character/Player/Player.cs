@@ -98,6 +98,7 @@ namespace Vacuname
             {
                 jumpState = JumpState.fall;
             }
+            
         }
         public override void Move(float input, bool setDirectly = false)
         {
@@ -130,72 +131,39 @@ namespace Vacuname
                 hitBack.Effect();
         }
 
-        protected override void OnCharacterLandGround()
-        {
-            base.OnCharacterLandGround();
-
-            // if (jumpState == JumpState.ground) return;
-            // if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) < Const.IdlePrecision)
-            // {
-            //     anima.SetTrigger(Const.Ani.Idle);
-            //     animState = AnimState.Idle;
-            //     Debug.Log("idle2");
-            // }
-            // else
-            // {
-            //     anima.SetTrigger(Const.Ani.Move);
-            //     animState = AnimState.Move;
-            //     Debug.Log("move2");
-            // }
-        }
-
         private void AnimStateUpdate()
         {
-            // Debug.Log(time.rigidbody2D.velocity.y);
-            if (Mathf.Abs(rd.velocity.y) > Const.JumpPrecision)
+            if (Mathf.Abs(rd.velocity.y) > Const.JumpTolerance)
             {
                 // 跳跃
                 if (time.rigidbody2D.velocity.y > 0)
                 {
-                    if (animState < AnimState.JumpUp)
-                    {
-                        anima.SetTrigger(Const.Ani.JumpUp);
-                        animState = AnimState.JumpUp;
-                        Debug.Log("up");
-                    }
+                    if (animState >= AnimState.JumpUp) return;
+                    anima.SetTrigger(Const.Ani.JumpUp);
+                    animState = AnimState.JumpUp;
                 }
-                else
+                else if (animState == AnimState.JumpUp)
                 {
-                    if (animState < AnimState.JumpFall)
-                    {
-                        anima.SetTrigger(Const.Ani.JumpFall);
-                        animState = AnimState.JumpFall;
-                        Debug.Log("fall");
-                    }
-                }
-
-                // anima.SetFloat(Const.Ani.VelocityY, rd.velocity.y);
+                    anima.SetTrigger(Const.Ani.JumpFall);
+                    animState = AnimState.JumpFall;
+                }   
             }
             else
             {
-                // 水平
                 if (animState == AnimState.JumpUp) return;
-                if (Mathf.Abs(Input.GetAxis("Horizontal")) < Const.IdlePrecision)
+                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 0)
                 {
-                    if (animState != AnimState.Idle)
-                    {
-                        anima.SetTrigger(Const.Ani.Idle);
-                        animState = AnimState.Idle;
-                        Debug.Log("idle");
-                    }
+                    if (animState == AnimState.Idle) return;
+                    anima.SetTrigger(Const.Ani.Idle);
+                    animState = AnimState.Idle;
                 }
-                else if (animState < AnimState.Move)
+                else if (animState != AnimState.Move)
                 {
                     anima.SetTrigger(Const.Ani.Move);
                     animState = AnimState.Move;
-                    Debug.Log("move");
                 }
             }
+
         }
         
     }

@@ -363,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Emitter:
     TargetObject: {fileID: 433349460}
-    TargetComponent: {fileID: 433349463}
+    TargetComponent: {fileID: 0}
     TargetScriptableObject: {fileID: 0}
     TargetPropertyName: velocity
     ClampMin: 1
@@ -392,11 +392,6 @@ GameObject:
 --- !u!4 &433349461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4793412097506941699, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
-  m_PrefabInstance: {fileID: 4793412097342077023}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &433349463 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 4793412097506941704, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
   m_PrefabInstance: {fileID: 4793412097342077023}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &436855599
@@ -4420,6 +4415,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 433349464, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 859072162, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4467,6 +4466,10 @@ PrefabInstance:
     - target: {fileID: 4793412097506941699, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793412097506941702, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4793412097506941707, guid: 33b740415ecad594db331079ee2ac9b5, type: 3}
       propertyPath: m_Name
