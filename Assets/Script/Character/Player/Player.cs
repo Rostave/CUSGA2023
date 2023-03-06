@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using R0;
 using R0.Character;
 using R0.Static;
+using Spine;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,6 +23,8 @@ namespace Vacuname
         }
 
         [SerializeField]protected AnimState animState;
+        private Bone _aimBone;
+        [SerializeField]private bool _isAiming;
 
         #region Hitback
         [SerializeField,TabGroup("技能"),InlineEditor(InlineEditorModes.GUIOnly)]private HitBack hitBack;
@@ -50,6 +54,7 @@ namespace Vacuname
         {
             CameraControl.Instance.ca.m_Follow = transform;
             animState = AnimState.Idle;
+            _aimBone = s_anima.skeleton.FindBone("target3");
         }
         #endregion
 
@@ -133,18 +138,53 @@ namespace Vacuname
 
         private void AnimStateUpdate()
         {
+            // 攻击
+            if (Input.GetMouseButtonDown(0))
+            {
+                // anima.SetTrigger(Const.Ani.Aim);
+                var aimTrack = s_anima.AnimationState.SetAnimation(2, "Aim", true);
+                aimTrack.AttachmentThreshold = 1f;
+                aimTrack.MixDuration = 0f;
+                _isAiming = true;
+                
+                var shootTrack = s_anima.AnimationState.SetAnimation(1, "Attack", false);
+                shootTrack.AttachmentThreshold = 1f;
+                shootTrack.MixDuration = 0f;
+                var empty1 = s_anima.state.AddEmptyAnimation(1, 0.5f, 0.1f);
+                empty1.AttachmentThreshold = 1f;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                // anima.SetTrigger(Const.Ani.Null);
+                var empty2 = s_anima.state.AddEmptyAnimation(2, 0.5f, 0.1f);
+                empty2.AttachmentThreshold = 1f;
+                _isAiming = false;
+            }
+
+            if (_isAiming)
+            {
+                var mousePosition = Input.mousePosition;
+                var worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                var skeletonSpacePoint = s_anima.transform.InverseTransformPoint(worldMousePosition);
+                skeletonSpacePoint.x *= s_anima.Skeleton.ScaleX;
+                skeletonSpacePoint.y *= s_anima.Skeleton.ScaleY;
+                _aimBone.SetLocalPosition(skeletonSpacePoint);
+            }
+            
             if (Mathf.Abs(rd.velocity.y) > Const.JumpTolerance)
             {
                 // 跳跃
                 if (time.rigidbody2D.velocity.y > 0)
                 {
                     if (animState >= AnimState.JumpUp) return;
-                    anima.SetTrigger(Const.Ani.JumpUp);
+                    // anima.SetTrigger(Const.Ani.JumpUp);
+                    s_anima.AnimationState.SetAnimation(0, "Jump-up1", false);
                     animState = AnimState.JumpUp;
                 }
-                else if (animState == AnimState.JumpUp)
+                else if (animState < AnimState.JumpFall)
                 {
-                    anima.SetTrigger(Const.Ani.JumpFall);
+                    // anima.SetTrigger(Const.Ani.JumpFall);
+                    s_anima.AnimationState.SetAnimation(0, "Jump-down2", true);
                     animState = AnimState.JumpFall;
                 }   
             }
@@ -154,17 +194,19 @@ namespace Vacuname
                 if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 0)
                 {
                     if (animState == AnimState.Idle) return;
-                    anima.SetTrigger(Const.Ani.Idle);
+                    // anima.SetTrigger(Const.Ani.Idle);
+                    s_anima.AnimationState.SetAnimation(0, "Idle", true);
                     animState = AnimState.Idle;
                 }
                 else if (animState != AnimState.Move)
                 {
-                    anima.SetTrigger(Const.Ani.Move);
+                    // anima.SetTrigger(Const.Ani.Move);
+                    s_anima.AnimationState.SetAnimation(0, "Move", true);
                     animState = AnimState.Move;
                 }
             }
-
         }
+        
         
     }
 }

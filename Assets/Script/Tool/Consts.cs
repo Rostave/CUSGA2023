@@ -12,6 +12,7 @@ namespace R0.Static
         /// </summary>
         public static class Ani
         {
+            public static readonly int Null = Animator.StringToHash("Null");
             public static readonly int Idle = Animator.StringToHash("Idle");
             public static readonly int Rest = Animator.StringToHash("Rest");
             public static readonly int Move = Animator.StringToHash("Move");
@@ -19,7 +20,7 @@ namespace R0.Static
             public static readonly int Hurt = Animator.StringToHash("Hurt");
             public static readonly int JumpUp = Animator.StringToHash("JumpUp");
             public static readonly int JumpFall = Animator.StringToHash("JumpFall");
-            // public static readonly int VelocityY = Animator.StringToHash("VelocityY");
+            public static readonly int Aim = Animator.StringToHash("Aim");
         }
         
         /// <summary>

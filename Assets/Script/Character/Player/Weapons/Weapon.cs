@@ -23,7 +23,7 @@ namespace R0.Weapons
         [HideInInspector] public Quaternion bulletInterQAngle;
         private float _bulletAngle;  // 相邻子弹间开角 
         private float _lastUpdatePointingAngleTime;
-        
+
         public float BulletAngle
         {
             get => _bulletAngle;

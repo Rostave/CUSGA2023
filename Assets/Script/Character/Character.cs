@@ -70,13 +70,15 @@ namespace Vacuname
         [TabGroup("配置")]
         // public SkeletonAnimation s_anima;
         public SkeletonMecanim sm_anima;
+        public SkeletonAnimation s_anima;
 
         protected virtual void Awake()
         {
             time = GetComponent<Timeline>();
             rd = GetComponent<Rigidbody2D>();
             TryGetComponent<Animator>(out anima);
-            if (anima == null) transform.Find("Spine").TryGetComponent<Animator>(out anima);
+            // if (anima == null) transform.Find("Spine").TryGetComponent<Animator>(out anima);
+            // transform.Find("Spine1").TryGetComponent(out s_anima);
             curAcceleraTime = 0;
             jumpState = JumpState.fall;
             moveDirection = 1;

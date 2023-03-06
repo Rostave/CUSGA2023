@@ -11,11 +11,6 @@ namespace R0
             sa.AnimationState.SetAnimation(trackIndex, animName, loop);
         }
         
-        public static void PlayAnim(Animator animator, int animTriggerHash)
-        {
-            animator.SetTrigger(animTriggerHash);
-        }
-        
         public static void SwitchSkeletonData(SkeletonAnimation sa, SkeletonDataAsset sda)
         {
             sa.ClearState();
