@@ -26,6 +26,7 @@ namespace Vacuname
                 else if (a.CompareTag("Sheild"))
                 {
                     blocked = true;
+                    me.TryPlayFeedback("Blocked");
                     if (a.transform.TryGetComponent(out HitBack hitback))
                         hitback.Success();
                     break;
@@ -36,15 +37,13 @@ namespace Vacuname
 
             if (blocked)
             {
-                me.feedbacks.TryPlay("Blocked");
                 enemyAction.SetTaskStatus(TaskStatus.Failure);
-
             }
             else
             {
                 if(p!=null)//没有被挡且打中了
                 {
-                    p.feedbacks.TryPlay("Hit");
+                    p.TryPlayFeedback("Hit");
                 }
                 enemyAction.SetTaskStatus(TaskStatus.Success);
             }

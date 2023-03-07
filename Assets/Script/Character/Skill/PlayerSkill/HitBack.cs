@@ -36,6 +36,7 @@ namespace Vacuname
         }
         public void Success()
         {
+            me.TryPlayFeedback("BlockSuccess");
             StartCoroutine(Successing());
         }
         

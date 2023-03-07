@@ -19,7 +19,7 @@ namespace Vacuname
         [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
         [LabelText("移动设置"), SerializeField]
         protected MoveAttribute moveAttribute;
-        public Timeline time;//有问题，在编辑器编辑提示什么ASSET，不过暂时没出毛病
+        
 
         #region 技能字典
         private Dictionary<string, UnityAction> skillDic;
@@ -40,8 +40,12 @@ namespace Vacuname
         #endregion
 
         #region 反馈字典
-        [TabGroup("反馈"), InlineEditor(InlineEditorModes.GUIOnly)]
-        public FeedbackDictionary feedbacks;
+        [SerializeField,TabGroup("反馈"), InlineEditor(InlineEditorModes.GUIOnly)]
+        protected FeedbackDictionary feedbacks;
+        public void TryPlayFeedback(string n)
+        {
+            feedbacks.TryPlay(n);
+        }
         #endregion
 
         #region 参与运动计算需要的参数
@@ -74,6 +78,7 @@ namespace Vacuname
         #endregion
         #endregion
 
+        [HideInInspector]public Timeline time;//有问题，在编辑器编辑提示什么ASSET，不过暂时没出毛病
         [HideInInspector]public Rigidbody2D rd;
         [HideInInspector]public Animator anima;
         [TabGroup("配置")]
@@ -103,6 +108,8 @@ namespace Vacuname
         }
         public virtual void Move(float input,bool setDirectly=false)
         {
+            if (!controllable)
+                return;
             float curSpeed;
             if (setDirectly)//直接设置速度的情况
             {

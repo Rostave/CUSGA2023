@@ -8,7 +8,7 @@ namespace Vacuname
     public class Look : EnemyConditional
     {
         public SharedGameObject target;
-        [SerializeField]private Visual visual;
+        private Visual visual;
 
         public override void OnAwake()
         {
@@ -17,11 +17,13 @@ namespace Vacuname
 
         public override TaskStatus OnUpdate()
         {
-            if(target.Value==null)
+            if (target.Value == null)
+            {
                 if (visual.TrySeePlayer(out GameObject g))
                 {
                     target.Value = g;
                 }
+            }
             return TaskStatus.Running;
         }
     }

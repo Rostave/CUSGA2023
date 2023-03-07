@@ -52,11 +52,11 @@ namespace Vacuname
         {
             if(Input.GetKeyDown(KeyCode.Tab))
             {
-                feedbacks.TryPlay("TimeSlow");
+                TryPlayFeedback("TimeSlow");
             }
             if(Input.GetKeyUp(KeyCode.Tab))
             {
-                feedbacks.TryPlay("TimeFast");
+                TryPlayFeedback("TimeFast");
             }
         }
 
@@ -72,31 +72,6 @@ namespace Vacuname
             }
             
         }
-        public override void Move(float input, bool setDirectly = false)
-        {
-            if (!controllable)
-                return;
-            base.Move(input, setDirectly);
-        }
-        /*IEnumerator Dashing()
-        {
-            canDash = false;
-            dashing = true;
-            dashColdDown = moveAttribute.maxDashCooldown;
-            float dashTimeLeft = moveAttribute.dashDuration;
-
-            feedbacks.TryPlay("Dash");
-            gameObject.layer = LayerMask.NameToLayer("Invincible");
-            time.rigidbody2D.velocity = new Vector2(moveAttribute.dashSpeed * moveDirection, time.rigidbody2D.velocity.y);
-
-            while (dashTimeLeft > 0)
-            {
-                dashTimeLeft -= Time.deltaTime;
-                yield return null;
-            }
-            gameObject.layer = LayerMask.NameToLayer("Player");
-            dashing = false;
-        }*/
         private void HandleDash()
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))

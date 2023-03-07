@@ -1,28 +1,30 @@
+ï»¿using BehaviorDesigner.Runtime.Tasks;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace Vacuname
 {
-    public class Dash :BasicSkill
+    public class DashAttack : EnemySkill
     {
         private bool canDash;
         private bool dashing;
         private float dashColdDown;
 
-        [LabelText("³å´ÌËÙ¶È")]
+        [LabelText("å†²åˆºé€Ÿåº¦")]
         public float dashSpeed;
 
-        [LabelText("³å´Ì³ÖÐøÊ±¼ä")]
+        [LabelText("å†²åˆºæŒç»­æ—¶é—´")]
         public float dashDuration;
 
-        [LabelText("³å´ÌÀäÈ´Ê±¼ä")]
+        [LabelText("å†²åˆºå†·å´æ—¶é—´")]
         public float maxDashCooldown;
+
+        private bool dashBlocked;
 
         protected override void Awake()
         {
-            skillName = "Dash";
+            skillName = "DashAttack";
             canDash = true;
             dashing = false;
             dashColdDown = 0;
@@ -31,7 +33,7 @@ namespace Vacuname
 
         public override void Effect()
         {
-            if(canDash)
+            if (canDash)
                 StartCoroutine(Dashing());
         }
 
@@ -46,15 +48,15 @@ namespace Vacuname
 
         IEnumerator Dashing()
         {
-            Debug.Log(1);
+            range.enabled = true;
+            dashBlocked = false;
             me.SetControllable(false);
             canDash = false;
             dashing = true;
             dashColdDown = maxDashCooldown;
             float dashTimeLeft = dashDuration;
 
-            me.feedbacks.TryPlay("Dash");
-            me.gameObject.layer = LayerMask.NameToLayer("Invincible");
+            me.TryPlayFeedback("Dash");
             me.time.rigidbody2D.velocity = new Vector2(dashSpeed * me.GetMoveDirection(), me.time.rigidbody2D.velocity.y);
 
             while (dashTimeLeft > 0)
@@ -62,12 +64,28 @@ namespace Vacuname
                 dashTimeLeft -= Time.deltaTime;
                 yield return null;
             }
-            me.gameObject.layer = LayerMask.NameToLayer("Player");
             dashing = false;
             me.SetControllable(true);
+            //enemyAction.SetTaskStatus(TaskStatus.Success);
+            range.enabled = false;
+        }
+
+        private void OnTriggerEnter2D(Collider2D a)
+        {
+            if (a.CompareTag("Sheild"))
+            {
+                dashBlocked = true;
+                me.TryPlayFeedback("Blocked");
+                if (a.transform.TryGetComponent(out HitBack hitback))
+                    hitback.Success();
+            }
+            else if(!dashBlocked&&a.CompareTag("Player"))
+            {
+                Player player = a.GetComponent<Player>();
+                player.TryPlayFeedback("Hit");
+            }
         }
 
 
     }
 }
-
