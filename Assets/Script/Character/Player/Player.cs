@@ -26,30 +26,7 @@ namespace Vacuname
         private Bone _aimBone;
         [SerializeField]private bool _isAiming;
 
-        #region Hitback
-        [SerializeField,TabGroup("技能"),InlineEditor(InlineEditorModes.GUIOnly)]private HitBack hitBack;
-        public HitBack GetGitBack()
-        {
-            return hitBack;
-        }
-        #endregion
-
-        #region 移动所需变量
-        private bool canDash;
-        private bool dashing;
-        private float dashColdDown;
-        #endregion
-
         #region 初始化
-        protected override void Awake()
-        {
-            base.Awake();
-
-            canDash = true;
-            dashing = false;
-            dashColdDown = 0;
-        }
-
         private void Start()
         {
             CameraControl.Instance.ca.m_Follow = transform;
@@ -65,7 +42,7 @@ namespace Vacuname
                 time.rigidbody2D.gravityScale = moveAttribute.gravity;
 
             Move(Input.GetAxisRaw("Horizontal"));
-            Dash();
+            HandleDash();
             Jump();
             ControlTime();
             HandleHitBack();
@@ -82,17 +59,7 @@ namespace Vacuname
                 feedbacks.TryPlay("TimeFast");
             }
         }
-        private void Dash()
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-                StartCoroutine(Dashing());
 
-            if (!dashing && dashColdDown > 0)
-            {
-                dashColdDown -= Time.deltaTime;
-                canDash = dashColdDown <= 0;
-            }
-        }
         public override void Jump()
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -107,11 +74,11 @@ namespace Vacuname
         }
         public override void Move(float input, bool setDirectly = false)
         {
-            if (dashing)
+            if (!controllable)
                 return;
             base.Move(input, setDirectly);
         }
-        IEnumerator Dashing()
+        /*IEnumerator Dashing()
         {
             canDash = false;
             dashing = true;
@@ -129,11 +96,16 @@ namespace Vacuname
             }
             gameObject.layer = LayerMask.NameToLayer("Player");
             dashing = false;
+        }*/
+        private void HandleDash()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+                TrigerSkill("Dash");
         }
         private void HandleHitBack()
         {
             if (Input.GetKeyDown(KeyCode.E))
-                hitBack.Effect();
+                TrigerSkill("HitBack");
         }
 
         private void AnimStateUpdate()

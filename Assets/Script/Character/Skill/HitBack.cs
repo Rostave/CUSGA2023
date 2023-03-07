@@ -18,6 +18,7 @@ namespace Vacuname
         private float remainActTime;
         protected override void Awake()
         {
+            skillName = "HitBack";
             base.Awake();
             curBackCoolDown = 0;
         }

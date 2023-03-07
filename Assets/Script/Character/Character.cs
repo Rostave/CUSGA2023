@@ -19,21 +19,23 @@ namespace Vacuname
         [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
         [LabelText("移动设置"), SerializeField]
         protected MoveAttribute moveAttribute;
-        protected Timeline time;//有问题，在编辑器编辑提示什么ASSET，不过暂时没出毛病
+        public Timeline time;//有问题，在编辑器编辑提示什么ASSET，不过暂时没出毛病
 
-        #region 动画用事件字典
-        private Dictionary<string, UnityAction> eventDic;
-        public Dictionary<string, UnityAction> GetEventDic()
+        #region 技能字典
+        private Dictionary<string, UnityAction> skillDic;
+        public Dictionary<string, UnityAction> GetSkillDic()
         {
-            if (eventDic == null) eventDic = new Dictionary<string, UnityAction>();
-            return eventDic;
+            if (skillDic == null) skillDic = new Dictionary<string, UnityAction>();
+            return skillDic;
         }
-        public void AnimaEvent(string name)
+        public void TrigerSkill(string name)
         {
-            if (eventDic.ContainsKey(name))
+            if (skillDic.ContainsKey(name))
             {
-                eventDic[name].Invoke();
+                skillDic[name].Invoke();
             }
+            else
+                Debug.Log("无此技能："+name);
         }
         #endregion
 
@@ -43,6 +45,13 @@ namespace Vacuname
         #endregion
 
         #region 参与运动计算需要的参数
+        #region protected bool controllable
+        protected bool controllable;
+        public void SetControllable(bool a)
+        {
+            controllable = a;
+        }
+        #endregion
         protected float curAcceleraTime;
         [HideInInspector]public JumpState jumpState;
         #region protected float moveDirection;
@@ -81,6 +90,7 @@ namespace Vacuname
             // transform.Find("Spine1").TryGetComponent(out s_anima);
             curAcceleraTime = 0;
             jumpState = JumpState.fall;
+            controllable = true;
             moveDirection = 1;
         }
         public virtual void Jump()

@@ -23,15 +23,6 @@ namespace Vacuname
         [LabelText("跳跃强度")] 
         public float jumpStrength;
 
-        [LabelText("冲刺速度")]
-        public float dashSpeed;
-
-        [LabelText("冲刺持续时间")]
-        public float dashDuration; 
-
-        [LabelText("冲刺冷却时间")]
-        public float maxDashCooldown;
-
         public void GetCurSpeed(float input, ref float curSpeed,ref float curAcceleraTime)
         {
             float acceleraDirection=1;//加速进度的方向

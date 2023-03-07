@@ -17,9 +17,9 @@ namespace Vacuname
         protected virtual void Awake()
         {
             me= transform.GetComponentInParent<Character>();
-            me.GetEventDic().Add(skillName, new UnityAction(Effect));
-            range = GetComponent<PolygonCollider2D>();
-            range.enabled = false;
+            me.GetSkillDic().Add(skillName, new UnityAction(Effect));
+            if(TryGetComponent(out range))
+                range.enabled = false;
         }
 
         public virtual void Effect()
