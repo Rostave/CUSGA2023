@@ -88,7 +88,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.56666666
-    functionName: AnimaEvent
+    functionName: TrigerSkill
     data: Attack
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

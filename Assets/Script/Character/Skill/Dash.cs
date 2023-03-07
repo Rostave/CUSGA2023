@@ -54,7 +54,7 @@ namespace Vacuname
             float dashTimeLeft = dashDuration;
 
             me.feedbacks.TryPlay("Dash");
-            gameObject.layer = LayerMask.NameToLayer("Invincible");
+            me.gameObject.layer = LayerMask.NameToLayer("Invincible");
             me.time.rigidbody2D.velocity = new Vector2(dashSpeed * me.GetMoveDirection(), me.time.rigidbody2D.velocity.y);
 
             while (dashTimeLeft > 0)
@@ -62,7 +62,7 @@ namespace Vacuname
                 dashTimeLeft -= Time.deltaTime;
                 yield return null;
             }
-            gameObject.layer = LayerMask.NameToLayer("Player");
+            me.gameObject.layer = LayerMask.NameToLayer("Player");
             dashing = false;
             me.SetControllable(true);
         }
