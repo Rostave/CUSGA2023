@@ -49,7 +49,7 @@ namespace R0.SpellRel
             var chara = CharaMgr.Instance.activeChara;
             
             chara.weapon.ResetEffectParam();  // weapon重置效果参数
-            chara.spellScroll.ApplyNonBulletSpell();  // 结算其他非子弹类型符文
+            chara.spellScroll.ApplyNonBulletSpell(this);  // 结算其他非子弹类型符文
             
             Apply();  // 自己结算
             _nextTriggerTime = Time.time + _triggerCd;

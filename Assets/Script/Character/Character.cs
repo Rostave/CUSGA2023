@@ -84,7 +84,6 @@ namespace Vacuname
         [TabGroup("配置")]
         // public SkeletonAnimation s_anima;
         public SkeletonMecanim sm_anima;
-        public SkeletonAnimation s_anima;
 
         protected virtual void Awake()
         {

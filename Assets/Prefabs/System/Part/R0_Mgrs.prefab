@@ -1,5 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1744155007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1744155008}
+  - component: {fileID: 1744155009}
+  m_Layer: 0
+  m_Name: SpellScroll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1744155008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744155007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9172509053349613431}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1744155009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744155007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4a9ba8d1ad42f185fa37de02445870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spells: []
+  activeSpellIndex: 9
+  power: 0
+  spellPrefab: []
+--- !u!1 &2351832266197295380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9172509053349613431}
+  m_Layer: 0
+  m_Name: SpellScrollHome
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9172509053349613431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2351832266197295380}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1744155008}
+  m_Father: {fileID: 7850439946179894984}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7850439946179894991
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,6 +107,7 @@ Transform:
   m_Children:
   - {fileID: 7850439946769793487}
   - {fileID: 7850439946883532431}
+  - {fileID: 9172509053349613431}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,17 +199,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeChara:
-    character: 0
+    character: 2
     playerCtrl: {fileID: 0}
     weapon: {fileID: 0}
-    spellScroll: {fileID: 0}
+    spellScroll: {fileID: 1744155009}
   characters: []
   playerHome: {fileID: 0}
   spellSrollHome: {fileID: 0}
   charaSwitchWaitTime: 2
-  knightSkeletonDataAssets:
-  - {fileID: 11400000, guid: 9faada7fafbe1fc4a8ef762826885512, type: 2}
-  - {fileID: 11400000, guid: d28a65df846bf434ba8782fd9468ace6, type: 2}
-  knightAnimControllers:
-  - {fileID: 9100000, guid: d786fa4654580da4db505d5054eb8008, type: 2}
-  - {fileID: 9100000, guid: 4a85b87ace887be408030e5e99fa7ef7, type: 2}

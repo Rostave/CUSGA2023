@@ -23,15 +23,17 @@ namespace Vacuname
         }
 
         [SerializeField]protected AnimState animState;
-        private Bone _aimBone;
         [SerializeField]private bool _isAiming;
+        private Bone _aimBone;
+        private SkeletonAnimation _sAnima;
 
         #region 初始化
         private void Start()
         {
             CameraControl.Instance.ca.m_Follow = transform;
             animState = AnimState.Idle;
-            _aimBone = s_anima.skeleton.FindBone("target3");
+            transform.Find("Spine1").TryGetComponent(out _sAnima);
+            _aimBone = _sAnima.skeleton.FindBone("target3");
         }
         #endregion
 
@@ -89,21 +91,21 @@ namespace Vacuname
             if (Input.GetMouseButtonDown(0))
             {
                 // anima.SetTrigger(Const.Ani.Aim);
-                var aimTrack = s_anima.AnimationState.SetAnimation(2, "Aim", true);
+                var aimTrack = _sAnima.AnimationState.SetAnimation(2, "Aim", true);
                 aimTrack.AttachmentThreshold = 1f;
                 aimTrack.MixDuration = 0f;
                 _isAiming = true;
                 
-                var shootTrack = s_anima.AnimationState.SetAnimation(1, "Attack", false);
+                var shootTrack = _sAnima.AnimationState.SetAnimation(1, "Attack", false);
                 shootTrack.AttachmentThreshold = 1f;
                 shootTrack.MixDuration = 0f;
-                var empty1 = s_anima.state.AddEmptyAnimation(1, 0.5f, 0.1f);
+                var empty1 = _sAnima.state.AddEmptyAnimation(1, 0.5f, 0.1f);
                 empty1.AttachmentThreshold = 1f;
             }
             else if (Input.GetMouseButtonUp(0))
             {
                 // anima.SetTrigger(Const.Ani.Null);
-                var empty2 = s_anima.state.AddEmptyAnimation(2, 0.5f, 0.1f);
+                var empty2 = _sAnima.state.AddEmptyAnimation(2, 0.5f, 0.1f);
                 empty2.AttachmentThreshold = 1f;
                 _isAiming = false;
             }
@@ -112,9 +114,9 @@ namespace Vacuname
             {
                 var mousePosition = Input.mousePosition;
                 var worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-                var skeletonSpacePoint = s_anima.transform.InverseTransformPoint(worldMousePosition);
-                skeletonSpacePoint.x *= s_anima.Skeleton.ScaleX;
-                skeletonSpacePoint.y *= s_anima.Skeleton.ScaleY;
+                var skeletonSpacePoint = _sAnima.transform.InverseTransformPoint(worldMousePosition);
+                skeletonSpacePoint.x *= _sAnima.Skeleton.ScaleX;
+                skeletonSpacePoint.y *= _sAnima.Skeleton.ScaleY;
                 _aimBone.SetLocalPosition(skeletonSpacePoint);
             }
             
@@ -125,13 +127,13 @@ namespace Vacuname
                 {
                     if (animState >= AnimState.JumpUp) return;
                     // anima.SetTrigger(Const.Ani.JumpUp);
-                    s_anima.AnimationState.SetAnimation(0, "Jump-up1", false);
+                    _sAnima.AnimationState.SetAnimation(0, "Jump-up1", false);
                     animState = AnimState.JumpUp;
                 }
                 else if (animState < AnimState.JumpFall)
                 {
                     // anima.SetTrigger(Const.Ani.JumpFall);
-                    s_anima.AnimationState.SetAnimation(0, "Jump-down2", true);
+                    _sAnima.AnimationState.SetAnimation(0, "Jump-down2", true);
                     animState = AnimState.JumpFall;
                 }   
             }
@@ -142,13 +144,13 @@ namespace Vacuname
                 {
                     if (animState == AnimState.Idle) return;
                     // anima.SetTrigger(Const.Ani.Idle);
-                    s_anima.AnimationState.SetAnimation(0, "Idle", true);
+                    _sAnima.AnimationState.SetAnimation(0, "Idle", true);
                     animState = AnimState.Idle;
                 }
                 else if (animState != AnimState.Move)
                 {
                     // anima.SetTrigger(Const.Ani.Move);
-                    s_anima.AnimationState.SetAnimation(0, "Move", true);
+                    _sAnima.AnimationState.SetAnimation(0, "Move", true);
                     animState = AnimState.Move;
                 }
             }

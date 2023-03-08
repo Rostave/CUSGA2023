@@ -68,7 +68,7 @@ namespace R0.SpellRel
         /// <summary>
         /// 应用并结算非子弹类型符文效果，更新符文的isPowered标识
         /// </summary>
-        public void ApplyNonBulletSpell()
+        public void ApplyNonBulletSpell(Spell triggerBulletSpell)
         {
             // 计算支持生效的符文数
             var spellDataObj = SpellData.Instance;
@@ -78,23 +78,32 @@ namespace R0.SpellRel
             // Debug.Log(supported);
             supported = Math.Min(supported, spells.Count);
             // Debug.Log(supported);
-
+            
+            var remain = power;
             var spellData = spellDataObj.data;
             for (var i = 0; i < supported; i++)
             {
                 var spell = spells[i];
                 spell.isPowered = true;
-                
-                if (spellData[(int) spell.spellCat].effect == SpellEffect.BulletSummon) continue;
-                
+
+                if (spellData[(int) spell.spellCat].effect == SpellEffect.BulletSummon)
+                {
+                    if (spell == triggerBulletSpell && i >= spellDataObj.powerFreeSpellCount)
+                    {
+                        remain -= spellData[(int) triggerBulletSpell.spellCat].powerCost;
+                    }
+                    remain = Mathf.Max(remain, 0f);
+                    Power = remain;
+                    continue;
+                }
+
                 // 超出部分计算符文的能量消耗
                 if (i >= spellDataObj.powerFreeSpellCount)
                 {
-                    var remain = power - spellData[(int) spell.spellCat].powerCost;
-                    remain = Mathf.Min(remain, 0f);  // 允许过量消耗
+                    remain -= spellData[(int) spell.spellCat].powerCost;
+                    remain = Mathf.Max(remain, 0f);  // 允许过量消耗
                     Power = remain;
                 }
-                Debug.Log($"{i}, {power}");
 
                 // 应用符文属性
                 spell.Apply();
@@ -109,12 +118,12 @@ namespace R0.SpellRel
 
         [Space, Space, LabelText("符文预制体")] public List<GameObject> spellPrefab;
         [Button("添加至符文卷轴", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
-        [DisableIf("@spellPrefab.Count == 0")]
+        [DisableIf("@spellPrefab.Count == 0"), DisableInEditorMode]
         private void AddSpellFromInspector()
         {
             foreach (var s in spellPrefab)
             {
-                var spell = Instantiate(s, transform);
+                var spell = Instantiate(s, SpellScrollViewer.Instance.spellHome);
                 AppendSpell(spell.GetComponent<Spell>());
             }
             

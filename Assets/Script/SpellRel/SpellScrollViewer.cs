@@ -2,6 +2,7 @@
 using R0.Character;
 using R0.ScriptableObjConfig;
 using R0.SingaltonBase;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,44 +10,71 @@ namespace R0.SpellRel
 {
     public class SpellScrollViewer : SingletonBehaviour<SpellScrollViewer>
     {
-        public GameObject framePrefab;
-        public float frameInterval;
+        public bool isSpellFacingDir;
+        public float radius;
+        public Transform spellHome;
         
         private Image _barImg;
-        private Vector3[] _framePos;
-        
+        private Quaternion _startQAngle, _interQAngle;
+
+        [Button("更新UI显示", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
+        private void InspectorUpdateSpellHud()
+        {
+            var count = SpellData.Instance.maxSpellCapacity;
+
+            var angle = 360f / count;
+            _interQAngle = Quaternion.AngleAxis(angle, Vector3.forward);
+            
+            if (count % 2 == 0) angle = 180f + 0.5f * angle;
+            else angle = 180f;
+            _startQAngle = Quaternion.AngleAxis(angle, Vector3.forward);
+            
+            var t = spellHome.transform;
+            var q = _startQAngle;
+            for (var i = 0; i < t.childCount; i++)
+            {
+                var tr = t.GetChild(i).transform;
+                tr.position = spellHome.transform.position + radius * (q * Vector3.up).normalized;
+                if (isSpellFacingDir) tr.rotation = q;
+                q *= _interQAngle;
+            }
+        } 
+
         protected override void OnEnableInit() { }
-        
+
         public void Awake()
         {
             var t = transform;
-            _barImg = t.Find("PowerBar/Bar").GetComponent<Image>();
-            
-            var count = SpellData.Instance.maxSpellCapacity;
-            _framePos = new Vector3[count];
+            _barImg = t.Find("PowerBar").GetComponent<Image>();
 
-            var pos = t.position;
-            for (var i = 0; i < count; i++)
-            {
-                var frame = Instantiate(framePrefab, transform);
-                frame.transform.position = pos;
-                _framePos[i] = pos;
-                pos.x += frameInterval;
-                frame.transform.SetAsFirstSibling();
-            }
+            var count = SpellData.Instance.maxSpellCapacity;
+
+            var angle = 360f / count;
+            _interQAngle = Quaternion.AngleAxis(angle, Vector3.forward);
+            
+            if (count % 2 == 0) angle = 180f + 0.5f * angle;
+            else angle = 180f;
+            _startQAngle = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         /// <summary>
         /// 更新能量条UI显示
         /// </summary>
-        public void UpdatePowerBarHud(float curPower) => _barImg.fillAmount = curPower / SpellData.Instance.maxSpellPower;
+        public void UpdatePowerBarHud(float curPower)
+        {
+            var per = curPower / SpellData.Instance.maxSpellPower;
+            _barImg.fillAmount = 0.7f * per + 0.3f;
+        }
 
         public void UpdateSpellScrollHud(SpellScroll spellScroll)
         {
             var spells = spellScroll.GetSpells();
-            for (var i = 0; i < spells.Count; i++)
+            var q = _startQAngle;
+            foreach (var t in spells)
             {
-                spells[i].transform.position = _framePos[i];
+                t.transform.position = spellHome.transform.position + radius * (q * Vector3.up).normalized;
+                if (isSpellFacingDir) t.transform.rotation = q;
+                q *= _interQAngle;
             }
         }
         
