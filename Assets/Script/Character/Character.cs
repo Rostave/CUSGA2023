@@ -17,7 +17,7 @@ namespace Vacuname
     public class Character : MonoBehaviour
     {
         [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
-        [LabelText("移动设置"), SerializeField]
+        [GUIColor(0.3f, 0.8f, 0.8f, 1f),LabelWidth(180),LabelText("移动设置"), SerializeField]
         protected MoveAttribute moveAttribute;
         
 
