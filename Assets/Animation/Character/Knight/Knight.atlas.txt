@@ -1,5 +1,5 @@
 
-Knight.png
+knight.png
 size: 1966,1775
 format: RGBA8888
 filter: Linear,Linear
