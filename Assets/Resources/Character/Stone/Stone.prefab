@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: DashAttack
   en_me: {fileID: 0}
-  attackDistance: 15.98
+  attackDistance: 0
   dashSpeed: 40
   dashDuration: 1
   maxDashCooldown: 0.09
@@ -553,7 +553,6 @@ MonoBehaviour:
   rd: {fileID: 0}
   anima: {fileID: 0}
   sm_anima: {fileID: 0}
-  s_anima: {fileID: 0}
   visual: {fileID: 7644716926160302711}
 --- !u!114 &3221814549033092921
 MonoBehaviour:
