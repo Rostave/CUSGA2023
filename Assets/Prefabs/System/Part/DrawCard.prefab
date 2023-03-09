@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicSpellPool: []
+  cards: []
+  spreadFeedback: {fileID: 0}
