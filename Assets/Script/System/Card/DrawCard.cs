@@ -5,6 +5,8 @@ using static R0.ScriptableObjConfig.SpellData;
 using R0.SingaltonBase;
 using R0.ScriptableObjConfig;
 using System;
+using UnityEngine.UI;
+using MoreMountains.Feedbacks;
 
 namespace Vacuname
 {
@@ -12,7 +14,10 @@ namespace Vacuname
     {
         public List<SpellDataStruct> basicSpellPool;
 
-        public Card textCard;
+        public List<Card> cards;
+
+        [SerializeField]private MMF_Player spreadFeedback;
+
         protected override void OnEnableInit()
         {
             basicSpellPool = SpellData.Instance.data;//暂时是抽所有的卡
@@ -22,8 +27,11 @@ namespace Vacuname
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                List<SpellDataStruct>test= DoDrawCard(basicSpellPool, 0, basicSpellPool.Count, 3);
-                textCard.Init(test[0]);
+                int num = 3;
+                List<SpellDataStruct>datas= DoDrawCard(basicSpellPool, 0, basicSpellPool.Count, num);
+                for (int i = 0; i < num; i++)
+                    cards[i].Init(datas[i]);
+                spreadFeedback.PlayFeedbacks();
             }
                 
         }
