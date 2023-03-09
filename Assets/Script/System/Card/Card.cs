@@ -6,6 +6,8 @@ using static R0.ScriptableObjConfig.SpellData;
 using TMPro;
 using UnityEngine.UI;
 using R0.SpellRel;
+using UnityEngine.EventSystems;
+using MoreMountains.Feedbacks;
 
 namespace Vacuname
 {
@@ -24,6 +26,12 @@ namespace Vacuname
             type.text = effectNameDic[spellData.effect];
             illstration.sprite = spellData.spellSprite;
         }
+
+        public void OnCardClick()
+        {
+            DrawCard.Instance.spreadFeedback?.PlayFeedbacks();
+        }
+
     }
 }
 

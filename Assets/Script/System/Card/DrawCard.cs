@@ -16,7 +16,7 @@ namespace Vacuname
 
         public List<Card> cards;
 
-        [SerializeField]private MMF_Player spreadFeedback;
+        public MMF_Player spreadFeedback;
 
         protected override void OnEnableInit()
         {
@@ -34,6 +34,14 @@ namespace Vacuname
                 spreadFeedback.PlayFeedbacks();
             }
                 
+        }
+
+        public void EnableCards(bool can)
+        {
+            foreach(var a in cards)
+            {
+                a.GetComponent<Button>().interactable = can;
+            }
         }
 
         private List<SpellDataStruct> DoDrawCard(List<SpellDataStruct> list,int minInclusive,int maxInclusive,int time)
