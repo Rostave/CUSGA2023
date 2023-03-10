@@ -60,7 +60,7 @@ namespace R0.Weapons
             position.z = 0;
             var dir = mousePos - position;
             _pointingAngle = Quaternion.FromToRotation(Vector3.up, dir);
-            
+
             return _pointingAngle;
         }
 

@@ -165,7 +165,7 @@ namespace R0.ScriptableObjConfig
 
         [SerializeField, DisplayAsString] private int eleOffset, propOffset, specialOffset;
         public BulletSpellDataStruct GetBulletSpellData(SpellCat spellCat) => bulletSpellData[(int) spellCat];
-        public ElementSpellDataStruct GetElementtSpellData(SpellCat spellCat) => elementSpellData[(int) spellCat - eleOffset];
+        public ElementSpellDataStruct GetElementSpellData(SpellCat spellCat) => elementSpellData[(int) spellCat - eleOffset];
         public PropModSpellDataStruct GetPropModSpellData(SpellCat spellCat) => propModSpellData[(int) spellCat - propOffset];
         public SpecialSpellDataStruct GetSpecialSpellData(SpellCat spellCat) => specialSpellData[(int) spellCat - specialOffset];
        

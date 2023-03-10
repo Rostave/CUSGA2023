@@ -7,7 +7,7 @@ namespace R0.SpellRel
     {
         public override void Apply()
         {
-            var data = (SpellData.Instance.GetElementtSpellData(spellCat));
+            var data = (SpellData.Instance.GetElementSpellData(spellCat));
             CharaMgr.Instance.activeChara.weapon.AddElement(data.elementType);
         }
     }
