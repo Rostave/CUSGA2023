@@ -27,6 +27,8 @@ namespace Vacuname
         private Bone _aimBone;
         private SkeletonAnimation _sAnima;
 
+        private float _t;
+
         #region 初始化
         private void Start()
         {
@@ -90,17 +92,21 @@ namespace Vacuname
             // 攻击
             if (Input.GetMouseButtonDown(0))
             {
-                // anima.SetTrigger(Const.Ani.Aim);
-                var aimTrack = _sAnima.AnimationState.SetAnimation(2, "Aim", true);
-                aimTrack.AttachmentThreshold = 1f;
-                aimTrack.MixDuration = 0f;
-                _isAiming = true;
+                if (Time.time > _t)
+                {
+                    _t = Time.time + 0.3f;
+                    var shootTrack = _sAnima.AnimationState.SetAnimation(1, "Attack", false);
+                    shootTrack.AttachmentThreshold = 1f;
+                    shootTrack.MixDuration = 0f;
+                    var empty1 = _sAnima.state.AddEmptyAnimation(1, 0.5f, 0.1f);
+                    empty1.AttachmentThreshold = 1f;
                 
-                var shootTrack = _sAnima.AnimationState.SetAnimation(1, "Attack", false);
-                shootTrack.AttachmentThreshold = 1f;
-                shootTrack.MixDuration = 0f;
-                var empty1 = _sAnima.state.AddEmptyAnimation(1, 0.5f, 0.1f);
-                empty1.AttachmentThreshold = 1f;
+                    // anima.SetTrigger(Const.Ani.Aim);
+                    var aimTrack = _sAnima.AnimationState.SetAnimation(2, "Aim", false);
+                    aimTrack.AttachmentThreshold = 1f;
+                    aimTrack.MixDuration = 0f;
+                    _isAiming = true;
+                }
             }
             else if (Input.GetMouseButtonUp(0))
             {
