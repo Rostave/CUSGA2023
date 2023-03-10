@@ -15662,7 +15662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _localTimeScale: 1
   _paused: 0
-  _parentKey: 
+  _parentKey: Root
   _parentBlend: 0
 --- !u!114 &433349464
 MonoBehaviour:

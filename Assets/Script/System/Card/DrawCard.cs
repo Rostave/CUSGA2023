@@ -7,6 +7,8 @@ using R0.ScriptableObjConfig;
 using System;
 using UnityEngine.UI;
 using MoreMountains.Feedbacks;
+using Chronos;
+using static MoreMountains.Feedbacks.MMFeedbacks;
 
 namespace Vacuname
 {
@@ -52,6 +54,7 @@ namespace Vacuname
 
         public void DrawCardToSelect()
         {
+            Timekeeper.instance.Clock("Root").localTimeScale = 0;
             int num = 3;
             List<SpellDataStruct> datas = DoDrawCard(basicSpellPool, 0, basicSpellPool.Count, num);
             for (int i = 0; i < num; i++)

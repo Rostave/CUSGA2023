@@ -8,6 +8,8 @@ using UnityEngine.UI;
 using R0.SpellRel;
 using UnityEngine.EventSystems;
 using MoreMountains.Feedbacks;
+using Chronos;
+using R0.Character;
 
 namespace Vacuname
 {
@@ -29,7 +31,9 @@ namespace Vacuname
 
         public void OnCardClick()
         {
+            Timekeeper.instance.Clock("Root").localTimeScale = 1;
             DrawCard.Instance.spreadFeedback?.PlayFeedbacks();
+            //CharaMgr.Instance.activeChara.spellScroll.AppendSpell()
         }
 
     }

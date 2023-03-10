@@ -44,9 +44,9 @@ namespace Vacuname
         {
             remainActTime = 0;
             curBackCoolDown = maxBackCoolDown;
-            Timekeeper.instance.Clock("Root").localTimeScale = bulletTimeScale;
+            Timekeeper.instance.Clock("ExceptPlayer").localTimeScale = bulletTimeScale;
             yield return new WaitForSecondsRealtime(bulletTime);
-            Timekeeper.instance.Clock("Root").localTimeScale = 1f;
+            Timekeeper.instance.Clock("ExceptPlayer").localTimeScale = 1f;
         }
 
         IEnumerator Activiting()

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8291084381128265003}
   - component: {fileID: 8291084381128265000}
   - component: {fileID: 6301611904226582247}
+  - component: {fileID: 8731132587326876083}
+  - component: {fileID: 6509419516920371975}
   m_Layer: 0
   m_Name: TimeControl
   m_TagString: Untagged
@@ -61,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _localTimeScale: 1
   _paused: 0
-  _parentKey: 
+  _parentKey: All
   _parentBlend: 0
   _key: Root
 --- !u!114 &6301611904226582247
@@ -81,3 +83,37 @@ MonoBehaviour:
   _parentKey: Root
   _parentBlend: 0
   _key: ExceptPlayer
+--- !u!114 &8731132587326876083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291084381128265005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0144e3ad8a88947298e2dca62625e6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localTimeScale: 1
+  _paused: 0
+  _parentKey: 
+  _parentBlend: 0
+  _key: All
+--- !u!114 &6509419516920371975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291084381128265005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0144e3ad8a88947298e2dca62625e6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localTimeScale: 1
+  _paused: 0
+  _parentKey: All
+  _parentBlend: 0
+  _key: UI
