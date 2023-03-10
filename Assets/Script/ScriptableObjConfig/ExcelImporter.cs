@@ -71,7 +71,7 @@ namespace R0.ScriptableObjConfig
                 sd.cat = (SpellCat) (int.Parse(first) - 1);
                 sd.effect = type;
                 sd.name = dr[2].ToString();
-                sd.description = dr[4].ToString();
+                sd.bgDesc = dr[4].ToString();
                 sd.powerCost = float.Parse(dr[5].ToString());
                         
                 switch (type)
@@ -102,7 +102,7 @@ namespace R0.ScriptableObjConfig
             sd.dmg = float.Parse(dr[6].ToString());
             sd.moveSpd = float.Parse(dr[7].ToString());
             sd.cd = float.Parse(dr[8].ToString());
-            sd.atkDesc = dr[11].ToString();
+            sd.effectDesc = dr[11].ToString();
             sd.randomAngle = float.Parse(dr[12].ToString());
             sd.destroyOnPlayerDmgCount = int.Parse(dr[13].ToString());
             sd.destroyOnUsaageCount = int.Parse(dr[14].ToString());
@@ -115,6 +115,7 @@ namespace R0.ScriptableObjConfig
         private static void GenElementSpellData(DataRow dr, ref SpellData.SpellDataStruct sdOri)
         {
             var sd = (SpellData.ElementSpellDataStruct) sdOri;
+            sd.effectDesc = dr[6].ToString();
             
             if (_b > SpellData.Instance.elementSpellData.Count) SpellData.Instance.elementSpellData.Add(sd);
             else SpellData.Instance.elementSpellData[_b - 1] = sd;
@@ -123,6 +124,7 @@ namespace R0.ScriptableObjConfig
         private static void GenPropModSpellData(DataRow dr, ref SpellData.SpellDataStruct sdOri)
         {
             var sd = (SpellData.PropModSpellDataStruct) sdOri;
+            sd.effectDesc = dr[6].ToString();
             
             if (_c > SpellData.Instance.propModSpellData.Count) SpellData.Instance.propModSpellData.Add(sd); 
             else SpellData.Instance.propModSpellData[_c - 1] = sd; 

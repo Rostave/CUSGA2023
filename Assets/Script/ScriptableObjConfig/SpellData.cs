@@ -30,8 +30,11 @@ namespace R0.ScriptableObjConfig
             [LabelText("单次能耗"), VerticalGroup("row1/left"), DisableIf("isSpellInfoLocked")]
             public float powerCost;
 
-            [TextArea, LabelText("描述"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
-            public string description;
+            [TextArea, LabelText("背景描述"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
+            public string bgDesc;
+            
+            [TextArea, LabelText("效果描述"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
+            public string effectDesc;
 
             [HideLabel]
             [PreviewField(58, ObjectFieldAlignment.Right)]
@@ -67,9 +70,6 @@ namespace R0.ScriptableObjConfig
             [PreviewField(58, ObjectFieldAlignment.Right)]
             [HorizontalGroup("row1", 58), VerticalGroup("row1/right"), DisableIf("isSpellInfoLocked")]
             public Sprite bulletSprite;
-            
-            [TextArea, LabelText("攻击形式"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
-            public string atkDesc;
 
             [LabelText("散射随机角"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public float randomAngle;
@@ -92,6 +92,7 @@ namespace R0.ScriptableObjConfig
         {
             [LabelText("元素属性"), VerticalGroup("row2"), DisableIf("isSpellInfoLocked")]
             public SpellElement elementType;
+            
         }
         
         /// <summary>

@@ -19,12 +19,12 @@ namespace Vacuname
         [SerializeField] private TextMeshProUGUI title, intro, type;
         [SerializeField] private Image illstration;
         private Dictionary<SpellEffect, string> effectNameDic = new Dictionary<SpellEffect, string>()
-        {{SpellEffect.BulletSummon,"¹¥»÷" },{SpellEffect.ElementAttach,"ÔªËØ" },{SpellEffect.PropMod,"ÊôĞÔ" },{SpellEffect.BulletCount,"ÊıÁ¿" } };
+        {{SpellEffect.BulletSummon,"æ”»å‡»" },{SpellEffect.ElementAttach,"å…ƒç´ " },{SpellEffect.PropMod,"å±æ€§" },{SpellEffect.BulletCount,"æ•°é‡" } };
         public void Init(SpellDataStruct data)
         {
             spellData = data;
             title.text = spellData.name;
-            intro.text = spellData.description;
+            intro.text = spellData.bgDesc;
             type.text = effectNameDic[spellData.effect];
             illstration.sprite = spellData.spellSprite;
         }

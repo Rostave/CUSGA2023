@@ -130,6 +130,12 @@ namespace R0.SpellRel
             spellPrefab.Clear();
             SpellScrollViewer.Instance.UpdateSpellScrollHud(this);
         }
+
+        
+        public void AddSpell(SpellData.SpellDataStruct spellStruct)
+        {
+            
+        }
         
     }
 }

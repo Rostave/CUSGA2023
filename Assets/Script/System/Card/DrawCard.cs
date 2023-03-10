@@ -22,7 +22,7 @@ namespace Vacuname
 
         protected override void OnEnableInit()
         {
-            basicSpellPool = SpellData.Instance.data;//ÔÝÊ±ÊÇ³éËùÓÐµÄ¿¨
+            basicSpellPool = SpellData.Instance.data;//ï¿½ï¿½Ê±ï¿½Ç³ï¿½ï¿½ï¿½ï¿½ÐµÄ¿ï¿½
         }
 
         public void EnableCards(bool can)
@@ -37,6 +37,7 @@ namespace Vacuname
         {
             List<int> drawInt = new List<int>();
             List<SpellDataStruct> drawCard = new List<SpellDataStruct>();
+
             for(int i=0;i<time;i++)
             {
                 int newOne;
