@@ -23,19 +23,6 @@ namespace Vacuname
             basicSpellPool = SpellData.Instance.data;//暂时是抽所有的卡
         }
 
-        public void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                int num = 3;
-                List<SpellDataStruct>datas= DoDrawCard(basicSpellPool, 0, basicSpellPool.Count, num);
-                for (int i = 0; i < num; i++)
-                    cards[i].Init(datas[i]);
-                spreadFeedback.PlayFeedbacks();
-            }
-                
-        }
-
         public void EnableCards(bool can)
         {
             foreach(var a in cards)
@@ -61,6 +48,15 @@ namespace Vacuname
             foreach (int a in drawInt)
                 drawCard.Add(list[a]);
             return drawCard;
+        }
+
+        public void DrawCardToSelect()
+        {
+            int num = 3;
+            List<SpellDataStruct> datas = DoDrawCard(basicSpellPool, 0, basicSpellPool.Count, num);
+            for (int i = 0; i < num; i++)
+                cards[i].Init(datas[i]);
+            spreadFeedback.PlayFeedbacks();
         }
     }
 
