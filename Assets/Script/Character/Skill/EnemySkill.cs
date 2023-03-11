@@ -6,7 +6,7 @@ namespace Vacuname
     public class EnemySkill : BasicSkill
     {
         public EnemyAction enemyAction;
-        public BaseEnemy en_me;
+        [HideInInspector]public BaseEnemy en_me;
         [LabelText("当玩家在该距离内会开始攻击")]
         public float attackDistance;
         protected override void Awake()

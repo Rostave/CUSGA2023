@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: 001016_landbomb_parts_fix_Atlas
+  m_Script: {fileID: 11500000, guid: dca327a79ec4f2d4cafb043021ea0041, type: 3}
+  m_Name: "\u79FB\u52A8_Rock"
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: b301c8e80f2a3bc4d82066be585ce82d, type: 3}
-  materials:
-  - {fileID: 2100000, guid: 0233a13b69e66aa4c8df983502729350, type: 2}
+  acceleraTime: 1
+  deceleraTime: 0.4
+  gravity: 4
+  maxSpeed: 30
+  jumpStrength: 12

@@ -14,6 +14,7 @@ namespace Vacuname
 {
     
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Timeline))]
     public class Character : MonoBehaviour
     {
         [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
@@ -83,7 +84,7 @@ namespace Vacuname
         [HideInInspector]public Animator anima;
         [TabGroup("配置")]
         // public SkeletonAnimation s_anima;
-        public SkeletonMecanim sm_anima;
+        public SkeletonAnimation sm_anima;
 
         protected virtual void Awake()
         {
