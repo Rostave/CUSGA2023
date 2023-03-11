@@ -17,6 +17,10 @@ namespace Vacuname
             bt = GetComponent<BehaviorTree>();
             base.Awake();
         }
+        private void Start()
+        {
+            sm_anima.AnimationState.SetAnimation(0, "idle", true);
+        }
     }
 
 

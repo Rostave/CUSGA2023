@@ -12,5 +12,11 @@ namespace Vacuname
             return spriteHeight;
         }
 
+        public static Vector3 GetScaleDirection(Vector3 scale,float x)
+        {
+            scale.x = Mathf.Abs(scale.x) * x < 0 ? -1 : 1;
+            return scale;
+        }
+
     }
 }

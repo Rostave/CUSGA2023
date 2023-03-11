@@ -46,6 +46,11 @@ namespace Vacuname
             }
         }
 
+        protected virtual Vector2 GetDashVelocity()
+        {
+            return new Vector2(dashSpeed * me.GetMoveDirection(), me.time.rigidbody2D.velocity.y);
+        }
+
         IEnumerator Dashing()
         {
             range.enabled = true;
@@ -57,7 +62,7 @@ namespace Vacuname
             float dashTimeLeft = dashDuration;
 
             me.TryPlayFeedback("Dash");
-            me.time.rigidbody2D.velocity = new Vector2(dashSpeed * me.GetMoveDirection(), me.time.rigidbody2D.velocity.y);
+            me.time.rigidbody2D.velocity = GetDashVelocity();
 
             while (dashTimeLeft > 0)
             {

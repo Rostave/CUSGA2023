@@ -7,6 +7,7 @@ namespace Vacuname
 {
     public class Visual: MonoBehaviour
     {
+        public float visionDirection;
         public float visionRadius, visionAngle;
         public float chaseRadius;
         private Character character;

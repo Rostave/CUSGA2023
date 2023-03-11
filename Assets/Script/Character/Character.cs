@@ -19,8 +19,8 @@ namespace Vacuname
     {
         [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f),LabelWidth(180),LabelText("移动设置"), SerializeField]
-        protected MoveAttribute moveAttribute;
-        
+        public MoveAttribute moveAttribute;
+        public float defaultScale=1;//图片初始的朝向，如果朝向为左则为-1
 
         #region 技能字典
         private Dictionary<string, UnityAction> skillDic;
