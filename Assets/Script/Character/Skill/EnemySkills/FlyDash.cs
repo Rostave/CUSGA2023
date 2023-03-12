@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,13 @@ namespace Vacuname
 {
     public class FlyDash:DashAttack
     {
-/*        protected override Vector2 GetDashVelocity()
+        protected override Vector2 GetDashVelocity()
         {
-            //Vector2 dire=
-        }*/
+            GameObject s = me.GetComponent<BehaviorTree>().GetVariable("target").GetValue() as GameObject;
+            Vector2 dash = (s.transform.position - transform.position).normalized;
+            dash *= dashSpeed;
+            return dash;
+        }
     }
 
 }

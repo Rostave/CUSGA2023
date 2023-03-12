@@ -48,11 +48,11 @@ namespace Vacuname
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            if (character.GetMoveDirection() > 0 && Mathf.Abs(angle) > visionAngle / 2)
+            if (character.GetTowardDirection() > 0 && Mathf.Abs(angle) > visionAngle / 2)
             {
                 return false;
             }
-            else if (character.GetMoveDirection() < 0 && Mathf.Abs(angle) < 180 - visionAngle / 2)
+            else if (character.GetTowardDirection() < 0 && Mathf.Abs(angle) < 180 - visionAngle / 2)
             {
                 return false;
             }

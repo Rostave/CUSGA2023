@@ -54,7 +54,7 @@ namespace Vacuname
 
             me.TryPlayFeedback("Dash");
             me.gameObject.layer = LayerMask.NameToLayer("Invincible");
-            me.time.rigidbody2D.velocity = new Vector2(dashSpeed * me.GetMoveDirection(), me.time.rigidbody2D.velocity.y);
+            me.time.rigidbody2D.velocity = new Vector2(dashSpeed * me.GetTowardDirection(), me.time.rigidbody2D.velocity.y);
 
             while (dashTimeLeft > 0)
             {

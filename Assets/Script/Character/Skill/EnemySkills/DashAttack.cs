@@ -7,9 +7,9 @@ namespace Vacuname
 {
     public class DashAttack : EnemySkill
     {
-        private bool canDash;
-        private bool dashing;
-        private float dashColdDown;
+        protected bool canDash;
+        protected bool dashing;
+        protected float dashColdDown;
 
         [LabelText("冲刺速度")]
         public float dashSpeed;
@@ -20,7 +20,7 @@ namespace Vacuname
         [LabelText("冲刺冷却时间")]
         public float maxDashCooldown;
 
-        private bool dashBlocked;
+        protected bool dashBlocked;
 
         protected override void Awake()
         {
@@ -37,7 +37,7 @@ namespace Vacuname
                 StartCoroutine(Dashing());
         }
 
-        private void Update()
+        protected void Update()
         {
             if (!dashing && dashColdDown > 0)
             {
@@ -48,10 +48,10 @@ namespace Vacuname
 
         protected virtual Vector2 GetDashVelocity()
         {
-            return new Vector2(dashSpeed * me.GetMoveDirection(), me.time.rigidbody2D.velocity.y);
+            return new Vector2(dashSpeed * me.GetTowardDirection(), me.time.rigidbody2D.velocity.y);
         }
 
-        IEnumerator Dashing()
+        protected IEnumerator Dashing()
         {
             range.enabled = true;
             dashBlocked = false;
@@ -75,7 +75,7 @@ namespace Vacuname
             range.enabled = false;
         }
 
-        private void OnTriggerEnter2D(Collider2D a)
+        protected void OnTriggerEnter2D(Collider2D a)
         {
             if (a.CompareTag("Sheild"))
             {

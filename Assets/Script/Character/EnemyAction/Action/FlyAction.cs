@@ -49,7 +49,7 @@ namespace Vacuname
             }
 
             //index走完，代表到达 
-            if (curPointIndex >= path.vectorPath.Count)
+            if (path != null&&curPointIndex >= path.vectorPath.Count)
             {
                 reachLastPoint = true;
                 StopAllCoroutines();
@@ -94,7 +94,8 @@ namespace Vacuname
             force *= 100* speedScale;
             me.time.rigidbody2D.AddForce(force);
 
-            me.transform.localScale = SpriteTool.GetScaleDirection(me.transform.localScale,dire.x*me.defaultScale);
+            //me.transform.localScale = SpriteTool.GetScaleDirection(me.transform.localScale,dire.x*me.defaultScale);
+            me.SetTowardDirection(dire.x);
 
             if (Vector2.Distance(path.vectorPath[curPointIndex], transform.position) <= closeDistance)
             {
