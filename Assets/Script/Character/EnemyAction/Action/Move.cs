@@ -11,14 +11,14 @@ namespace Vacuname
         public EnemySkill curSkill;
         [HideInInspector]public SharedInt direction;
         public SharedGameObject target;
-        public SharedVector2 patrolPos;
+        public SharedVector2 movePos;
 
         public override TaskStatus OnUpdate()
         {
             //突然发现目标则停止巡逻
-            if(target.Value!=null&&patrolPos.Value!=NumberTool.NullV2)
+            if(target.Value!=null&&movePos.Value!=NumberTool.NullV2)
             {
-                patrolPos.Value = NumberTool.NullV2;
+                movePos.Value = NumberTool.NullV2;
                 return TaskStatus.Failure;
             }
 
@@ -26,13 +26,7 @@ namespace Vacuname
             float closeDistance = curSkill == null ? GetComponent<SpriteRenderer>().sprite.GetHeight() : curSkill.attackDistance;
 
             //计算目标点
-            Vector2 targetPos;
-            if (target.Value != null) targetPos = target.Value.transform.position;
-            else
-            {
-                if (patrolPos.Value != NumberTool.NullV2) targetPos = patrolPos.Value;
-                else targetPos = transform.position;
-            }
+            Vector2 targetPos=GetTargetPos();
 
             float distance = Vector2.Distance(transform.position, targetPos);
             float input = targetPos.x - transform.position.x;
@@ -54,6 +48,18 @@ namespace Vacuname
                 me.Move(input);
                 return TaskStatus.Running;
             }
+        }
+
+        protected virtual Vector2 GetTargetPos()
+        {
+            Vector2 targetPos;
+            if (target.Value != null) targetPos = target.Value.transform.position;
+            else
+            {
+                if (movePos.Value != NumberTool.NullV2) targetPos = movePos.Value;
+                else targetPos = transform.position;
+            }
+            return targetPos;
         }
     }
 }

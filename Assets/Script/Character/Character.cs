@@ -85,7 +85,8 @@ namespace Vacuname
         {
             time = GetComponent<Timeline>();
             rd = GetComponent<Rigidbody2D>();
-            TryGetComponent<Animator>(out anima);
+            TryGetComponent(out anima);
+            sm_anima = GetComponentInChildren<SkeletonAnimation>();
             // if (anima == null) transform.Find("Spine").TryGetComponent<Animator>(out anima);
             // transform.Find("Spine1").TryGetComponent(out s_anima);
             curAcceleraTime = 0;

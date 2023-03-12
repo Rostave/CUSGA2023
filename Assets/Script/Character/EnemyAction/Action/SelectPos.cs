@@ -8,22 +8,32 @@ namespace Vacuname
     public class SelectPos : EnemyAction
     {
         [SerializeField]private BoxCollider2D range;
-        [SerializeField] private SharedVector2 patrolPos;
+        [SerializeField]protected SharedVector2 patrolPos;
         private Bounds bounds;
 
         public override void OnAwake()
         {
             base.OnAwake();
+            GetRange();
+        }
+
+        protected virtual void GetRange()
+        {
             range.enabled = true;
             bounds = range.bounds;
             range.enabled = false;
         }
 
-        public override TaskStatus OnUpdate()
+        protected virtual Vector2 GetPos()
         {
             float randomX = Random.Range(bounds.min.x, bounds.max.x);
             float randomY = Random.Range(bounds.min.y, bounds.max.y);
-            patrolPos.Value= new Vector2(randomX, randomY);
+            return new Vector2(randomX, randomY); 
+        }
+
+        public override TaskStatus OnUpdate()
+        {
+            patrolPos.Value = GetPos();
             return TaskStatus.Success;
         }
 

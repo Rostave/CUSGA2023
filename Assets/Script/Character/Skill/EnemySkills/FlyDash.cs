@@ -14,6 +14,15 @@ namespace Vacuname
             dash *= dashSpeed;
             return dash;
         }
+
+        protected void OnCollisionEnter2D(Collision2D collision)
+        {
+            if(collision.gameObject.layer==LayerMask.NameToLayer("Ground"))
+            {
+                me.time.rigidbody2D.velocity = Vector2.zero;
+            }
+        }
+
     }
 
 }

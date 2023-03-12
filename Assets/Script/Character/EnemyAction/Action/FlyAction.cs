@@ -27,12 +27,6 @@ namespace Vacuname
         {
             curPointIndex = 0;
             reachLastPoint = false;
-            if (target.Value != null) targetPos = target.Value.transform.position;
-            else
-            {
-                if (patrolPos.Value != NumberTool.NullV2) targetPos = patrolPos.Value;
-                else targetPos = transform.position;
-            }
             StartCoroutine(GetPathLoop());
         }
 
@@ -42,9 +36,9 @@ namespace Vacuname
         }
         public override TaskStatus OnUpdate()
         {
-            if (target.Value != null && patrolPos.Value != NumberTool.NullV2)
+            if (target.Value != null && movePos.Value != NumberTool.NullV2)
             {
-                patrolPos.Value = NumberTool.NullV2;
+                movePos.Value = NumberTool.NullV2;
                 return TaskStatus.Failure;
             }
 
@@ -65,6 +59,7 @@ namespace Vacuname
 
         IEnumerator GetPathLoop()
         {
+            targetPos = GetTargetPos();
             GetPath();
             yield return new WaitForSecondsRealtime(0.5f);
         }

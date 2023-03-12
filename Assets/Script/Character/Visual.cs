@@ -75,6 +75,7 @@ namespace Vacuname
         {
             Gizmos.color = Color.yellow;
             float direction = transform.parent.localScale.x >= 0 ? 1 : -1;
+            if(character!=null)direction *= character.defaultScale;
             Vector3 from = Quaternion.Euler(0, 0, -visionAngle / 2) * Vector2.right*direction * visionRadius;
             Vector3 to = Quaternion.Euler(0, 0, visionAngle / 2) * Vector2.right * direction * visionRadius;
             UnityEditor.Handles.DrawWireArc(transform.position, Vector3.forward, from, visionAngle, visionRadius);
