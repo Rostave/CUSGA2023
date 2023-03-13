@@ -6113,7 +6113,7 @@ Transform:
   m_GameObject: {fileID: 2076339460}
   m_LocalRotation: {x: 0, y: 0, z: 0.9970803, w: 0.07635981}
   m_LocalPosition: {x: 0.51868844, y: -0.434699, z: 0}
-  m_LocalScale: {x: 0.99520546, y: 1.0050223, z: 1}
+  m_LocalScale: {x: 0.9952055, y: 1.0050223, z: 1}
   m_Children:
   - {fileID: 69123124}
   m_Father: {fileID: 103344171}
@@ -6448,6 +6448,7 @@ GameObject:
   - component: {fileID: 8460617994022194379}
   - component: {fileID: 6862396604815963133}
   - component: {fileID: 1516403324}
+  - component: {fileID: 3968222054788328630}
   m_Layer: 0
   m_Name: Spine1
   m_TagString: Untagged
@@ -6516,7 +6517,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1434251745
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6862396604815963133
@@ -6569,6 +6570,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boneRoot: {fileID: 2141913334}
+  flipBy180DegreeRotation: 0
+  skeletonRenderer: {fileID: 6862396604815963133}
+  skeletonGraphic: {fileID: 0}
+--- !u!114 &3968222054788328630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224341891529103311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRoot: {fileID: 0}
   flipBy180DegreeRotation: 0
   skeletonRenderer: {fileID: 6862396604815963133}
   skeletonGraphic: {fileID: 0}
@@ -6898,10 +6915,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
-  - {fileID: 2100000, guid: 62d3c911a1d901b488c09c73b9d12ad0, type: 2}
-  - {fileID: 2100000, guid: 28e34e4ff508d544eade24b736ec1a52, type: 2}
-  - {fileID: 2100000, guid: 62d3c911a1d901b488c09c73b9d12ad0, type: 2}
+  - {fileID: 2100000, guid: e13ea122bdbe04d429f6c901cf49377d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6920,7 +6934,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1434251745
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!95 &4757486097229826320
@@ -6955,7 +6969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9db98c60740638449864eb028fbe7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: beb0a99ccc3f744408d280bfae55db62, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: e5fa336445454c446a45135c863f6447, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -15425,7 +15439,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1434251745
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_RenderMode: 0
   m_SortMode: 0
@@ -15595,7 +15609,7 @@ MonoBehaviour:
   time: {fileID: 0}
   rd: {fileID: 4793412097506941704}
   anima: {fileID: 4757486097229826320}
-  sm_anima: {fileID: 6862396604815963133}
+  sm_anima: {fileID: 3772015150744448035}
   animState: 0
   _isAiming: 0
 --- !u!50 &4793412097506941704
@@ -16274,6 +16288,7 @@ GameObject:
   - component: {fileID: 1593585737295084705}
   - component: {fileID: 6543793666883712591}
   - component: {fileID: 743995880}
+  - component: {fileID: 1862382321330971698}
   m_Layer: 0
   m_Name: Texiao
   m_TagString: Untagged
@@ -16317,6 +16332,23 @@ MonoBehaviour:
   overrideAlpha: 1
   hierarchy: {fileID: 394149192386509532}
 --- !u!114 &743995880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480632528858381723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9468f91265044e0a0a6678fd4087bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tCached: {fileID: 0}
+  bulletDmgMultiplier: 1
+  ammoCount: 0
+  bulletElements: 
+  bulletInterQAngle: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1862382321330971698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

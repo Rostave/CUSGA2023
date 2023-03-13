@@ -5,6 +5,7 @@ using R0.SingaltonBase;
 using R0.Weapons;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace R0.SpellRel
 {
@@ -46,7 +47,7 @@ namespace R0.SpellRel
         /// 添加spell至符文列表
         /// </summary>
         /// <param name="spell">添加的符文</param>
-        public void AppendSpell(Spell spell)
+        public void AppendSpellToScroll(Spell spell)
         {
             if (spells.Count > SpellData.Instance.maxSpellCapacity)
             {
@@ -116,25 +117,33 @@ namespace R0.SpellRel
             }
         }
 
-        [Space, Space, LabelText("符文预制体")] public List<GameObject> spellPrefab;
+        [Space, Space, LabelText("符文预制体")] public List<SpellCat> spellPrefab;
         [Button("添加至符文卷轴", ButtonSizes.Large), GUIColor(0.4f, 0.8f, 1)]
         [DisableIf("@spellPrefab.Count == 0"), DisableInEditorMode]
         private void AddSpellFromInspector()
         {
             foreach (var s in spellPrefab)
             {
-                var spell = Instantiate(s, SpellScrollViewer.Instance.spellHome);
-                AppendSpell(spell.GetComponent<Spell>());
+                AddSpell(SpellData.Instance.data[(int) s]);
             }
-            
             spellPrefab.Clear();
             SpellScrollViewer.Instance.UpdateSpellScrollHud(this);
         }
 
         
+        /// <summary>
+        /// 调用以添加符文至列表
+        /// </summary>
+        /// <param name="spellStruct"></param>
         public void AddSpell(SpellData.SpellDataStruct spellStruct)
         {
-            
+            var spellObj = Resources.Load<GameObject>("Spell/SpellModel");
+            spellObj.transform.SetParent(SpellScrollViewer.Instance.spellHome);
+            spellObj.AddComponent(Spell.SpellScriptTypes[spellStruct.effect]);
+            spellObj.GetComponent<Image>().sprite = spellStruct.spellSprite;
+            var spell = spellObj.GetComponent<Spell>();
+            spell.spellCat = spellStruct.cat;
+            AppendSpellToScroll(spell);
         }
         
     }

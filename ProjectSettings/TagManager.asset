@@ -55,6 +55,9 @@ TagManager:
   - name: CloseShot
     uniqueID: 2270480261
     locked: 0
+  - name: DistortLow
+    uniqueID: 3736520411
+    locked: 0
   - name: UI
     uniqueID: 2720223035
     locked: 0

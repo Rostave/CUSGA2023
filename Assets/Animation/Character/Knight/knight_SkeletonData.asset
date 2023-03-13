@@ -18,14 +18,10 @@ MonoBehaviour:
   skeletonJSON: {fileID: 4900000, guid: 05625f0dba2582347bb0df85db4d9f54, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
-    requiresBlendModeMaterials: 1
+    requiresBlendModeMaterials: 0
     applyAdditiveMaterial: 1
-    additiveMaterials:
-    - pageName: knight.png
-      material: {fileID: 2100000, guid: d2e5dde35fcfae0469c1851f51035b41, type: 2}
-    multiplyMaterials:
-    - pageName: knight.png
-      material: {fileID: 2100000, guid: eb23d13c6c42604419030d7cdcf2853a, type: 2}
+    additiveMaterials: []
+    multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []
   fromAnimation: []

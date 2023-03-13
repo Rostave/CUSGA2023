@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using R0.Bullet;
 using R0.Character;
 using R0.ScriptableObjConfig;
@@ -58,6 +59,12 @@ namespace R0.SpellRel
     /// </summary>
     public abstract class Spell : MonoBehaviour
     {
+        public static Dictionary<SpellEffect, Type> SpellScriptTypes = new Dictionary<SpellEffect, Type>
+        {
+            {SpellEffect.BulletSummon, typeof(BulletSpell)},
+            {SpellEffect.ElementAttach, typeof(BulletSpell)},
+        };
+        
         public SpellCat spellCat;
         public bool isActive = true;
         public bool isPowered = true;
