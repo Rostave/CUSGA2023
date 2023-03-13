@@ -7,6 +7,7 @@ namespace Vacuname
 {
     public class Visual: MonoBehaviour
     {
+        public float visionDirection;
         public float visionRadius, visionAngle;
         public float chaseRadius;
         private Character character;
@@ -47,11 +48,11 @@ namespace Vacuname
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            if (character.GetMoveDirection() > 0 && Mathf.Abs(angle) > visionAngle / 2)
+            if (character.GetTowardDirection() > 0 && Mathf.Abs(angle) > visionAngle / 2)
             {
                 return false;
             }
-            else if (character.GetMoveDirection() < 0 && Mathf.Abs(angle) < 180 - visionAngle / 2)
+            else if (character.GetTowardDirection() < 0 && Mathf.Abs(angle) < 180 - visionAngle / 2)
             {
                 return false;
             }
@@ -74,6 +75,7 @@ namespace Vacuname
         {
             Gizmos.color = Color.yellow;
             float direction = transform.parent.localScale.x >= 0 ? 1 : -1;
+            if(character!=null)direction *= character.defaultScale;
             Vector3 from = Quaternion.Euler(0, 0, -visionAngle / 2) * Vector2.right*direction * visionRadius;
             Vector3 to = Quaternion.Euler(0, 0, visionAngle / 2) * Vector2.right * direction * visionRadius;
             UnityEditor.Handles.DrawWireArc(transform.position, Vector3.forward, from, visionAngle, visionRadius);

@@ -43,8 +43,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Distant
+    uniqueID: 1431628129
+    locked: 0
   - name: Player
     uniqueID: 1434251745
+    locked: 0
+  - name: MediumShot
+    uniqueID: 3042115981
+    locked: 0
+  - name: CloseShot
+    uniqueID: 2270480261
     locked: 0
   - name: UI
     uniqueID: 2720223035

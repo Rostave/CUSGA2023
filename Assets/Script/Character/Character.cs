@@ -14,12 +14,13 @@ namespace Vacuname
 {
     
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Timeline))]
     public class Character : MonoBehaviour
     {
         [TabGroup("配置"), AssetsOnly, InlineEditor(InlineEditorModes.GUIOnly)]
         [GUIColor(0.3f, 0.8f, 0.8f, 1f),LabelWidth(180),LabelText("移动设置"), SerializeField]
-        protected MoveAttribute moveAttribute;
-        
+        public MoveAttribute moveAttribute;
+        public float defaultScale=1;//图片初始的朝向，如果朝向为左则为-1
 
         #region 技能字典
         private Dictionary<string, UnityAction> skillDic;
@@ -58,22 +59,17 @@ namespace Vacuname
         #endregion
         protected float curAcceleraTime;
         [HideInInspector]public JumpState jumpState;
-        #region protected float moveDirection;
-        protected float moveDirection;
-        public float GetMoveDirection()
+        #region protected float towardDirection;
+        protected float towardDirection;
+        public float GetTowardDirection()
         {
-            return moveDirection;
+            return towardDirection;
         }
-        public void SetMoveDirection(float input)
+        public void SetTowardDirection(float dire)
         {
-            input.Normalize();
-            if (input != 0 && moveDirection != input)
-            {
-                moveDirection = input;
-                Vector3 temp = transform.localScale;
-                temp.x = moveDirection * Mathf.Abs(temp.x);
-                transform.localScale = temp;
-            }
+            dire.Normalize();
+            towardDirection = dire;
+            transform.localScale = SpriteTool.SetScaleDirection(transform.localScale, dire * defaultScale);
         }
         #endregion
         #endregion
@@ -83,19 +79,20 @@ namespace Vacuname
         [HideInInspector]public Animator anima;
         [TabGroup("配置")]
         // public SkeletonAnimation s_anima;
-        public SkeletonMecanim sm_anima;
+        public SkeletonAnimation sm_anima;
 
         protected virtual void Awake()
         {
             time = GetComponent<Timeline>();
             rd = GetComponent<Rigidbody2D>();
-            TryGetComponent<Animator>(out anima);
+            TryGetComponent(out anima);
+            sm_anima = GetComponentInChildren<SkeletonAnimation>();
             // if (anima == null) transform.Find("Spine").TryGetComponent<Animator>(out anima);
             // transform.Find("Spine1").TryGetComponent(out s_anima);
             curAcceleraTime = 0;
             jumpState = JumpState.fall;
             controllable = true;
-            moveDirection = 1;
+            towardDirection = defaultScale;
         }
         public virtual void Jump()
         {
@@ -113,7 +110,8 @@ namespace Vacuname
             if (setDirectly)//直接设置速度的情况
             {
                 curSpeed = input;
-
+                input.Normalize();
+                SetTowardDirection(input);
                 time.rigidbody2D.velocity = new Vector2(curSpeed, time.rigidbody2D.velocity.y);
                 anima?.SetFloat("Move", Mathf.Abs(curSpeed));
                 return;
@@ -122,12 +120,13 @@ namespace Vacuname
             //标准化input
             input.Normalize();
 
-            if (input != 0 && Math.Abs(moveDirection - input) > Const.IdleTolerance)
+            if (input != 0 && Math.Abs(towardDirection - input) > Const.IdleTolerance)
             {
-                moveDirection = input;
+                SetTowardDirection(input);
+                /*moveDirection = input;
                 Vector3 temp = transform.localScale;
                 temp.x = moveDirection*Mathf.Abs(temp.x);
-                transform.localScale = temp;
+                transform.localScale = temp;*/
             }
 
             curSpeed = time.rigidbody2D.velocity.x;
@@ -136,7 +135,6 @@ namespace Vacuname
 
             anima?.SetFloat("Move", Mathf.Abs(curSpeed));
         }
-
         protected void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.layer==LayerMask.NameToLayer("Ground"))
@@ -145,6 +143,5 @@ namespace Vacuname
                     jumpState = JumpState.ground;
                 }
         }
-
     }
 }

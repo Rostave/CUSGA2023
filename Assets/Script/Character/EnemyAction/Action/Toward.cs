@@ -12,7 +12,7 @@ namespace Vacuname
         public override TaskStatus OnUpdate()
         {
             float input = target.Value.transform.position.x - transform.position.x;
-            me.SetMoveDirection(input);
+            me.SetTowardDirection(input);
             return TaskStatus.Success;
         }
     }

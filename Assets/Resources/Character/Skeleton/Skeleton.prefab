@@ -468,13 +468,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveAttribute: {fileID: 11400000, guid: aa5febf15b3d5bd41bf22bd88c76c6ff, type: 2}
+  defaultScale: 1
   feedbacks: {fileID: 3065463458673778928}
   jumpState: 0
   time: {fileID: 0}
   rd: {fileID: 0}
   anima: {fileID: 0}
   sm_anima: {fileID: 0}
-  s_anima: {fileID: 0}
   visual: {fileID: 5089440079180818024}
 --- !u!114 &776704806
 MonoBehaviour:
@@ -536,6 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ea8cce007e5884b9ec2ca718452c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionDirection: 0
   visionRadius: 42.53
   visionAngle: 58.8
   chaseRadius: 42.32
